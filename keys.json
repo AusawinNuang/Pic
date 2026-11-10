@@ -135,9 +135,9 @@
     "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
      },
   {
-    "key": "VIP018",
+    "key": "TAB",
     "status": "active",
-    "deviceId": "DEV-XXXXXX-XXXX",
+    "deviceId": "DEV-LPRMR3-69AD",
     "expires": "2026-12-31",
     "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
      },
