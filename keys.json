@@ -4,7 +4,7 @@
     "status": "active",
     "deviceId": "DEV-XHKK1P-BG2N",
     "expires": "2026-12-31",
-    "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
+    "note": "คอมตัวเอง"
   },
   {
     "key": "VIP002",
@@ -24,7 +24,7 @@
     "status": "active",
     "deviceId": "DEV-LU0Q1Q-F1GX",
     "expires": "2026-12-31",
-    "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
+    "note": "มือถือตัวเอง"
     },
   {
     "key": "VIP2510",
