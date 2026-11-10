@@ -2434,14 +2434,20 @@
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/b44edf42580a.webp",
     "url": "http://125hvt.ddns.net:21585/vtv6/playlist.m3u8"
-    },
+  },
   {
-    "id": "ch_349",
-    "name": "tapmad",
-    "category": "กีฬา",
-    "logo": "https://cdn.imgchest.com/files/a8e6ff43db0d.webp",
-    "url": "https://bpl24middleeast.akamaized.net/hls/live/2109311/j15klM//master.m3u8"
-
-    
+    "name": "ตะวันลวง - Beneath the Lies",
+    "category": "ละคร/ซีรีส์",
+    "image": "https://cdn.imgchest.com/files/0b0e846c8aac.jpg",
+    "stations": [
+      {
+        "name": "ตอนที่ 1",
+        "info": "วันที่ 6 ตุลาคม 2569",
+        "image": "https://cdn.imgchest.com/files/0b0e846c8aac.jpg",
+        "url": "https://www.watchlakorn.org/egde/e3adda0e5846946efeb769897c1e6b7e/NzI1Mw==/MQ==/ZGF0YTE3LzA2LTEwLTIwMjYvQmVuZWF0aHRoZUxpZXMtRGlzYzEtMDYtT2N0LTIwMjYubXA0/index-v1-a1.m3u8",
+        "referer": "https://www.watchlakorn.net/",
+        "subtitle": "https://docs.google.com/uc?export=download&id=14EykR06RSJVhjD6cfskSvDsIt4Kk-eRp"
+      }
+    ]
   }
 ]
