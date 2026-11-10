@@ -5,21 +5,18 @@
   "url": "https://drive.google.com/uc?id=1hKoWBJUa8XC7DYZL5hUhTYsydytR6LBi",
   "groups": [
     {
+      "id": "ch_ais_zankt",
       "name": "AIS @By Zank.T",
       "author": "Zank.T",
       "category": "ฟรีทีวี",
       "url": "https://aisfree.copytv-iptv.workers.dev/playlist",
       "image": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/1792680557667.jpg",
+      "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/1792680557667.jpg",
       "import": false
     },
-  ]
-}
-
-
-[
-  {
-    "id": "ch_1",
-    "name": "NBT2",
+    {
+      "id": "ch_1",
+      "name": "NBT2",
     "category": "ฟรีทีวี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/nbt2.png",
     "url": "https://cdn-edge.iiptvcdn.com/live_event/smil:f180-054a-38d7-ce66-f7cf.smil/chunklist_w884800294_b3128000.m3u8"
@@ -4004,16 +4001,14 @@
             "url": "https://www.watchlakorn.net/egde/ebb806f336e8d56253bf679da05441b5/NzAwNw==/MTA=/ZGF0YTE3LzEyLTAzLTIwMjYvUGVudG9yMjAyNi0xMi1NYXItMjAyNl9IRC5tcDQ=/index-v1-a1.m3u8",
             "subtitle": "https://docs.google.com/uc?export=download&id=14EykR06RSJVhjD6cfskSvDsIt4Kk-eRp"
                 },
-                {   
+                                {   
             "name": "You know me little go",
             "info": "วันที่ 5 มีนาคม 2569",
             "image": "https://cdn.imgchest.com/files/91933ad3ae7d.jpg",
             "url": "https://www.watchlakorn.net/egde/6f7c8b475498498825c3d2ce9e874bca/NzAwNw==/OQ==/ZGF0YTE3LzA1LTAzLTIwMjYvUGVudG9yMjAyNS01LU1hci0yMDI2X0hELm1wNA==/index-v1-a1.m3u8",
             "subtitle": "https://docs.google.com/uc?export=download&id=14EykR06RSJVhjD6cfskSvDsIt4Kk-eRp"
-	
-
-						 
       }
     ]
   }
 ]
+}
