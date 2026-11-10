@@ -17,6 +17,13 @@
     "deviceId": "DEV-4HTFJ3-T70J",
     "note": "แฮปคอมตัวเอง"
   },
+  
+  {
+    "key": "TV",
+    "status": "active",
+    "deviceId": "DEV-1G7GEH-ZFRC",
+    "note": "ทีวี"
+  },
   {
     "key": "VIP002",
     "status": "active",
