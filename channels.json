@@ -2434,5 +2434,13 @@
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/b44edf42580a.webp",
     "url": "http://125hvt.ddns.net:21585/vtv6/playlist.m3u8"
+    },
+  {
+    "id": "ch_349",
+    "name": "StudioFY",
+    "category": "เพลง",
+    "logo": "https://cdn.imgchest.com/files/cd35cc203940.png",
+    "url": "https://hls.nexa.tv.br/hls/nexa/live.m3u8"
+
   }
 ]
