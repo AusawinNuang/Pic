@@ -93,11 +93,11 @@
     "note": "Bank"
      },
   {
-    "key": "VIP012",
+    "key": "VIP0416",
     "status": "active",
-    "deviceId": "DEV-XXXXXX-XXXX",
+    "deviceId": "DEV-62KZHH-3AWY",
     "expires": "2026-12-31",
-    "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
+    "note": "tk"
      },
   {
     "key": "VIP013",
