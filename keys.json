@@ -2,26 +2,134 @@
   {
     "key": "VIP001",
     "status": "active",
-    "deviceId": "DEV-XHKK1P-BG2N",
-    "note": "รหัสทั่วไป (ใครกรอกก็เข้าได้ เพราะยังไม่ได้ระบุเลขเครื่อง)"
+    "deviceId": "DEV-XXXXXX-XXXX",
+    "expires": "2026-12-31",
+    "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
   },
   {
     "key": "VIP002",
     "status": "active",
     "deviceId": "DEV-XXXXXX-XXXX",
-    "note": "ล็อกเฉพาะเครื่อง (เข้าได้เฉพาะเครื่องที่มีรหัสตรงกับ deviceId เท่านั้น)"
+    "expires": "2026-12-31",
+    "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
   },
   {
     "key": "VIP003",
     "status": "block",
-    "deviceId": "",
+    "deviceId": "DEV-XXXXXX-XXXX",
     "note": "ตัวอย่างรหัสที่ถูกระงับสิทธิ์ (เปลี่ยน status เป็น block)"
   },
   {
     "key": "VIP004",
     "status": "active",
-    "deviceId": "",
+    "deviceId": "DEV-XXXXXX-XXXX",
     "expires": "2026-12-31",
     "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
+    },
+  {
+    "key": "VIP005",
+    "status": "active",
+    "deviceId": "DEV-XXXXXX-XXXX",
+    "expires": "2026-12-31",
+    "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
+     },
+  {
+    "key": "VIP006",
+    "status": "active",
+    "deviceId": "DEV-XXXXXX-XXXX",
+    "expires": "2026-12-31",
+    "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
+     },
+  {
+    "key": "VIP007",
+    "status": "active",
+    "deviceId": "DEV-XXXXXX-XXXX",
+    "expires": "2026-12-31",
+    "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
+     },
+  {
+    "key": "VIP008",
+    "status": "active",
+    "deviceId": "DEV-XXXXXX-XXXX",
+    "expires": "2026-12-31",
+    "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
+     },
+  {
+    "key": "VIP009",
+    "status": "active",
+    "deviceId": "DEV-XXXXXX-XXXX",
+    "expires": "2026-12-31",
+    "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
+     },
+  {
+    "key": "VIP010",
+    "status": "active",
+    "deviceId": "DEV-XXXXXX-XXXX",
+    "expires": "2026-12-31",
+    "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
+     },
+  {
+    "key": "VIP011",
+    "status": "active",
+    "deviceId": "DEV-XXXXXX-XXXX",
+    "expires": "2026-12-31",
+    "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
+     },
+  {
+    "key": "VIP012",
+    "status": "active",
+    "deviceId": "DEV-XXXXXX-XXXX",
+    "expires": "2026-12-31",
+    "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
+     },
+  {
+    "key": "VIP013",
+    "status": "active",
+    "deviceId": "DEV-XXXXXX-XXXX",
+    "expires": "2026-12-31",
+    "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
+     },
+  {
+    "key": "VIP014",
+    "status": "active",
+    "deviceId": "DEV-XXXXXX-XXXX",
+    "expires": "2026-12-31",
+    "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
+     },
+  {
+    "key": "VIP015",
+    "status": "active",
+    "deviceId": "DEV-XXXXXX-XXXX",
+    "expires": "2026-12-31",
+    "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
+     },
+  {
+    "key": "VIP016",
+    "status": "active",
+    "deviceId": "DEV-XXXXXX-XXXX",
+    "expires": "2026-12-31",
+    "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
+     },
+  {
+    "key": "VIP017",
+    "status": "active",
+    "deviceId": "DEV-XXXXXX-XXXX",
+    "expires": "2026-12-31",
+    "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
+     },
+  {
+    "key": "VIP018",
+    "status": "active",
+    "deviceId": "DEV-XXXXXX-XXXX",
+    "expires": "2026-12-31",
+    "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
+     },
+  {
+    "key": "VIP019",
+    "status": "active",
+    "deviceId": "DEV-XXXXXX-XXXX",
+    "expires": "2026-12-31",
+    "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
+    
   }
 ]
