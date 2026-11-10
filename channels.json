@@ -49,14 +49,14 @@
   },
   {
     "id": "ch_7",
-    "name": "Workpoint(m-fixer)",
+    "name": "Workpoint(m)",
     "category": "ฟรีทีวี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/workpoint.webp",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/workpoint/master.m3u8"
   },
   {
     "id": "ch_8",
-    "name": "Workpoint-2(m-fixer)",
+    "name": "Workpoint-2(m)",
     "category": "ฟรีทีวี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/workpoint.webp",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/workpoint/master.m3u8"
@@ -77,21 +77,21 @@
   },
   {
     "id": "ch_11",
-    "name": "CH8(m-fixer)",
+    "name": "CH8(m)",
     "category": "ฟรีทีวี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/ch8.png",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/ch8/master.m3u8"
   },
   {
     "id": "ch_12",
-    "name": "CH8-2(m-fixer)",
+    "name": "CH8-2(m)",
     "category": "ฟรีทีวี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/ch8.png",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/ch8/master.m3u8"
   },
   {
     "id": "ch_13",
-    "name": "MONO29(ATMflix)",
+    "name": "MONO29(a)",
     "category": "ฟรีทีวี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/mono29.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/mono29/playlist.m3u8"
@@ -112,28 +112,28 @@
   },
   {
     "id": "ch_16",
-    "name": "ThaiRath TV(m-fixer)",
+    "name": "ThaiRath TV(m)",
     "category": "ฟรีทีวี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/thairath.webp",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/thairathtvhd/master.m3u8"
   },
   {
     "id": "ch_17",
-    "name": "ThaiRath TV-2(m-fixer)",
+    "name": "ThaiRath TV-2(m)",
     "category": "ฟรีทีวี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/thairath.webp",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/thairathtvhd/master.m3u8"
   },
   {
     "id": "ch_18",
-    "name": "CH3-33(ATMflix)",
+    "name": "CH3-33(a)",
     "category": "ฟรีทีวี",
     "logo": "https://raw.githubusercontent.com/zaxacaasada/logotv/refs/heads/main/hd-ch3.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/ch3hd/playlist.m3u8"
   },
   {
     "id": "ch_19",
-    "name": "AmarinTV HD(ATMflix)",
+    "name": "AmarinTV HD(a)",
     "category": "ฟรีทีวี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/amrinntv.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/amarintv/playlist.m3u8"
@@ -154,49 +154,49 @@
   },
   {
     "id": "ch_22",
-    "name": "CH7HD(m-fixer)",
+    "name": "CH7HD(m)",
     "category": "ฟรีทีวี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/ch7.png",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/ch7hd/master.m3u8"
   },
   {
     "id": "ch_23",
-    "name": "CH7HD-2(m-fixer)",
+    "name": "CH7HD-2(m)",
     "category": "ฟรีทีวี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/ch7.png",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/ch7hd/master.m3u8"
   },
   {
     "id": "ch_24",
-    "name": "pptvhd(m-fixer)",
+    "name": "pptvhd(m)",
     "category": "ฟรีทีวี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/pptv36.webp",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/pptvhd/master.m3u8"
   },
   {
     "id": "ch_25",
-    "name": "pptvhd-2(m-fixer)",
+    "name": "pptvhd-2(m)",
     "category": "ฟรีทีวี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/pptv36.webp",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/pptvhd/master.m3u8"
   },
   {
     "id": "ch_26",
-    "name": "tnn16(ATMflix)",
+    "name": "tnn16(a)",
     "category": "ข่าวสาร",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/tnn16.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/tnn/playlist.m3u8"
   },
   {
     "id": "ch_27",
-    "name": "tnn16(m-fixer)",
+    "name": "tnn16(m)",
     "category": "ข่าวสาร",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/tnn16.webp",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/tnn24/master.m3u8"
   },
   {
     "id": "ch_28",
-    "name": "tnn16-2(m-fixer)",
+    "name": "tnn16-2(m)",
     "category": "ข่าวสาร",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/tnn16.webp",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/tnn24/master.m3u8"
@@ -245,14 +245,14 @@
   },
   {
     "id": "ch_35",
-    "name": "TV5MONDE(m-fixer)",
+    "name": "TV5MONDE(m)",
     "category": "ทั่วไป",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/tv5monde.png",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/tv5monde/master.m3u8"
   },
   {
     "id": "ch_36",
-    "name": "TV5MONDE-2(m-fixer)",
+    "name": "TV5MONDE-2(m)",
     "category": "ทั่วไป",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/tv5monde.png",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/tv5monde/master.m3u8"
@@ -280,14 +280,14 @@
   },
   {
     "id": "ch_40",
-    "name": "T-Sports7(m-fixer)",
+    "name": "T-Sports7(m)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/tsport7.webp",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/T-Sports7/master.m3u8"
   },
   {
     "id": "ch_41",
-    "name": "T-Sports7-2(m-fixer)",
+    "name": "T-Sports7-2(m)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/tsport7.webp",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/T-Sports7/master.m3u8"
@@ -301,7 +301,7 @@
   },
   {
     "id": "ch_43",
-    "name": "truefootball3(ATMflix)",
+    "name": "truefootball3(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/d8a3d6fa78d5.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/tpf3/playlist.m3u8"
@@ -329,7 +329,7 @@
   },
   {
     "id": "ch_47",
-    "name": "truefootball4(ATMflix)",
+    "name": "truefootball4(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/e79a4bb56fa4.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/tpf4/playlist.m3u8"
@@ -357,7 +357,7 @@
   },
   {
     "id": "ch_51",
-    "name": "truefootball5(ATMflix)",
+    "name": "truefootball5(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/306fd3f17471.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/tpf5/playlist.m3u8"
@@ -385,70 +385,70 @@
   },
   {
     "id": "ch_55",
-    "name": "trueballthai1(ATMflix)",
+    "name": "trueballthai1(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/9e09c5b77206.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/trueballthai1/playlist.m3u8"
   },
   {
     "id": "ch_56",
-    "name": "trueballthai2(ATMflix)",
+    "name": "trueballthai2(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/006c49a23c6f.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/trueballthai2/playlist.m3u8"
   },
   {
     "id": "ch_57",
-    "name": "trueballthai3(ATMflix)",
+    "name": "trueballthai3(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/befeb53ff614.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/trueballthai3/playlist.m3u8"
   },
   {
     "id": "ch_58",
-    "name": "trueballthai4(ATMflix)",
+    "name": "trueballthai4(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/e462f75e6c47.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/trueballthai4/playlist.m3u8"
   },
   {
     "id": "ch_59",
-    "name": "trueballthai5(ATMflix)",
+    "name": "trueballthai5(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/26740824e73a.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/trueballthai5/playlist.m3u8"
   },
   {
     "id": "ch_60",
-    "name": "trueballthai6(ATMflix)",
+    "name": "trueballthai6(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/9caf0bf22d18.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/trueballthai6/playlist.m3u8"
   },
   {
     "id": "ch_61",
-    "name": "trueballthai7(ATMflix)",
+    "name": "trueballthai7(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/c324f1ab9900.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/trueballthai7/playlist.m3u8"
   },
   {
     "id": "ch_62",
-    "name": "trueballthai8(ATMflix)",
+    "name": "trueballthai8(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/ddf34ba06e62.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/trueballthai8/playlist.m3u8"
   },
   {
     "id": "ch_63",
-    "name": "trueballthai9(ATMflix)",
+    "name": "trueballthai9(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/345ee979c11e.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/trueballthai9/playlist.m3u8"
   },
   {
     "id": "ch_64",
-    "name": "truesports1(ATMflix)",
+    "name": "truesports1(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/22004e5c8ec9.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/tsp1/playlist.m3u8"
@@ -476,7 +476,7 @@
   },
   {
     "id": "ch_68",
-    "name": "truesports2(ATMflix)",
+    "name": "truesports2(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/c35cba36351d.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/tsp2/playlist.m3u8"
@@ -504,7 +504,7 @@
   },
   {
     "id": "ch_72",
-    "name": "truesports3(ATMflix)",
+    "name": "truesports3(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/c3769e7e6e16.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/tsp3/playlist.m3u8"
@@ -532,14 +532,14 @@
   },
   {
     "id": "ch_76",
-    "name": "truesports5(ATMflix)",
+    "name": "truesports5(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/fc13960c5f4f.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/tsp5/playlist.m3u8"
   },
   {
     "id": "ch_77",
-    "name": "truesports7(ATMflix)",
+    "name": "truesports7(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/e0975ca261c8.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/tsp7/playlist.m3u8"
@@ -567,7 +567,7 @@
   },
   {
     "id": "ch_81",
-    "name": "AISPLAY1(ATMflix)",
+    "name": "AISPLAY1(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/aisplay.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/playsportsfootball1/playlist.m3u8"
@@ -588,7 +588,7 @@
   },
   {
     "id": "ch_84",
-    "name": "AISPLAY2(ATMflix)",
+    "name": "AISPLAY2(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/aisplay.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/playsportsfootball2/playlist.m3u8"
@@ -609,7 +609,7 @@
   },
   {
     "id": "ch_87",
-    "name": "AISPLAY3(ATMflix)",
+    "name": "AISPLAY3(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/aisplay.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/playsportsfootball3/playlist.m3u8"
@@ -630,7 +630,7 @@
   },
   {
     "id": "ch_90",
-    "name": "AISPLAY4(ATMflix)",
+    "name": "AISPLAY4(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/aisplay.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/playsportsfootball4/playlist.m3u8"
@@ -651,7 +651,7 @@
   },
   {
     "id": "ch_93",
-    "name": "AISPLAY6(ATMflix)",
+    "name": "AISPLAY6(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/aisplay.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/playsportsfootball6/playlist.m3u8"
@@ -672,7 +672,7 @@
   },
   {
     "id": "ch_96",
-    "name": "AISPLAY7(ATMflix)",
+    "name": "AISPLAY7(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/aisplay.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/playsportsfootball7/playlist.m3u8"
@@ -693,7 +693,7 @@
   },
   {
     "id": "ch_99",
-    "name": "AISPLAY8(ATMflix)",
+    "name": "AISPLAY8(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/aisplay.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/playsportsfootball8/playlist.m3u8"
@@ -714,7 +714,7 @@
   },
   {
     "id": "ch_102",
-    "name": "AISPLAY9(ATMflix)",
+    "name": "AISPLAY9(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/aisplay.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/playsportsfootball9/playlist.m3u8"
@@ -735,147 +735,147 @@
   },
   {
     "id": "ch_105",
-    "name": "ราชดำเนิน41(ATMflix)",
+    "name": "ราชดำเนิน41(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/aisplay.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/playsports41/playlist.m3u8"
   },
   {
     "id": "ch_106",
-    "name": "eSports46(ATMflix)",
+    "name": "eSports46(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/aisplay.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/playsports46/playlist.m3u8"
   },
   {
     "id": "ch_107",
-    "name": "NFL51(ATMflix)",
+    "name": "NFL51(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/aisplay.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/playsports51/playlist.m3u8"
   },
   {
     "id": "ch_108",
-    "name": "NFL52(ATMflix)",
+    "name": "NFL52(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/aisplay.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/playsports52/playlist.m3u8"
   },
   {
     "id": "ch_109",
-    "name": "NFL53(ATMflix)",
+    "name": "NFL53(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/aisplay.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/playsports53/playlist.m3u8"
   },
   {
     "id": "ch_110",
-    "name": "NBA55(ATMflix)",
+    "name": "NBA55(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/aisplay.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/playsports55/playlist.m3u8"
   },
   {
     "id": "ch_111",
-    "name": "NBA56(ATMflix)",
+    "name": "NBA56(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/aisplay.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/playsports56/playlist.m3u8"
   },
   {
     "id": "ch_112",
-    "name": "WNBA57(ATMflix)",
+    "name": "WNBA57(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/aisplay.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/playsports57/playlist.m3u8"
   },
   {
     "id": "ch_113",
-    "name": "PGA61(ATMflix)",
+    "name": "PGA61(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/aisplay.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/playsports61/playlist.m3u8"
   },
   {
     "id": "ch_114",
-    "name": "LPGA66(ATMflix)",
+    "name": "LPGA66(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/aisplay.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/playsports66/playlist.m3u8"
   },
   {
     "id": "ch_115",
-    "name": "GOLF69(ATMflix)",
+    "name": "GOLF69(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/aisplay.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/playsports69/playlist.m3u8"
   },
   {
     "id": "ch_116",
-    "name": "ATP71(ATMflix)",
+    "name": "ATP71(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/aisplay.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/playsports71/playlist.m3u8"
   },
   {
     "id": "ch_117",
-    "name": "ATP72(ATMflix)",
+    "name": "ATP72(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/aisplay.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/playsports72/playlist.m3u8"
   },
   {
     "id": "ch_118",
-    "name": "ATP73(ATMflix)",
+    "name": "ATP73(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/aisplay.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/playsports73/playlist.m3u8"
   },
   {
     "id": "ch_119",
-    "name": "ATP74(ATMflix)",
+    "name": "ATP74(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/aisplay.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/playsports74/playlist.m3u8"
   },
   {
     "id": "ch_120",
-    "name": "Bundes90(ATMflix)",
+    "name": "Bundes90(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/aisplay.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/playsports90/playlist.m3u8"
   },
   {
     "id": "ch_121",
-    "name": "Bundes91(ATMflix)",
+    "name": "Bundes91(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/aisplay.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/playsports91/playlist.m3u8"
   },
   {
     "id": "ch_122",
-    "name": "Bundes92(ATMflix)",
+    "name": "Bundes92(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/aisplay.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/playsports92/playlist.m3u8"
   },
   {
     "id": "ch_123",
-    "name": "Bundes93(ATMflix)",
+    "name": "Bundes93(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/aisplay.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/playsports93/playlist.m3u8"
   },
   {
     "id": "ch_124",
-    "name": "Bundes94(ATMflix)",
+    "name": "Bundes94(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/aisplay.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/playsports94/playlist.m3u8"
   },
   {
     "id": "ch_125",
-    "name": "monomax1(ATMflix)",
+    "name": "monomax1(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/maxsports.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/monomax-sports1/playlist.m3u8"
@@ -896,7 +896,7 @@
   },
   {
     "id": "ch_128",
-    "name": "monomax2(ATMflix)",
+    "name": "monomax2(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/maxsports.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/monomax-sports2/playlist.m3u8"
@@ -917,7 +917,7 @@
   },
   {
     "id": "ch_131",
-    "name": "monomax3(ATMflix)",
+    "name": "monomax3(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/maxsports.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/monomax-sports3/playlist.m3u8"
@@ -938,7 +938,7 @@
   },
   {
     "id": "ch_134",
-    "name": "monomax4(ATMflix)",
+    "name": "monomax4(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/maxsports.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/monomax-sports4/playlist.m3u8"
@@ -959,7 +959,7 @@
   },
   {
     "id": "ch_137",
-    "name": "monomax5(ATMflix)",
+    "name": "monomax5(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/maxsports.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/monomax-sports5/playlist.m3u8"
@@ -980,7 +980,7 @@
   },
   {
     "id": "ch_140",
-    "name": "monomax6(ATMflix)",
+    "name": "monomax6(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/maxsports.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/monomax-sports6/playlist.m3u8"
@@ -1001,7 +1001,7 @@
   },
   {
     "id": "ch_143",
-    "name": "monomax7(ATMflix)",
+    "name": "monomax7(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/maxsports.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/monomax-sports7/playlist.m3u8"
@@ -1022,7 +1022,7 @@
   },
   {
     "id": "ch_146",
-    "name": "bein1(ATMflix)",
+    "name": "bein1(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/unnamed (2).png",
     "url": "https://app.ipplaybox.fun/atmflixlive/bein1/playlist.m3u8"
@@ -1043,7 +1043,7 @@
   },
   {
     "id": "ch_149",
-    "name": "bein2(ATMflix)",
+    "name": "bein2(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/unnamed (2).png",
     "url": "https://app.ipplaybox.fun/atmflixlive/bein2/playlist.m3u8"
@@ -1064,7 +1064,7 @@
   },
   {
     "id": "ch_152",
-    "name": "bein3(ATMflix)",
+    "name": "bein3(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/unnamed (2).png",
     "url": "https://app.ipplaybox.fun/atmflixlive/bein3/playlist.m3u8"
@@ -1085,7 +1085,7 @@
   },
   {
     "id": "ch_155",
-    "name": "SPOTV(ATMflix)",
+    "name": "SPOTV(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/7849b6cbc420.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/spotv/playlist.m3u8"
@@ -1113,7 +1113,7 @@
   },
   {
     "id": "ch_159",
-    "name": "SPOTV 2(ATMflix)",
+    "name": "SPOTV 2(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/88bbe037db6f.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/spotv2/playlist.m3u8"
@@ -1134,56 +1134,56 @@
   },
   {
     "id": "ch_162",
-    "name": "AppleTV1(ATMflix)",
+    "name": "AppleTV1(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/0c617fdb89a0.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/atvp1/playlist.m3u8"
   },
   {
     "id": "ch_163",
-    "name": "AppleTV2(ATMflix)",
+    "name": "AppleTV2(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/0c617fdb89a0.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/atvp2/playlist.m3u8"
   },
   {
     "id": "ch_164",
-    "name": "AppleTV3(ATMflix)",
+    "name": "AppleTV3(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/0c617fdb89a0.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/atvp3/playlist.m3u8"
   },
   {
     "id": "ch_165",
-    "name": "arenasport2(ATMflix)",
+    "name": "arenasport2(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/316de74f568f.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/arenasport2/playlist.m3u8"
   },
   {
     "id": "ch_166",
-    "name": "arenasport3(ATMflix)",
+    "name": "arenasport3(a)",
     "category": "กีฬา",
     "logo": "",
     "url": "https://app.ipplaybox.fun/atmflixlive/arenasport3/playlist.m3u8"
   },
   {
     "id": "ch_167",
-    "name": "arenasport4(ATMflix)",
+    "name": "arenasport4(a)",
     "category": "กีฬา",
     "logo": "",
     "url": "https://app.ipplaybox.fun/atmflixlive/arenasport4/playlist.m3u8"
   },
   {
     "id": "ch_168",
-    "name": "arenasport6(ATMflix)",
+    "name": "arenasport6(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/c40ff43f9e38.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/arenasport6/playlist.m3u8"
   },
   {
     "id": "ch_169",
-    "name": "cbssports(ATMflix)",
+    "name": "cbssports(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/22de27e62c26.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/cbssports/playlist.m3u8"
@@ -1204,385 +1204,385 @@
   },
   {
     "id": "ch_172",
-    "name": "dazn1(ATMflix)",
+    "name": "dazn1(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/a8540882957f.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/dazn1/playlist.m3u8"
   },
   {
     "id": "ch_173",
-    "name": "dazn2(ATMflix)",
+    "name": "dazn2(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/a8540882957f.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/dazn2/playlist.m3u8"
   },
   {
     "id": "ch_174",
-    "name": "dazn1es(ATMflix)",
+    "name": "dazn1es(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/a8540882957f.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/dazn1es/playlist.m3u8"
   },
   {
     "id": "ch_175",
-    "name": "dazn2es(ATMflix)",
+    "name": "dazn2es(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/a8540882957f.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/dazn2es/playlist.m3u8"
   },
   {
     "id": "ch_176",
-    "name": "eurosport(m-fixer)",
+    "name": "eurosport(m)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/eurosport.jfif",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/eurosport/master.m3u8"
   },
   {
     "id": "ch_177",
-    "name": "eurosport-2(m-fixer)",
+    "name": "eurosport-2(m)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/eurosport.jfif",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/eurosport/master.m3u8"
   },
   {
     "id": "ch_178",
-    "name": "Eurosport1(ATMflix)",
+    "name": "Eurosport1(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/e0eb3321e592.jfif",
     "url": "https://app.ipplaybox.fun/atmflixlive/eurosport1es/playlist.m3u8"
   },
   {
     "id": "ch_179",
-    "name": "Eurosport2(ATMflix)",
+    "name": "Eurosport2(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/fdf7d886481e.jfif",
     "url": "https://app.ipplaybox.fun/atmflixlive/eurosport2es/playlist.m3u8"
   },
   {
     "id": "ch_180",
-    "name": "FS1(ATMflix)",
+    "name": "FS1(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/49d84fa51a66.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/foxsports1usa/playlist.m3u8"
   },
   {
     "id": "ch_181",
-    "name": "FS2(ATMflix)",
+    "name": "FS2(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/96eb414a9a1c.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/foxsports2usa/playlist.m3u8"
   },
   {
     "id": "ch_182",
-    "name": "L1MAX(ATMflix)",
+    "name": "L1MAX(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/611dfbc346b6.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/l1max/playlist.m3u8"
   },
   {
     "id": "ch_183",
-    "name": "laliga-hypermotion-tv(ATMflix)",
+    "name": "laliga-hypermotion-tv(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/6733cf1b4643.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/laliga-hypermotion-tv/playlist.m3u8"
   },
   {
     "id": "ch_184",
-    "name": "maxsport1hr(ATMflix)",
+    "name": "maxsport1hr(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/51cce54a838b.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/maxsport1hr/playlist.m3u8"
   },
   {
     "id": "ch_185",
-    "name": "MU TV(ATMflix)",
+    "name": "MU TV(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/36480ac3d156.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/mutv/playlist.m3u8"
   },
   {
     "id": "ch_186",
-    "name": "mutv(m-fixer)",
+    "name": "mutv(m)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/mutv.png",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/mutv/master.m3u8"
   },
   {
     "id": "ch_187",
-    "name": "mutv-2(m-fixer)",
+    "name": "mutv-2(m)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/mutv.png",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/mutv/master.m3u8"
   },
   {
     "id": "ch_188",
-    "name": "NBA TV(ATMflix)",
+    "name": "NBA TV(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/8a705e6b2da4.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/nba/playlist.m3u8"
   },
   {
     "id": "ch_189",
-    "name": "polsatsportpremium2(ATMflix)",
+    "name": "polsatsportpremium2(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/aca767a86d07.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/polsatsportpremium2/playlist.m3u8"
   },
   {
     "id": "ch_190",
-    "name": "premiersport(m-fixer)",
+    "name": "premiersport(m)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/premieasport.png",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/premiersport/master.m3u8"
   },
   {
     "id": "ch_191",
-    "name": "premiersport-2(m-fixer)",
+    "name": "premiersport-2(m)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/premieasport.png",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/premiersport/master.m3u8"
   },
   {
     "id": "ch_192",
-    "name": "realmadridtv(m-fixer)",
+    "name": "realmadridtv(m)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/realmaddridtv.png",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/realmadridtv/master.m3u8"
   },
   {
     "id": "ch_193",
-    "name": "realmadridtv-2(m-fixer)",
+    "name": "realmadridtv-2(m)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/realmaddridtv.png",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/realmadridtv/master.m3u8"
   },
   {
     "id": "ch_194",
-    "name": "sportdigital(ATMflix)",
+    "name": "sportdigital(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/2a16c12f6c36.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/sportdigital/playlist.m3u8"
   },
   {
     "id": "ch_195",
-    "name": "sporttv1(ATMflix)",
+    "name": "sporttv1(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/5e316d446c88.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/sporttv1/playlist.m3u8"
   },
   {
     "id": "ch_196",
-    "name": "tudn(ATMflix)",
+    "name": "tudn(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/04e6b364b3da.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/tudnusa/playlist.m3u8"
   },
   {
     "id": "ch_197",
-    "name": "tyC Sports(ATMflix)",
+    "name": "tyC Sports(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/22c434de482e.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/tycsports/playlist.m3u8"
   },
   {
     "id": "ch_198",
-    "name": "wsport(m-fixer)",
+    "name": "wsport(m)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/w-sport.png",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/wsport/master.m3u8"
   },
   {
     "id": "ch_199",
-    "name": "wsport-2(m-fixer)",
+    "name": "wsport-2(m)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/w-sport.png",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/wsport/master.m3u8"
   },
   {
     "id": "ch_200",
-    "name": "volleyball1(ATMflix)",
+    "name": "volleyball1(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/Volleyball1.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/volleyball1/playlist.m3u8"
   },
   {
     "id": "ch_201",
-    "name": "volleyball2(ATMflix)",
+    "name": "volleyball2(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/Volleyball2.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/volleyball2/playlist.m3u8"
   },
   {
     "id": "ch_202",
-    "name": "volleyball3(ATMflix)",
+    "name": "volleyball3(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/Volleyball3.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/volleyball3/playlist.m3u8"
   },
   {
     "id": "ch_203",
-    "name": "volleyball4(ATMflix)",
+    "name": "volleyball4(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/Volleyball4.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/volleyball4/playlist.m3u8"
   },
   {
     "id": "ch_204",
-    "name": "NBA Event1(ATMflix)",
+    "name": "NBA Event1(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/nbaevent.jpg",
     "url": "https://app.ipplaybox.fun/atmflixlive/nbalpevent1/playlist.m3u8"
   },
   {
     "id": "ch_205",
-    "name": "NBA Event2(ATMflix)",
+    "name": "NBA Event2(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/nbaevent.jpg",
     "url": "https://app.ipplaybox.fun/atmflixlive/nbalpevent2/playlist.m3u8"
   },
   {
     "id": "ch_206",
-    "name": "NBA Event3(ATMflix)",
+    "name": "NBA Event3(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/nbaevent.jpg",
     "url": "https://app.ipplaybox.fun/atmflixlive/nbalpevent3/playlist.m3u8"
   },
   {
     "id": "ch_207",
-    "name": "NBA Event4(ATMflix)",
+    "name": "NBA Event4(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/nbaevent.jpg",
     "url": "https://app.ipplaybox.fun/atmflixlive/nbalpevent4/playlist.m3u8"
   },
   {
     "id": "ch_208",
-    "name": "NBA Event5(ATMflix)",
+    "name": "NBA Event5(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/nbaevent.jpg",
     "url": "https://app.ipplaybox.fun/atmflixlive/nbalpevent5/playlist.m3u8"
   },
   {
     "id": "ch_209",
-    "name": "NBA Event6(ATMflix)",
+    "name": "NBA Event6(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/nbaevent.jpg",
     "url": "https://app.ipplaybox.fun/atmflixlive/nbalpevent6/playlist.m3u8"
   },
   {
     "id": "ch_210",
-    "name": "NBA Event7(ATMflix)",
+    "name": "NBA Event7(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/nbaevent.jpg",
     "url": "https://app.ipplaybox.fun/atmflixlive/nbalpevent7/playlist.m3u8"
   },
   {
     "id": "ch_211",
-    "name": "NBA Event8(ATMflix)",
+    "name": "NBA Event8(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/nbaevent.jpg",
     "url": "https://app.ipplaybox.fun/atmflixlive/nbalpevent8/playlist.m3u8"
   },
   {
     "id": "ch_212",
-    "name": "NBA Event9(ATMflix)",
+    "name": "NBA Event9(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/nbaevent.jpg",
     "url": "https://app.ipplaybox.fun/atmflixlive/nbalpevent9/playlist.m3u8"
   },
   {
     "id": "ch_213",
-    "name": "NBA Event10(ATMflix)",
+    "name": "NBA Event10(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/nbaevent.jpg",
     "url": "https://app.ipplaybox.fun/atmflixlive/nbalpevent10/playlist.m3u8"
   },
   {
     "id": "ch_214",
-    "name": "NBA Event11(ATMflix)",
+    "name": "NBA Event11(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/nbaevent.jpg",
     "url": "https://app.ipplaybox.fun/atmflixlive/nbalpevent11/playlist.m3u8"
   },
   {
     "id": "ch_215",
-    "name": "NBA Event12(ATMflix)",
+    "name": "NBA Event12(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/nbaevent.jpg",
     "url": "https://app.ipplaybox.fun/atmflixlive/nbalpevent12/playlist.m3u8"
   },
   {
     "id": "ch_216",
-    "name": "NBA Event13(ATMflix)",
+    "name": "NBA Event13(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/nbaevent.jpg",
     "url": "https://app.ipplaybox.fun/atmflixlive/nbalpevent13/playlist.m3u8"
   },
   {
     "id": "ch_217",
-    "name": "event1(ATMflix)",
+    "name": "event1(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/livesportATMflick.jpg",
     "url": "https://app.ipplaybox.fun/atmflixlive/event1/playlist.m3u8"
   },
   {
     "id": "ch_218",
-    "name": "event2(ATMflix)",
+    "name": "event2(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/livesportATMflick.jpg",
     "url": "https://app.ipplaybox.fun/atmflixlive/event2/playlist.m3u8"
   },
   {
     "id": "ch_219",
-    "name": "event3(ATMflix)",
+    "name": "event3(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/livesportATMflick.jpg",
     "url": "https://app.ipplaybox.fun/atmflixlive/event3/playlist.m3u8"
   },
   {
     "id": "ch_220",
-    "name": "event4(ATMflix)",
+    "name": "event4(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/livesportATMflick.jpg",
     "url": "https://app.ipplaybox.fun/atmflixlive/event4/playlist.m3u8"
   },
   {
     "id": "ch_221",
-    "name": "event5(ATMflix)",
+    "name": "event5(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/livesportATMflick.jpg",
     "url": "https://app.ipplaybox.fun/atmflixlive/event5/playlist.m3u8"
   },
   {
     "id": "ch_222",
-    "name": "event6(ATMflix)",
+    "name": "event6(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/livesportATMflick.jpg",
     "url": "https://app.ipplaybox.fun/atmflixlive/event6/playlist.m3u8"
   },
   {
     "id": "ch_223",
-    "name": "event7(ATMflix)",
+    "name": "event7(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/livesportATMflick.jpg",
     "url": "https://app.ipplaybox.fun/atmflixlive/event7/playlist.m3u8"
   },
   {
     "id": "ch_224",
-    "name": "event8(ATMflix)",
+    "name": "event8(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/livesportATMflick.jpg",
     "url": "https://app.ipplaybox.fun/atmflixlive/event8/playlist.m3u8"
   },
   {
     "id": "ch_225",
-    "name": "event9(ATMflix)",
+    "name": "event9(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/livesportATMflick.jpg",
     "url": "https://app.ipplaybox.fun/atmflixlive/event9/playlist.m3u8"
   },
   {
     "id": "ch_226",
-    "name": "event10(ATMflix)",
+    "name": "event10(a)",
     "category": "กีฬา",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/livesportATMflick.jpg",
     "url": "https://app.ipplaybox.fun/atmflixlive/event10/playlist.m3u8"
@@ -1659,42 +1659,42 @@
   },
   {
     "id": "ch_237",
-    "name": "HBO(ATMflix)",
+    "name": "HBO(a)",
     "category": "ภาพยนตร์",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/hbo.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/hbo/playlist.m3u8"
   },
   {
     "id": "ch_238",
-    "name": "HBO(m-fixer)",
+    "name": "HBO(m)",
     "category": "ภาพยนตร์",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/hbo.png",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/hbo-hd/master.m3u8"
   },
   {
     "id": "ch_239",
-    "name": "HBO-2(m-fixer)",
+    "name": "HBO-2(m)",
     "category": "ภาพยนตร์",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/hbo.png",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/hbo-hd/master.m3u8"
   },
   {
     "id": "ch_240",
-    "name": "HBOHits(ATMflix)",
+    "name": "HBOHits(a)",
     "category": "ภาพยนตร์",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/hbohits.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/hbo-hits/playlist.m3u8"
   },
   {
     "id": "ch_241",
-    "name": "HBOHits(m-fixer)",
+    "name": "HBOHits(m)",
     "category": "ภาพยนตร์",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/hbohits.png",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/hbohits/master.m3u8"
   },
   {
     "id": "ch_242",
-    "name": "HBOHits-2(m-fixer)",
+    "name": "HBOHits-2(m)",
     "category": "ภาพยนตร์",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/hbohits.png",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/hbohits/master.m3u8"
@@ -1708,112 +1708,112 @@
   },
   {
     "id": "ch_244",
-    "name": "HBOSignature(ATMflix)",
+    "name": "HBOSignature(a)",
     "category": "ภาพยนตร์",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/hbosig.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/hbo-signature/playlist.m3u8"
   },
   {
     "id": "ch_245",
-    "name": "HBOSignature(m-fixer)",
+    "name": "HBOSignature(m)",
     "category": "ภาพยนตร์",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/hbosig.png",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/hbosignature/master.m3u8"
   },
   {
     "id": "ch_246",
-    "name": "HBOSignature-2(m-fixer)",
+    "name": "HBOSignature-2(m)",
     "category": "ภาพยนตร์",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/hbosig.png",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/hbosignature/master.m3u8"
   },
   {
     "id": "ch_247",
-    "name": "hbofamily(m-fixer)",
+    "name": "hbofamily(m)",
     "category": "ภาพยนตร์",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/hbofam.png",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/hbofamily/master.m3u8"
   },
   {
     "id": "ch_248",
-    "name": "hbofamily-2(m-fixer)",
+    "name": "hbofamily-2(m)",
     "category": "ภาพยนตร์",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/hbofam.png",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/hbofamily/master.m3u8"
   },
   {
     "id": "ch_249",
-    "name": "cinemax(ATMflix)",
+    "name": "cinemax(a)",
     "category": "ภาพยนตร์",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/cinemax.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/cinemax/playlist.m3u8"
   },
   {
     "id": "ch_250",
-    "name": "cinemax(m-fixer)",
+    "name": "cinemax(m)",
     "category": "ภาพยนตร์",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/cinemax.png",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/cinemax/master.m3u8"
   },
   {
     "id": "ch_251",
-    "name": "cinemax-2(m-fixer)",
+    "name": "cinemax-2(m)",
     "category": "ภาพยนตร์",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/cinemax.png",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/cinemax/master.m3u8"
   },
   {
     "id": "ch_252",
-    "name": "mono29plus(ATMflix)",
+    "name": "mono29plus(a)",
     "category": "ภาพยนตร์",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/mono29plus.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/mono29plus/playlist.m3u8"
   },
   {
     "id": "ch_253",
-    "name": "mono29plus(m-fixer)",
+    "name": "mono29plus(m)",
     "category": "ภาพยนตร์",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/mono29plus.png",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/mono29plus/master.m3u8"
   },
   {
     "id": "ch_254",
-    "name": "mono29plus-2(m-fixer)",
+    "name": "mono29plus-2(m)",
     "category": "ภาพยนตร์",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/mono29plus.png",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/mono29plus/master.m3u8"
   },
   {
     "id": "ch_255",
-    "name": "True film1(ATMflix)",
+    "name": "True film1(a)",
     "category": "ภาพยนตร์",
     "logo": "https://cdn.imgchest.com/files/35348deb64cb.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/truefilm1/playlist.m3u8"
   },
   {
     "id": "ch_256",
-    "name": "True film2(ATMflix)",
+    "name": "True film2(a)",
     "category": "ภาพยนตร์",
     "logo": "https://cdn.imgchest.com/files/40de2167af80.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/truefilm2/playlist.m3u8"
   },
   {
     "id": "ch_257",
-    "name": "True Asian More(ATMflix)",
+    "name": "True Asian More(a)",
     "category": "ภาพยนตร์",
     "logo": "https://cdn.imgchest.com/files/15202ff45da6.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/trueasianmore/playlist.m3u8"
   },
   {
     "id": "ch_258",
-    "name": "asianhits(m-fixer)",
+    "name": "asianhits(m)",
     "category": "ภาพยนตร์",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/asianhits.png",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/asianhits/master.m3u8"
   },
   {
     "id": "ch_259",
-    "name": "asianhits-2(m-fixer)",
+    "name": "asianhits-2(m)",
     "category": "ภาพยนตร์",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/asianhits.png",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/asianhits/master.m3u8"
@@ -1827,56 +1827,56 @@
   },
   {
     "id": "ch_261",
-    "name": "ROCKAction(ATMflix)",
+    "name": "ROCKAction(a)",
     "category": "ภาพยนตร์",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/rockac.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/rock-action/playlist.m3u8"
   },
   {
     "id": "ch_262",
-    "name": "ROCKAction(m-fixer)",
+    "name": "ROCKAction(m)",
     "category": "ภาพยนตร์",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/rockac.png",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/rockaction/master.m3u8"
   },
   {
     "id": "ch_263",
-    "name": "ROCKAction-2(m-fixer)",
+    "name": "ROCKAction-2(m)",
     "category": "ภาพยนตร์",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/rockac.png",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/rockaction/master.m3u8"
   },
   {
     "id": "ch_264",
-    "name": "rock-entertainment(ATMflix)",
+    "name": "rock-entertainment(a)",
     "category": "ภาพยนตร์",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/rocken.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/rock-entertainment/playlist.m3u8"
   },
   {
     "id": "ch_265",
-    "name": "rock-entertainment(m-fixer)",
+    "name": "rock-entertainment(m)",
     "category": "ภาพยนตร์",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/rocken.webp",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/rock-entertainment/master.m3u8"
   },
   {
     "id": "ch_266",
-    "name": "rock-entertainment-2(m-fixer)",
+    "name": "rock-entertainment-2(m)",
     "category": "ภาพยนตร์",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/rocken.webp",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/rock-entertainment/master.m3u8"
   },
   {
     "id": "ch_267",
-    "name": "Warnertv(m-fixer)",
+    "name": "Warnertv(m)",
     "category": "ภาพยนตร์",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/warnertv.png",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/warnertv/master.m3u8"
   },
   {
     "id": "ch_268",
-    "name": "Warnertv-2(m-fixer)",
+    "name": "Warnertv-2(m)",
     "category": "ภาพยนตร์",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/warnertv.png",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/warnertv/master.m3u8"
@@ -1946,266 +1946,266 @@
   },
   {
     "id": "ch_278",
-    "name": "Animal Show(ATMflix)",
+    "name": "Animal Show(a)",
     "category": "สารคดี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/animalshow.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/animalshow/playlist.m3u8"
   },
   {
     "id": "ch_279",
-    "name": "Animal Show(m-fixer)",
+    "name": "Animal Show(m)",
     "category": "สารคดี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/animalshow.png",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/animalshow/master.m3u8"
   },
   {
     "id": "ch_280",
-    "name": "Animal Show-2(m-fixer)",
+    "name": "Animal Show-2(m)",
     "category": "สารคดี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/animalshow.png",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/animalshow/master.m3u8"
   },
   {
     "id": "ch_281",
-    "name": "Discovery(ATMflix)",
+    "name": "Discovery(a)",
     "category": "สารคดี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/diccovery.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/discovery/playlist.m3u8"
   },
   {
     "id": "ch_282",
-    "name": "Discovery(m-fixer)",
+    "name": "Discovery(m)",
     "category": "สารคดี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/diccovery.png",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/discovery/master.m3u8"
   },
   {
     "id": "ch_283",
-    "name": "Discovery-2(m-fixer)",
+    "name": "Discovery-2(m)",
     "category": "สารคดี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/diccovery.png",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/discovery/master.m3u8"
   },
   {
     "id": "ch_284",
-    "name": "dmax(ATMflix)",
+    "name": "dmax(a)",
     "category": "สารคดี",
     "logo": "https://cdn.imgchest.com/files/5fbb6f96f05f.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/dmax/playlist.m3u8"
   },
   {
     "id": "ch_285",
-    "name": "History(ATMflix)",
+    "name": "History(a)",
     "category": "สารคดี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/history.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/history/playlist.m3u8"
   },
   {
     "id": "ch_286",
-    "name": "Khong Dee Thailand(m-fixer)",
+    "name": "Khong Dee Thailand(m)",
     "category": "สารคดี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/khongdee.png",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/khongdeethailand/master.m3u8"
   },
   {
     "id": "ch_287",
-    "name": "Khong Dee Thailand-2(m-fixer)",
+    "name": "Khong Dee Thailand-2(m)",
     "category": "สารคดี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/khongdee.png",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/khongdeethailand/master.m3u8"
   },
   {
     "id": "ch_288",
-    "name": "MySci(ATMflix)",
+    "name": "MySci(a)",
     "category": "สารคดี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/mysci.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/mysci/playlist.m3u8"
   },
   {
     "id": "ch_289",
-    "name": "MySci(m-fixer)",
+    "name": "MySci(m)",
     "category": "สารคดี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/mysci.png",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/mysci/master.m3u8"
   },
   {
     "id": "ch_290",
-    "name": "MySci-2(m-fixer)",
+    "name": "MySci-2(m)",
     "category": "สารคดี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/mysci.png",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/mysci/master.m3u8"
   },
   {
     "id": "ch_291",
-    "name": "Samrujlok(ATMflix)",
+    "name": "Samrujlok(a)",
     "category": "สารคดี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/samrojlok.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/samrujlok/playlist.m3u8"
   },
   {
     "id": "ch_292",
-    "name": "Samrujlok(m-fixer)",
+    "name": "Samrujlok(m)",
     "category": "สารคดี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/samrojlok.png",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/samrujlok/master.m3u8"
   },
   {
     "id": "ch_293",
-    "name": "Samrujlok-2(m-fixer)",
+    "name": "Samrujlok-2(m)",
     "category": "สารคดี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/samrojlok.png",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/samrujlok/master.m3u8"
   },
   {
     "id": "ch_294",
-    "name": "Thainess(ATMflix)",
+    "name": "Thainess(a)",
     "category": "สารคดี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/thainess.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/thainess/playlist.m3u8"
   },
   {
     "id": "ch_295",
-    "name": "Thainess(m-fixer)",
+    "name": "Thainess(m)",
     "category": "สารคดี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/thainess.png",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/thainess/master.m3u8"
   },
   {
     "id": "ch_296",
-    "name": "Thainess-2(m-fixer)",
+    "name": "Thainess-2(m)",
     "category": "สารคดี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/thainess.png",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/thainess/master.m3u8"
   },
   {
     "id": "ch_297",
-    "name": "tlc(ATMflix)",
+    "name": "tlc(a)",
     "category": "สารคดี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/tlc.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/tlc/playlist.m3u8"
   },
   {
     "id": "ch_298",
-    "name": "tlc(m-fixer)",
+    "name": "tlc(m)",
     "category": "สารคดี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/tlc.webp",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/tlc/master.m3u8"
   },
   {
     "id": "ch_299",
-    "name": "tlc-2(m-fixer)",
+    "name": "tlc-2(m)",
     "category": "สารคดี",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/tlc.webp",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/tlc/master.m3u8"
   },
   {
     "id": "ch_300",
-    "name": "Aniplus(ATMflix)",
+    "name": "Aniplus(a)",
     "category": "บันเทิง",
     "logo": "https://cdn.imgchest.com/files/247234af7e13.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/anipluschannel/playlist.m3u8"
   },
   {
     "id": "ch_301",
-    "name": "cartoonito(m-fixer)",
+    "name": "cartoonito(m)",
     "category": "บันเทิง",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/cartoonnito.png",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/cartoonito/master.m3u8"
   },
   {
     "id": "ch_302",
-    "name": "cartoonito-2(m-fixer)",
+    "name": "cartoonito-2(m)",
     "category": "บันเทิง",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/cartoonnito.png",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/cartoonito/master.m3u8"
   },
   {
     "id": "ch_303",
-    "name": "cartoonnetwork(m-fixer)",
+    "name": "cartoonnetwork(m)",
     "category": "บันเทิง",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/cnnetwork.webp",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/cartoonnetwork/master.m3u8"
   },
   {
     "id": "ch_304",
-    "name": "cartoonnetwork-2(m-fixer)",
+    "name": "cartoonnetwork-2(m)",
     "category": "บันเทิง",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/cnnetwork.webp",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/cartoonnetwork/master.m3u8"
   },
   {
     "id": "ch_305",
-    "name": "nickelodeon(m-fixer)",
+    "name": "nickelodeon(m)",
     "category": "บันเทิง",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/nickelo.webp",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/nickelodeon/master.m3u8"
   },
   {
     "id": "ch_306",
-    "name": "nickelodeon-2(m-fixer)",
+    "name": "nickelodeon-2(m)",
     "category": "บันเทิง",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/nickelo.webp",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/nickelodeon/master.m3u8"
   },
   {
     "id": "ch_307",
-    "name": "nickjr(m-fixer)",
+    "name": "nickjr(m)",
     "category": "บันเทิง",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/nickjr.webp",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/nickjr/master.m3u8"
   },
   {
     "id": "ch_308",
-    "name": "nickjr-2(m-fixer)",
+    "name": "nickjr-2(m)",
     "category": "บันเทิง",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/nickjr.webp",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/nickjr/master.m3u8"
   },
   {
     "id": "ch_309",
-    "name": "asianfoodnetwork(ATMflix)",
+    "name": "asianfoodnetwork(a)",
     "category": "บันเทิง",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/asianfood.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/afn/playlist.m3u8"
   },
   {
     "id": "ch_310",
-    "name": "asianfoodnetwork(m-fixer)",
+    "name": "asianfoodnetwork(m)",
     "category": "บันเทิง",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/asianfood.png",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/asianfoodnetwork/master.m3u8"
   },
   {
     "id": "ch_311",
-    "name": "asianfoodnetwork-2(m-fixer)",
+    "name": "asianfoodnetwork-2(m)",
     "category": "บันเทิง",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/asianfood.png",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/asianfoodnetwork/master.m3u8"
   },
   {
     "id": "ch_312",
-    "name": "foodnetwork(m-fixer)",
+    "name": "foodnetwork(m)",
     "category": "บันเทิง",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/foodnetwork.png",
     "url": "https://edge-1.m-fixer.net:8092/stream/ais/foodnetwork/master.m3u8"
   },
   {
     "id": "ch_313",
-    "name": "foodnetwork-2(m-fixer)",
+    "name": "foodnetwork-2(m)",
     "category": "บันเทิง",
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/foodnetwork.png",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/foodnetwork/master.m3u8"
   },
   {
     "id": "ch_314",
-    "name": "A'lure channel(ATMflix)",
+    "name": "A'lure channel(a)",
     "category": "บันเทิง",
     "logo": "https://cdn.imgchest.com/files/fb0e90e062f6.jfif",
     "url": "https://app.ipplaybox.fun/atmflixlive/alure-channel/playlist.m3u8"
   },
   {
     "id": "ch_315",
-    "name": "RUSH Stories(ATMflix)",
+    "name": "RUSH Stories(a)",
     "category": "บันเทิง",
     "logo": "https://cdn.imgchest.com/files/4cdf45e6a841.jpg",
     "url": "https://app.ipplaybox.fun/atmflixlive/rush-stories/playlist.m3u8"
@@ -2268,7 +2268,7 @@
   },
   {
     "id": "ch_324",
-    "name": "MTV(ATMflix)",
+    "name": "MTV(a)",
     "category": "เพลง",
     "logo": "https://cdn.imgchest.com/files/93e778a0c482.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/mtv/playlist.m3u8"
@@ -2338,14 +2338,14 @@
   },
   {
     "id": "ch_334",
-    "name": "golfchannel(ATMflix)",
+    "name": "golfchannel(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/3f6c14905d97.jpg",
     "url": "https://app.ipplaybox.fun/atmflixlive/golfchannel/playlist.m3u8"
   },
   {
     "id": "ch_335",
-    "name": "truetennis(ATMflix)",
+    "name": "truetennis(a)",
     "category": "กีฬา",
     "logo": "https://cdn.imgchest.com/files/6073729771fc.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/truetennis/playlist.m3u8"
