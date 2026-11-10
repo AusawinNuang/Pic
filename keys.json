@@ -1,0 +1,27 @@
+[
+  {
+    "key": "VIP001",
+    "status": "active",
+    "deviceId": "",
+    "note": "รหัสทั่วไป (ใครกรอกก็เข้าได้ เพราะยังไม่ได้ระบุเลขเครื่อง)"
+  },
+  {
+    "key": "VIP002",
+    "status": "active",
+    "deviceId": "DEV-XXXXXX-XXXX",
+    "note": "ล็อกเฉพาะเครื่อง (เข้าได้เฉพาะเครื่องที่มีรหัสตรงกับ deviceId เท่านั้น)"
+  },
+  {
+    "key": "VIP003",
+    "status": "block",
+    "deviceId": "",
+    "note": "ตัวอย่างรหัสที่ถูกระงับสิทธิ์ (เปลี่ยน status เป็น block)"
+  },
+  {
+    "key": "VIP004",
+    "status": "active",
+    "deviceId": "",
+    "expires": "2026-12-31",
+    "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
+  }
+]
