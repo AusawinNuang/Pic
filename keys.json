@@ -3,8 +3,13 @@
     "key": "VIP001",
     "status": "active",
     "deviceId": "DEV-XHKK1P-BG2N",
-    "expires": "2026-12-31",
     "note": "คอมตัวเอง"
+  },
+  {
+    "key": "VIPxxx",
+    "status": "active",
+    "deviceId": "DEV-M15G2X-AXU3",
+    "note": "แฮปคอมตัวเอง"
   },
   {
     "key": "VIP002",
