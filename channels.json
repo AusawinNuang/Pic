@@ -1,3 +1,22 @@
+{
+  "name": "Doo Duai Kan VIP",
+  "author": "อัพเดท 6/11/2026",
+  "image": "https://raw.githubusercontent.com/AusawinNuang/Pic/35ef11da858771f055886790a43468bb9b67af07/1792150348771.jpg",
+  "url": "https://drive.google.com/uc?id=1hKoWBJUa8XC7DYZL5hUhTYsydytR6LBi",
+  "groups": [
+    {
+      "name": "AIS @By Zank.T",
+      "author": "Zank.T",
+      "category": "ฟรีทีวี",
+      "url": "https://aisfree.copytv-iptv.workers.dev/playlist",
+      "image": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/1792680557667.jpg",
+      "import": false
+    },
+    ... (ตามด้วยรายการช่องเดิมของคุณ) ...
+  ]
+}
+
+
 [
   {
     "id": "ch_1",
