@@ -2435,15 +2435,6 @@
     "logo": "https://cdn.imgchest.com/files/b44edf42580a.webp",
     "url": "http://125hvt.ddns.net:21585/vtv6/playlist.m3u8"
   },
-
-  {
-    "name": "AIS @By Zank.T",
-    "author": "Zank.T",
-    "category": "ฟรีทีวี",
-    "url": "https://aisfree.copytv-iptv.workers.dev/playlist",
-    "image": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/1792680557667.jpg",
-    "import": false
-  },
  {
 "name": "ตะวันลวง - Beneath the Lies",
 "image": "https://cdn.imgchest.com/files/0b0e846c8aac.jpg",
