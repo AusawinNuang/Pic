@@ -25,11 +25,11 @@
     "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
      },
   {
-    "key": "VIP002",
+    "key": "VIP6395",
     "status": "active",
-    "deviceId": "DEV-XXXXXX-XXXX",
+    "deviceId": "DEV-OMTNIT-X8TB",
     "expires": "2026-12-31",
-    "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
+    "note": "โส่ย"
   },
   {
     "key": "VIP003",
