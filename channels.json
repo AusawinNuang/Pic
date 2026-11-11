@@ -2450,6 +2450,13 @@
   "import": false
 },
 
+	  {
+		"name": "Movies Online",
+		  "category": "ภาพยนตร์",
+		"image": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/Doonung-Last.jpg",
+		"url": "https://raw.githubusercontent.com/AusawinNuang/AusawinChannel/refs/heads/main/1-Full-Movies",
+		"import": false},
+
  
     {
 "name": "งานสนุก จะตาย (พากย์ไทย) Dead-End Job (2026) 8 ตอนจบ",
