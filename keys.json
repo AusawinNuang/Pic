@@ -1,29 +1,24 @@
 [
   {
-    "key": "VIPcom",
+    "key": "COM",
     "status": "active",
-    "deviceId": "DEV-XHKK1P-BG2N",
     "note": "คอมตัวเอง"
   },
   {
-    "key": "VIPapp",
+    "key": "COMAPP",
     "status": "active",
-    "deviceId": "DEV-ZT5H7D-N30R",
     "note": "แฮปคอมตัวเอง"
-  },
-  {
-    "key": "VIPtab",
-    "status": "active",
-    "deviceId": "DEV-4HTFJ3-T70J",
-    "note": "แฮปคอมตัวเอง"
-  },
-  
+  }, 
   {
     "key": "TV",
     "status": "active",
-    "deviceId": "DEV-1G7GEH-ZFRC",
     "note": "ทีวี"
   },
+    {
+    "key": "TAB",
+    "status": "active",
+    "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
+     },
   {
     "key": "VIP002",
     "status": "active",
@@ -133,13 +128,6 @@
     "deviceId": "DEV-LZIZFM-IJ08",
     "expires": "2026-12-31",
     "note": "หง"
-     },
-  {
-    "key": "TAB",
-    "status": "active",
-    "deviceId": "DEV-4HTFJ3-T70J",
-    "expires": "2026-12-31",
-    "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
      },
   {
     "key": "VIP180",
