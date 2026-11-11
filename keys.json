@@ -132,7 +132,7 @@
     "status": "active",
     "deviceId": "DEV-XXXXXX-XXXX",
     "expires": "2026-12-31",
-    "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
+    "note": "ตัวอย่าง"
      },
   {
     "key": "TAB",
@@ -142,11 +142,11 @@
     "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
      },
   {
-    "key": "VIP019",
+    "key": "VIP180",
     "status": "active",
-    "deviceId": "DEV-XXXXXX-XXXX",
+    "deviceId": "DEV-EOQARI-CAX8",
     "expires": "2026-12-31",
-    "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
+    "note": "adisak"
     
   }
 ]
