@@ -128,11 +128,11 @@
     "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
      },
   {
-    "key": "VIP017",
+    "key": "VIP777",
     "status": "active",
-    "deviceId": "DEV-XXXXXX-XXXX",
+    "deviceId": "DEV-LZIZFM-IJ08",
     "expires": "2026-12-31",
-    "note": "ตัวอย่าง"
+    "note": "หง"
      },
   {
     "key": "TAB",
