@@ -20,6 +20,11 @@
     "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
      },
   {
+    "key": "MOBILE",
+    "status": "active",
+    "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
+     },
+  {
     "key": "VIP002",
     "status": "active",
     "deviceId": "DEV-XXXXXX-XXXX",
