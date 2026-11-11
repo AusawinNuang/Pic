@@ -38,11 +38,11 @@
     "note": "ตัวอย่างรหัสที่ถูกระงับสิทธิ์ (เปลี่ยน status เป็น block)"
   },
   {
-    "key": "VIP004",
+    "key": "VIP6773",
     "status": "active",
-    "deviceId": "DEV-LU0Q1Q-F1GX",
+    "deviceId": "DEV-CM13US-T7L0",
     "expires": "2026-12-31",
-    "note": "มือถือตัวเอง"
+    "note": "ARM"
     },
   {
     "key": "VIP2510",
