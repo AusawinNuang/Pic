@@ -1783,6 +1783,13 @@
     "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/mono29plus.png",
     "url": "https://edge-2.m-fixer.net:8092/stream/ais/mono29plus/master.m3u8"
   },
+	  	  {
+    "id": "ch_351",
+    "name": "amc(a)",
+    "category": "ภาพยนตร์",
+    "logo": "https://cdn.imgchest.com/files/960945826d77.png",
+    "url": "https://app.ipplaybox.fun/atmflixlive/amc/playlist.m3u8"
+  },
 	  {
     "id": "ch_349",
     "name": "TrueMovieHits(a)",
@@ -1796,13 +1803,6 @@
     "category": "ภาพยนตร์",
     "logo": "https://cdn.imgchest.com/files/e6b14dc41e68.webp",
     "url": "https://app.ipplaybox.fun/atmflixlive/truethaifilm/playlist.m3u8"
-  },
-	  {
-    "id": "ch_351",
-    "name": "amc(a)",
-    "category": "ภาพยนตร์",
-    "logo": "https://cdn.imgchest.com/files/960945826d77.png",
-    "url": "https://app.ipplaybox.fun/atmflixlive/amc/playlist.m3u8"
   },
   {
     "id": "ch_255",
