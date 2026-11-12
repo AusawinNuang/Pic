@@ -2457,8 +2457,8 @@
   },
 	  {
     "id": "ch_351",
-    "name": "amc",
-    "category": "ภาพยนตร์(a)",
+    "name": "amc(a)",
+    "category": "ภาพยนตร์",
     "logo": "https://cdn.imgchest.com/files/960945826d77.png",
     "url": "https://app.ipplaybox.fun/atmflixlive/amc/playlist.m3u8"
   },
