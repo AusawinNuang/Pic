@@ -1,9 +1,8 @@
-```html
 <!doctype html>
 <html lang="th">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>ดูด้วยกัน(เงียบๆ)</title>
   <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.15/dist/hls.min.js"></script>
   <style>
@@ -29,7 +28,12 @@
       --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans Thai", sans-serif;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
 
     body {
       font-family: var(--font);
@@ -39,6 +43,13 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    input, textarea, code {
+      user-select: text;
+      -webkit-user-select: text;
     }
 
     header {
@@ -440,20 +451,27 @@
   <script>
     const GITHUB_KEYS_URL = "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/keys.json";
 
-    // ==================== ระบบสร้างและจำรหัสประจำเครื่องแบบคงที่ (Hardware Fingerprint + Multi-Storage) ====================
+    // ==================== ระบบสร้างและจำรหัสประจำเครื่องแบบคงที่ (รองรับ APK / WebView / Android TV) ====================
     function generateStableDeviceFingerprint() {
       try {
+        // 1. หากตัวสร้าง APK มี Native Android Bridge ให้ดึงค่าจากตัวเครื่องโดยตรง
+        if (window.Android && typeof window.Android.getDeviceId === "function") {
+          const nativeId = String(window.Android.getDeviceId() || "").trim();
+          if (nativeId) return nativeId.startsWith("DEV-") ? nativeId : ("DEV-" + nativeId.toUpperCase());
+        }
+
         const nav = window.navigator || {};
         const scr = window.screen || {};
 
-        // ดึงชื่อรุ่นอุปกรณ์จาก User-Agent โดยตัดเลขเวอร์ชันของ Chrome/WebView ที่อัปเดตบ่อยออก
+        // 2. ดึงชื่อรุ่นอุปกรณ์จาก User-Agent โดยตัดเลขเวอร์ชันของ Chrome/WebView ที่อัปเดตบ่อยออก
         let uaModel = (nav.userAgent || "")
           .replace(/Chrome\/[\d.]+/g, "")
           .replace(/Version\/[\d.]+/g, "")
           .replace(/Safari\/[\d.]+/g, "")
-          .replace(/AppleWebKit\/[\d.]+/g, "");
+          .replace(/AppleWebKit\/[\d.]+/g, "")
+          .replace(/wv\)/g, ")");
 
-        // ดึงข้อมูลการ์ดจอ (GPU Renderer) ซึ่งคงที่เสมอในแต่ละอุปกรณ์
+        // 3. ดึงข้อมูลการ์ดจอ (GPU Renderer) ซึ่งคงที่เสมอในแต่ละอุปกรณ์
         let gpuInfo = "";
         try {
           const canvas = document.createElement("canvas");
@@ -495,34 +513,99 @@
     }
 
     function readCookieValue(name) {
-      const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
-      return match ? decodeURIComponent(match[2]) : null;
+      try {
+        const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+        return match ? decodeURIComponent(match[2]) : null;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function readWindowNameStore() {
+      try {
+        if (window.name && window.name.startsWith("{")) {
+          return JSON.parse(window.name);
+        }
+      } catch (e) {}
+      return {};
+    }
+
+    function writeWindowNameStore(obj) {
+      try {
+        window.name = JSON.stringify(obj || {});
+      } catch (e) {}
     }
 
     function savePersistentValue(key, value) {
       try { localStorage.setItem(key, value); } catch (e) {}
+      try { sessionStorage.setItem(key, value); } catch (e) {}
       try {
-        const expires = new Date(Date.now() + 3650 * 864e5).toUTCString(); // เก็บในคุกกี้ 10 ปี
+        const expires = new Date(Date.now() + 3650 * 864e5).toUTCString();
         document.cookie = key + "=" + encodeURIComponent(value) + "; expires=" + expires + "; path=/; SameSite=Lax";
+      } catch (e) {}
+      try {
+        const store = readWindowNameStore();
+        store[key] = value;
+        writeWindowNameStore(store);
       } catch (e) {}
     }
 
     function readPersistentValue(key) {
       let val = null;
       try { val = localStorage.getItem(key); } catch (e) {}
+      if (!val) {
+        try { val = sessionStorage.getItem(key); } catch (e) {}
+      }
       if (!val) val = readCookieValue(key);
+      if (!val) {
+        const store = readWindowNameStore();
+        val = store[key] || null;
+      }
+      if (val) {
+        try { localStorage.setItem(key, val); } catch (e) {}
+      }
       return val;
     }
 
     function removePersistentValue(key) {
       try { localStorage.removeItem(key); } catch (e) {}
+      try { sessionStorage.removeItem(key); } catch (e) {}
       try {
         document.cookie = key + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+      } catch (e) {}
+      try {
+        const store = readWindowNameStore();
+        delete store[key];
+        writeWindowNameStore(store);
+      } catch (e) {}
+    }
+
+    // ฟังก์ชันคัดลอกข้อความที่รองรับทั้งเบราว์เซอร์ปกติ และ APK WebView (file://)
+    function copyTextSafe(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).catch(() => fallbackCopyText(text));
+      } else {
+        fallbackCopyText(text);
+      }
+    }
+
+    function fallbackCopyText(text) {
+      try {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.setAttribute("readonly", "");
+        ta.style.position = "fixed";
+        ta.style.top = "-9999px";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        ta.setSelectionRange(0, text.length);
+        document.execCommand("copy");
+        document.body.removeChild(ta);
       } catch (e) {}
     }
 
     function getDeviceId() {
-      // ใช้รหัสประจำเครื่องที่คำนวณจากสเปคเครื่องเป็นหลัก เพื่อให้ล้างแคชหรือปิดแอปเปิดใหม่ก็ได้รหัสเดิมเสมอ
       const stableId = generateStableDeviceFingerprint();
       savePersistentValue("app_device_id", stableId);
       return stableId;
@@ -530,9 +613,7 @@
 
     function copyDeviceId() {
       const id = getDeviceId();
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(id);
-      }
+      copyTextSafe(id);
       const msg = document.getElementById("auth-msg");
       msg.style.color = "#38bdf8";
       msg.innerText = "คัดลอกรหัสประจำเครื่องแล้ว: " + id;
@@ -545,6 +626,10 @@
       document.getElementById("auth-lock-screen").style.display = "flex";
       const v = document.getElementById("tv-video");
       if (v && !v.paused) v.pause();
+      setTimeout(() => {
+        const inp = document.getElementById("license-input");
+        if (inp) inp.focus();
+      }, 150);
     }
 
     function unlockScreen() {
@@ -642,7 +727,10 @@
     }
 
     document.getElementById("license-input").addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.keyCode === 13) { e.preventDefault(); verifyAccess(); }
+      if (e.key === "Enter" || e.keyCode === 13 || e.keyCode === 23 || e.keyCode === 66) {
+        e.preventDefault();
+        verifyAccess();
+      }
     });
 
     setTimeout(() => {
@@ -734,7 +822,6 @@
       animation: ticker-scroll 24s linear infinite;
     }
 
-    /* ถ้าเอาเมาส์ชี้ให้หยุดวิ่งชั่วคราวเพื่อให้อ่านง่าย */
     .announcement-bar:hover .announcement-text {
       animation-play-state: paused;
     }
@@ -829,6 +916,7 @@
       let selectedCategory = 'ทั้งหมด';
       let searchQuery = '';
       let hlsInstance = null;
+      let wakeLockSentinel = null;
 
       const videoEl = document.getElementById('tv-video');
       const placeholderEl = document.getElementById('player-placeholder');
@@ -843,6 +931,20 @@
       const searchInput = document.getElementById('search-input');
       const categoryTabs = document.getElementById('category-tabs');
       const channelListEl = document.getElementById('channel-list');
+
+      // ป้องกันหน้าจอทีวี/มือถือพักหน้าจอเองขณะกำลังเล่นวิดีโอ
+      async function requestScreenWakeLock() {
+        try {
+          if ('wakeLock' in navigator && !wakeLockSentinel) {
+            wakeLockSentinel = await navigator.wakeLock.request('screen');
+            wakeLockSentinel.addEventListener('release', () => {
+              wakeLockSentinel = null;
+            });
+          }
+        } catch (e) {}
+      }
+
+      videoEl.addEventListener('play', requestScreenWakeLock);
 
       // ฟังก์ชันดึงข้อมูลแบบมี Timeout 5 วินาทีต่อจุด (ป้องกันอาการกดแล้วนิ่งค้าง)
       async function fetchWithTimeout(url, timeoutMs = 5500) {
@@ -1120,7 +1222,7 @@
           episodeBarEl.classList.remove('visible');
           currentCatEl.textContent = 'เพลย์ลิสต์ภายนอก (สำหรับแอป IPTV)';
           showPlayerError('⚠️ ลิงก์นี้ล็อกให้เปิดเฉพาะในแอป IPTV (Wiseplay / OTT) กดปุ่มสีฟ้าด้านขวาเพื่อเปิด หรือคัดลอกลิงก์ไปใส่ในแอป IPTV', channel.url);
-          if (navigator.clipboard) navigator.clipboard.writeText(channel.url);
+          copyTextSafe(channel.url);
           return;
         }
 
@@ -1159,7 +1261,6 @@
         }
         renderChannels();
       }
-
 
       videoEl.addEventListener('error', () => {
         if (activeChannelId) {
@@ -1316,13 +1417,18 @@
 
       function toggleFullScreen() {
         if (!video) return;
+        const wrapper = document.querySelector('.player-wrapper') || video;
         if (!document.fullscreenElement && !document.webkitFullscreenElement) {
           if (video.requestFullscreen) {
-            video.requestFullscreen().catch(() => {});
+            video.requestFullscreen().catch(() => {
+              if (wrapper.requestFullscreen) wrapper.requestFullscreen().catch(() => {});
+            });
           } else if (video.webkitRequestFullscreen) {
             video.webkitRequestFullscreen();
           } else if (video.webkitEnterFullscreen) {
             video.webkitEnterFullscreen();
+          } else if (wrapper.requestFullscreen) {
+            wrapper.requestFullscreen().catch(() => {});
           }
         } else {
           if (document.exitFullscreen) {
@@ -1353,20 +1459,21 @@
 
       document.addEventListener('keydown', function (e) {
         const key = e.key;
+        const isOkKey = (key === 'Enter' || key === ' ' || e.keyCode === 13 || e.keyCode === 23 || e.keyCode === 66);
         const activeEl = document.activeElement;
 
-        // While the login screen is showing, keep remote focus inside it
+        // ขณะที่หน้าจอล็อกอินแสดงอยู่ ให้บังคับโฟกัสอยู่ภายในหน้าจอล็อกอินเท่านั้น
         if (isLockVisible() && !(activeEl && activeEl.closest && activeEl.closest('#auth-lock-screen'))) {
           const lockFirst = document.getElementById('license-input');
-          if (lockFirst && ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Enter', ' '].includes(key)) {
+          if (lockFirst && (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(key) || isOkKey)) {
             e.preventDefault();
             lockFirst.focus();
           }
           return;
         }
 
-        // 1. เมื่อกดปุ่ม OK (Enter) บนรีโมททีวีตรงช่องรายการ (.channel-item)
-        if ((key === 'Enter' || key === ' ' || e.keyCode === 13 || e.keyCode === 23) && activeEl && activeEl.classList && activeEl.classList.contains('channel-item')) {
+        // 1. เมื่อกดปุ่ม OK (Enter / DPAD_CENTER) บนรีโมททีวีตรงช่องรายการ (.channel-item)
+        if (isOkKey && activeEl && activeEl.classList && activeEl.classList.contains('channel-item')) {
           e.preventDefault();
           // ถ้ากดปุ่ม OK ซ้ำที่ช่องเดิมที่กำลังเล่นอยู่ ให้ขยายเต็มจอทันที!
           if (activeEl.classList.contains('active')) {
@@ -1381,6 +1488,13 @@
               newActiveChannel.focus();
             }
           }, 60);
+          return;
+        }
+
+        // รองรับปุ่มกลางรีโมททีวี (keyCode 23) บนปุ่มทั่วไป เช่น ปุ่มเข้าสู่ระบบ ปุ่มคัดลอก ปุ่มหมวดหมู่
+        if ((e.keyCode === 23 || e.keyCode === 66) && activeEl && (activeEl.tagName === 'BUTTON' || activeEl.tagName === 'A')) {
+          e.preventDefault();
+          activeEl.click();
           return;
         }
 
@@ -1457,4 +1571,3 @@
 
 </body>
 </html>
-```
