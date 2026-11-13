@@ -2462,6 +2462,14 @@
     "logo": "https://cdn.imgchest.com/files/b44edf42580a.webp",
     "url": "http://125hvt.ddns.net:21585/vtv6/playlist.m3u8"
   },
+{
+    "id": "ch_one",
+    "name": "ONE",
+    "category": "กีฬา",
+    "logo": "https://cdn.imgchest.com/files/40d42bdba5e6.png",
+    "url": "https://app.ipplaybox.fun/atmflixlive/onefc/playlist.m3u8"
+  },
+
 
 	  {
   "name": "ห้องทดลอง",
