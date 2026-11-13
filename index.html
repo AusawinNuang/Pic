@@ -5,7 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>ดูด้วยกัน(เงียบๆ)</title>
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.15/dist/hls.min.js"></script>
+  <!-- โหลด hls.js พร้อมระบบสำรองอัตโนมัติ (Fallback CDN) กรณีเน็ตบางค่ายบล็อก jsdelivr -->
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.15/dist/hls.min.js" onerror="var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.15/hls.min.js';document.head.appendChild(s);"></script>
   <style>
     :root {
       --bg: #0f172a;
@@ -451,6 +452,13 @@
 
   <script>
     const GITHUB_KEYS_URL = "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/keys.json";
+
+    // ป้องกันการกดค้างแล้วเมนูคลิกขวาของ WebView เด้งขึ้นมาบังหน้าจอทีวี
+    document.addEventListener("contextmenu", function (e) {
+      if (e.target && e.target.tagName !== "INPUT") {
+        e.preventDefault();
+      }
+    });
 
     // ==================== ระบบสร้างและจำรหัสประจำเครื่องแบบคงที่ (รองรับทั้งผู้ใช้งานเดิมบนเว็บ + แอป APK) ====================
     function generateStableDeviceFingerprint() {
@@ -910,7 +918,7 @@
             <div class="now-playing-title" id="current-title">เลือกช่องเพื่อรับชม</div>
             <div class="status-msg" id="error-msg" role="alert"></div>
           </div>
-          <a id="external-open-btn" href="#" target="_blank" style="display:none; background:#3b82f6; color:#fff; text-decoration:none; padding:8px 14px; border-radius:8px; font-size:0.8rem; font-weight:600; white-space:nowrap;">📲 เปิดในแอปภายนอก</a>
+          <a id="external-open-btn" href="#" style="display:none; background:#3b82f6; color:#fff; text-decoration:none; padding:8px 14px; border-radius:8px; font-size:0.8rem; font-weight:600; white-space:nowrap;">📲 เปิดในแอปภายนอก</a>
         </div>
         <div class="episode-bar" id="episode-bar">
           <div class="episode-bar-header">
@@ -969,6 +977,22 @@
       const categoryTabs = document.getElementById('category-tabs');
       const channelListEl = document.getElementById('channel-list');
 
+      // รองรับการกดปุ่ม "เปิดในแอปภายนอก" ใน APK WebView (คัดลอกลิงก์ให้อัตโนมัติ + สั่งเปิดลิงก์)
+      if (externalOpenBtn) {
+        externalOpenBtn.addEventListener('click', function (e) {
+          const targetHref = externalOpenBtn.getAttribute('href');
+          if (!targetHref || targetHref === '#') {
+            e.preventDefault();
+            return;
+          }
+          copyTextSafe(targetHref);
+          if (window.Android && typeof window.Android.openExternal === 'function') {
+            e.preventDefault();
+            window.Android.openExternal(targetHref);
+          }
+        });
+      }
+
       // ป้องกันหน้าจอทีวี/มือถือดับเองขณะกำลังเล่นวิดีโอ
       async function requestScreenWakeLock() {
         try {
@@ -982,6 +1006,11 @@
       }
 
       videoEl.addEventListener('play', requestScreenWakeLock);
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible' && !videoEl.paused) {
+          requestScreenWakeLock();
+        }
+      });
 
       // ฟังก์ชันดึงข้อมูลแบบมี Timeout 5.5 วินาทีต่อจุด
       async function fetchWithTimeout(url, timeoutMs = 5500) {
@@ -1194,7 +1223,10 @@
         attachSubtitle(subtitleUrl);
 
         if (isHls && window.Hls && window.Hls.isSupported()) {
-          hlsInstance = new window.Hls();
+          hlsInstance = new window.Hls({
+            enableWorker: true,
+            lowLatencyMode: true
+          });
           hlsInstance.loadSource(url);
           hlsInstance.attachMedia(videoEl);
           hlsInstance.on(window.Hls.Events.MANIFEST_PARSED, () => {
@@ -1202,7 +1234,11 @@
           });
           hlsInstance.on(window.Hls.Events.ERROR, (event, data) => {
             if (data && data.fatal) {
-              showPlayerError('⚠️ สตรีมนี้บล็อกการเล่นบนเว็บ กดปุ่มด้านขวาเพื่อเปิดผ่านแอปภายนอก', url);
+              if (data.type === window.Hls.ErrorTypes.MEDIA_ERROR) {
+                hlsInstance.recoverMediaError();
+              } else {
+                showPlayerError('⚠️ สตรีมนี้บล็อกการเล่นบนเว็บ กดปุ่มด้านขวาเพื่อเปิดผ่านแอปภายนอก', url);
+              }
             }
           });
         } else {
@@ -1452,9 +1488,14 @@
         nowPlayingBar.appendChild(fsBtn);
       }
 
+      function isCurrentlyFullscreen() {
+        return !!(document.fullscreenElement || document.webkitFullscreenElement);
+      }
+
       function toggleFullScreen() {
         if (!video) return;
-        if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+        if (!isCurrentlyFullscreen()) {
+          try { history.pushState({ tvFullscreen: true }, ''); } catch (e) {}
           if (video.requestFullscreen) {
             video.requestFullscreen().catch(() => {});
           } else if (video.webkitRequestFullscreen) {
@@ -1470,6 +1511,14 @@
           }
         }
       }
+
+      // ป้องกันการกดปุ่ม Back บนรีโมทขณะดูเต็มจอแล้วแอปเด้งออก
+      window.addEventListener('popstate', function () {
+        if (isCurrentlyFullscreen()) {
+          if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
+          else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+        }
+      });
 
       // ระบบควบคุมด้วยปุ่มลูกศรและปุ่ม OK บนรีโมท Android TV
       function isLockVisible() {
@@ -1494,6 +1543,15 @@
         const code = e.keyCode;
         const activeEl = document.activeElement;
         const isOkKey = (key === 'Enter' || key === ' ' || code === 13 || code === 23 || code === 66);
+        const isBackKey = (key === 'Escape' || key === 'GoBack' || key === 'BrowserBack' || code === 27 || code === 4);
+
+        // หากกำลังดูเต็มจอแล้วกดปุ่ม Back บนรีโมท ให้ย่อออกจากเต็มจอแทนการปิดแอป
+        if (isBackKey && isCurrentlyFullscreen()) {
+          e.preventDefault();
+          if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
+          else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+          return;
+        }
 
         // ขณะที่หน้าจอล็อกอินแสดงอยู่ ให้กักโฟกัสรีโมทไว้เฉพาะในหน้าล็อกอิน
         if (isLockVisible() && !(activeEl && activeEl.closest && activeEl.closest('#auth-lock-screen'))) {
