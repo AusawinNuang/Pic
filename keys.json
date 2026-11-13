@@ -6,13 +6,6 @@
     "expires": "2026-12-31",
     "note": "ใช้เอง"
   },
-   {
-    "key": "VIP3333",
-    "status": "active",
-    "deviceId": "DEV-YKGRQB-JEOK",
-    "expires": "2026-12-31",
-    "note": "ไม่เห็นชื่อ"
-     },
   {
     "key": "VIP3334",
     "status": "active",
