@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="th">
 <head>
@@ -47,7 +48,7 @@
       -webkit-user-select: none;
     }
 
-    input, textarea, code {
+    input, code {
       user-select: text;
       -webkit-user-select: text;
     }
@@ -442,7 +443,7 @@
         <div>รหัสประจำเครื่องของคุณ (สำหรับแจ้งแอดมิน):</div>
         <div style="display:flex; align-items:center; justify-content:center; gap:8px;">
           <code id="display-device-id" style="background:#0f172a; padding:4px 10px; border-radius:6px; color:#38bdf8; font-weight:600; font-size:0.8rem; border:1px solid #334155;">กำลังโหลด...</code>
-          <button type="button" onclick="copyDeviceId()" style="background:#334155; color:#f8fafc; border:none; padding:4px 8px; border-radius:6px; font-size:0.75rem; cursor:pointer;">คัดลอก</button>
+          <button type="button" onclick="copyDeviceId()" id="copy-dev-btn" style="background:#334155; color:#f8fafc; border:none; padding:4px 8px; border-radius:6px; font-size:0.75rem; cursor:pointer;">คัดลอก</button>
         </div>
       </div>
     </div>
@@ -451,10 +452,10 @@
   <script>
     const GITHUB_KEYS_URL = "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/keys.json";
 
-    // ==================== ระบบสร้างและจำรหัสประจำเครื่องแบบคงที่ (รองรับ APK / WebView / Android TV) ====================
+    // ==================== ระบบสร้างและจำรหัสประจำเครื่องแบบคงที่ (รองรับทั้งผู้ใช้งานเดิมบนเว็บ + แอป APK) ====================
     function generateStableDeviceFingerprint() {
       try {
-        // 1. หากตัวสร้าง APK มี Native Android Bridge ให้ดึงค่าจากตัวเครื่องโดยตรง
+        // 1. ถ้ารันใน APK ที่มี Android JavaScript Interface ให้ดึงรหัสเครื่องจากตัวแอปโดยตรง
         if (window.Android && typeof window.Android.getDeviceId === "function") {
           const nativeId = String(window.Android.getDeviceId() || "").trim();
           if (nativeId) return nativeId.startsWith("DEV-") ? nativeId : ("DEV-" + nativeId.toUpperCase());
@@ -523,8 +524,8 @@
 
     function readWindowNameStore() {
       try {
-        if (window.name && window.name.startsWith("{")) {
-          return JSON.parse(window.name);
+        if (window.name && window.name.startsWith("TV_STORE:")) {
+          return JSON.parse(window.name.slice(9));
         }
       } catch (e) {}
       return {};
@@ -532,10 +533,11 @@
 
     function writeWindowNameStore(obj) {
       try {
-        window.name = JSON.stringify(obj || {});
+        window.name = "TV_STORE:" + JSON.stringify(obj || {});
       } catch (e) {}
     }
 
+    // บันทึกข้อมูลสำรอง 4 ชั้น (localStorage + sessionStorage + Cookie + window.name สำหรับ APK file://)
     function savePersistentValue(key, value) {
       try { localStorage.setItem(key, value); } catch (e) {}
       try { sessionStorage.setItem(key, value); } catch (e) {}
@@ -561,9 +563,6 @@
         const store = readWindowNameStore();
         val = store[key] || null;
       }
-      if (val) {
-        try { localStorage.setItem(key, val); } catch (e) {}
-      }
       return val;
     }
 
@@ -580,7 +579,47 @@
       } catch (e) {}
     }
 
-    // ฟังก์ชันคัดลอกข้อความที่รองรับทั้งเบราว์เซอร์ปกติ และ APK WebView (file://)
+    // ดึงรหัสประจำเครื่องหลัก (ถนอมรหัสเดิมของลูกค้าเก่าบนเว็บ + ใช้รหัสคงที่จากสเปคเครื่องสำหรับเครื่องใหม่/APK)
+    function getDeviceId() {
+      const existingSavedId = (readPersistentValue("app_device_id") || "").trim();
+      const hardwareId = generateStableDeviceFingerprint();
+
+      // หากเครื่องนี้มีรหัส DEV-... เดิมบันทึกไว้อยู่แล้ว ให้คงรหัสเดิมไว้เพื่อไม่ให้ลูกค้าเก่าทั้ง 21 คนหลุดจากระบบ
+      if (existingSavedId && existingSavedId.startsWith("DEV-")) {
+        savePersistentValue("app_device_id", existingSavedId);
+        return existingSavedId;
+      }
+
+      // หากเป็นเครื่องใหม่, เพิ่งลงแอป APK, หรือแคชถูกล้าง ให้ใช้รหัสคงที่จากสเปคฮาร์ดแวร์แทนการสุ่ม
+      savePersistentValue("app_device_id", hardwareId);
+      return hardwareId;
+    }
+
+    // ดึงรหัสประจำเครื่องที่เป็นไปได้ทั้งหมดของอุปกรณ์นี้ (ทั้งรหัสที่จำไว้ในเครื่อง และรหัสจากฮาร์ดแวร์)
+    function getAllCandidateDeviceIds() {
+      const candidates = new Set();
+      const primaryId = getDeviceId();
+      const hardwareId = generateStableDeviceFingerprint();
+      if (primaryId) candidates.add(primaryId.toUpperCase());
+      if (hardwareId) candidates.add(hardwareId.toUpperCase());
+      return Array.from(candidates);
+    }
+
+    // แปลงค่า deviceId จาก keys.json ให้เป็น Array ของรหัสเครื่อง (รองรับทั้ง String เดี่ยว, คั่นด้วยลูกน้ำ ",", หรือ Array)
+    function parseAllowedDevices(rawDeviceField) {
+      if (!rawDeviceField) return [];
+      if (Array.isArray(rawDeviceField)) {
+        return rawDeviceField
+          .map(d => String(d || "").trim().toUpperCase())
+          .filter(Boolean);
+      }
+      return String(rawDeviceField)
+        .split(/[,;|]+/)
+        .map(d => d.trim().toUpperCase())
+        .filter(Boolean);
+    }
+
+    // ฟังก์ชันคัดลอกข้อความที่ทำงานได้ 100% ทั้งบนหน้าเว็บและใน APK (file:// WebView)
     function copyTextSafe(text) {
       if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(text).catch(() => fallbackCopyText(text));
@@ -593,22 +632,15 @@
       try {
         const ta = document.createElement("textarea");
         ta.value = text;
-        ta.setAttribute("readonly", "");
         ta.style.position = "fixed";
-        ta.style.top = "-9999px";
         ta.style.opacity = "0";
+        ta.style.left = "-9999px";
         document.body.appendChild(ta);
+        ta.focus();
         ta.select();
-        ta.setSelectionRange(0, text.length);
         document.execCommand("copy");
         document.body.removeChild(ta);
       } catch (e) {}
-    }
-
-    function getDeviceId() {
-      const stableId = generateStableDeviceFingerprint();
-      savePersistentValue("app_device_id", stableId);
-      return stableId;
     }
 
     function copyDeviceId() {
@@ -655,6 +687,7 @@
       const btn = document.getElementById("verify-btn");
       const inputKey = (savedKey || keyInput.value || "").trim();
       const currentDeviceId = getDeviceId();
+      const candidateDeviceIds = getAllCandidateDeviceIds(); // รองรับทั้งรหัสเก่าที่จำไว้ และรหัสฮาร์ดแวร์
       const checkValue = inputKey || currentDeviceId;
 
       btn.disabled = true;
@@ -676,17 +709,21 @@
 
         for (const item of keyList) {
           if (typeof item === "string") {
-            if (item.trim().toLowerCase() === inputKey.toLowerCase() || item.trim() === currentDeviceId) {
+            const cleanItem = item.trim().toUpperCase();
+            if (cleanItem.toLowerCase() === inputKey.toLowerCase() || candidateDeviceIds.includes(cleanItem)) {
               isAllowed = true;
               break;
             }
           } else if (item && typeof item === "object") {
             const itemKey = (item.key || "").toString().trim();
-            const itemDevice = (item.deviceId || item.device_id || "").toString().trim();
+            const allowedDevices = parseAllowedDevices(item.deviceId || item.device_id || item.devices);
             const itemStatus = (item.status || "active").toString().trim().toLowerCase();
 
+            // เช็กว่าเครื่องปัจจุบันตรงกับหนึ่งใน deviceId ที่อนุญาตไว้หรือไม่
+            const isDeviceMatched = allowedDevices.length === 0 || allowedDevices.some(dev => candidateDeviceIds.includes(dev));
+
             const keyMatched = itemKey && inputKey && (itemKey.toLowerCase() === inputKey.toLowerCase());
-            const deviceDirectMatched = !itemKey && itemDevice && (itemDevice === currentDeviceId);
+            const deviceDirectMatched = !itemKey && allowedDevices.length > 0 && isDeviceMatched;
 
             if (keyMatched || deviceDirectMatched) {
               if (itemStatus !== "active") {
@@ -694,14 +731,14 @@
                 break;
               }
               if (item.expires) {
-                const expDate = new Date(item.expires);
+                const expDate = new Date(item.expires + "T23:59:59");
                 if (!isNaN(expDate) && new Date() > expDate) {
                   rejectReason = "รหัสผู้ใช้งานนี้หมดอายุแล้ว";
                   break;
                 }
               }
-              if (itemDevice && itemDevice !== currentDeviceId) {
-                rejectReason = "รหัสนี้ถูกล็อกไว้กับอุปกรณ์เครื่องอื่นแล้ว!";
+              if (allowedDevices.length > 0 && !isDeviceMatched) {
+                rejectReason = "รหัสนี้ถูกล็อกไว้กับอุปกรณ์เครื่องอื่นแล้ว! (แจ้งรหัส " + currentDeviceId + " ให้แอดมินเพิ่มได้)";
                 break;
               }
               isAllowed = true;
@@ -858,7 +895,7 @@
     <div class="left-col">
       <section class="card" aria-label="เครื่องเล่นทีวีออนไลน์">
         <div class="player-wrapper">
-          <video id="tv-video" controls playsinline></video>
+          <video id="tv-video" controls playsinline webkit-playsinline></video>
           <div id="player-placeholder" class="player-placeholder">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
               <polygon points="5 3 19 12 5 21 5 3"></polygon>
@@ -932,7 +969,7 @@
       const categoryTabs = document.getElementById('category-tabs');
       const channelListEl = document.getElementById('channel-list');
 
-      // ป้องกันหน้าจอทีวี/มือถือพักหน้าจอเองขณะกำลังเล่นวิดีโอ
+      // ป้องกันหน้าจอทีวี/มือถือดับเองขณะกำลังเล่นวิดีโอ
       async function requestScreenWakeLock() {
         try {
           if ('wakeLock' in navigator && !wakeLockSentinel) {
@@ -946,7 +983,7 @@
 
       videoEl.addEventListener('play', requestScreenWakeLock);
 
-      // ฟังก์ชันดึงข้อมูลแบบมี Timeout 5 วินาทีต่อจุด (ป้องกันอาการกดแล้วนิ่งค้าง)
+      // ฟังก์ชันดึงข้อมูลแบบมี Timeout 5.5 วินาทีต่อจุด
       async function fetchWithTimeout(url, timeoutMs = 5500) {
         const controller = new AbortController();
         const timer = setTimeout(() => controller.abort(), timeoutMs);
@@ -1214,7 +1251,6 @@
         currentCatEl.textContent = 'หมวดหมู่: ' + channel.category;
         renderChannels();
 
-        // ถ้าเป็นลิงก์เพลย์ลิสต์ภายนอกที่บล็อกเว็บ (เช่น aisfree...workers.dev) ให้แจ้งเตือนและแสดงปุ่มเปิดแอปทันทีโดยไม่ต้องรอค้าง
         if (channel.url && channel.url.includes('workers.dev/playlist')) {
           if (hlsInstance) { hlsInstance.destroy(); hlsInstance = null; }
           videoEl.pause();
@@ -1356,6 +1392,7 @@
       loadLatestChannels();
     })();
   </script>
+
   <!-- ==================== ระบบรองรับรีโมทและหน้าจอ Android TV ==================== -->
   <style>
     /* 1. กรอบไฟสว่างเวลาใช้รีโมททีวีเลื่อน (Focus Ring) */
@@ -1417,18 +1454,13 @@
 
       function toggleFullScreen() {
         if (!video) return;
-        const wrapper = document.querySelector('.player-wrapper') || video;
         if (!document.fullscreenElement && !document.webkitFullscreenElement) {
           if (video.requestFullscreen) {
-            video.requestFullscreen().catch(() => {
-              if (wrapper.requestFullscreen) wrapper.requestFullscreen().catch(() => {});
-            });
+            video.requestFullscreen().catch(() => {});
           } else if (video.webkitRequestFullscreen) {
             video.webkitRequestFullscreen();
           } else if (video.webkitEnterFullscreen) {
             video.webkitEnterFullscreen();
-          } else if (wrapper.requestFullscreen) {
-            wrapper.requestFullscreen().catch(() => {});
           }
         } else {
           if (document.exitFullscreen) {
@@ -1459,10 +1491,11 @@
 
       document.addEventListener('keydown', function (e) {
         const key = e.key;
-        const isOkKey = (key === 'Enter' || key === ' ' || e.keyCode === 13 || e.keyCode === 23 || e.keyCode === 66);
+        const code = e.keyCode;
         const activeEl = document.activeElement;
+        const isOkKey = (key === 'Enter' || key === ' ' || code === 13 || code === 23 || code === 66);
 
-        // ขณะที่หน้าจอล็อกอินแสดงอยู่ ให้บังคับโฟกัสอยู่ภายในหน้าจอล็อกอินเท่านั้น
+        // ขณะที่หน้าจอล็อกอินแสดงอยู่ ให้กักโฟกัสรีโมทไว้เฉพาะในหน้าล็อกอิน
         if (isLockVisible() && !(activeEl && activeEl.closest && activeEl.closest('#auth-lock-screen'))) {
           const lockFirst = document.getElementById('license-input');
           if (lockFirst && (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(key) || isOkKey)) {
@@ -1472,7 +1505,14 @@
           return;
         }
 
-        // 1. เมื่อกดปุ่ม OK (Enter / DPAD_CENTER) บนรีโมททีวีตรงช่องรายการ (.channel-item)
+        // รองรับปุ่ม OK บนรีโมท Android TV (keyCode 23 / DPAD_CENTER) กับปุ่มทั่วไปทุกปุ่ม
+        if ((code === 23 || code === 66) && activeEl && (activeEl.tagName === 'BUTTON' || activeEl.tagName === 'A')) {
+          e.preventDefault();
+          activeEl.click();
+          return;
+        }
+
+        // 1. เมื่อกดปุ่ม OK (Enter) บนรีโมททีวีตรงช่องรายการ (.channel-item)
         if (isOkKey && activeEl && activeEl.classList && activeEl.classList.contains('channel-item')) {
           e.preventDefault();
           // ถ้ากดปุ่ม OK ซ้ำที่ช่องเดิมที่กำลังเล่นอยู่ ให้ขยายเต็มจอทันที!
@@ -1488,13 +1528,6 @@
               newActiveChannel.focus();
             }
           }, 60);
-          return;
-        }
-
-        // รองรับปุ่มกลางรีโมททีวี (keyCode 23) บนปุ่มทั่วไป เช่น ปุ่มเข้าสู่ระบบ ปุ่มคัดลอก ปุ่มหมวดหมู่
-        if ((e.keyCode === 23 || e.keyCode === 66) && activeEl && (activeEl.tagName === 'BUTTON' || activeEl.tagName === 'A')) {
-          e.preventDefault();
-          activeEl.click();
           return;
         }
 
