@@ -207,11 +207,17 @@
 
 },
 
-
+{
+    "key": "WichienTV",
+    "status": "active",
+    "deviceId": "DEV-A0X35S-I7TA",
+    "expires": "2026-12-31",
+    "note": "Wichien"
+  },
 {
     "key": "Wichien",
     "status": "active",
-    "deviceId": "DEV-PD9KYK-172T, DEV-A0X35S-I7TA",
+    "deviceId": "DEV-PD9KYK-172T, ",
     "expires": "2026-12-31",
     "note": "Wichien"
 
