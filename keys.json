@@ -1,29 +1,11 @@
 [
   {
-    "key": "COM",
+    "key": "VIP",
     "status": "active",
-    "note": "คอมตัวเอง"
+    "deviceId": "DEV-4G4774-U49U",
+    "expires": "2026-12-31",
+    "note": "ใช้เอง"
   },
-  {
-    "key": "COMAPP",
-    "status": "active",
-    "note": "แฮปคอมตัวเอง"
-  }, 
-  {
-    "key": "TV",
-    "status": "active",
-    "note": "ทีวี"
-  },
-    {
-    "key": "TAB",
-    "status": "active",
-    "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
-     },
-  {
-    "key": "MOBILE",
-    "status": "active",
-    "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
-     },
   {
     "key": "VIP6395",
     "status": "active",
