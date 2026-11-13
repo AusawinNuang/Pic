@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="th">
 <head>
@@ -50,7 +51,7 @@
     }
 
     .header-inner {
-      max-width: 1600px;
+      max-width: 1120px;
       margin: 0 auto;
       display: flex;
       align-items: center;
@@ -90,22 +91,12 @@
       flex: 1;
     }
 
-    @media (min-width: 960px) {
+    @media (min-width: 900px) {
       .main-container {
-        max-width: 1600px;
-        grid-template-columns: 1.15fr 1fr;
-        padding: 16px 24px;
-        gap: 20px;
+        grid-template-columns: 1fr;
+        padding: var(--space-6);
+        gap: var(--space-6);
         align-items: start;
-      }
-      .left-col {
-        position: sticky;
-        top: 72px;
-      }
-      .channel-list {
-        max-height: calc(100vh - 220px);
-        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-        gap: 10px;
       }
     }
 
@@ -277,6 +268,13 @@
       }
     }
 
+    @media (min-width: 960px) {
+      .channel-list {
+        grid-template-columns: repeat(9, minmax(0, 1fr));
+        padding: var(--space-4);
+      }
+    }
+
     .channel-item {
       display: flex;
       flex-direction: column;
@@ -407,27 +405,211 @@
       flex-direction: column;
       gap: var(--space-4);
     }
+  </style>
+</head>
+<body>
 
-    /* สไตล์ Focus Ring สำหรับรีโมททีวี */
-    button:focus,
-    input:focus,
-    a:focus,
-    .channel-item:focus,
-    .tab-btn:focus,
-    .ep-btn:focus {
-      outline: 3px solid #38bdf8 !important;
-      outline-offset: 2px !important;
-      box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.35), 0 8px 20px rgba(0, 0, 0, 0.6) !important;
-      transform: scale(1.04) !important;
-      z-index: 10;
+  <!-- ==================== ระบบล็อกสิทธิ์การใช้งานผ่าน GitHub (keys.json) ==================== -->
+  <div id="auth-lock-screen" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#0f172a; color:#f8fafc; z-index:999999; display:flex; flex-direction:column; justify-content:center; align-items:center; font-family:var(--font, sans-serif); padding:20px; box-sizing:border-box;">
+    <div style="background:#1e293b; border:1px solid #334155; padding:32px 24px; border-radius:16px; width:100%; max-width:380px; text-align:center; box-shadow:0 10px 30px rgba(0,0,0,0.6);">
+      <div style="width:52px; height:52px; border-radius:12px; background:linear-gradient(135deg, #3b82f6, #06b6d4); display:flex; align-items:center; justify-content:center; margin:0 auto 16px; color:#fff;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+      </div>
+      <h2 style="margin:0 0 6px; font-size:1.25rem; font-weight:700;">ดูด้วยกัน(เงียบๆ)</h2>
+      <p style="font-size:0.875rem; color:#94a3b8; margin-bottom:20px;">กรุณากรอกรหัสผู้ใช้งานเพื่อเข้าชมรายการ</p>
+
+      <input type="text" id="license-input" placeholder="กรอกรหัส เช่น VIP001" style="width:100%; padding:12px 14px; margin-bottom:12px; border-radius:10px; border:1px solid #334155; background:#0f172a; color:#f8fafc; font-size:1rem; text-align:center; outline:none;" autocomplete="off" enterkeyhint="go">
+
+      <button type="button" onclick="verifyAccess()" id="verify-btn" style="width:100%; padding:12px; background:#3b82f6; color:#ffffff; border:none; border-radius:10px; font-size:1rem; font-weight:600; cursor:pointer; transition:background 0.15s ease;">เข้าสู่ระบบ</button>
+
+      <p id="auth-msg" style="color:#ef4444; font-size:0.85rem; margin-top:14px; min-height:20px;"></p>
+
+      <div style="margin-top:18px; padding-top:14px; border-top:1px solid #334155; font-size:0.75rem; color:#64748b; display:flex; flex-direction:column; gap:6px;">
+        <div>รหัสประจำเครื่องของคุณ (สำหรับแจ้งแอดมิน):</div>
+        <div style="display:flex; align-items:center; justify-content:center; gap:8px;">
+          <code id="display-device-id" style="background:#0f172a; padding:4px 10px; border-radius:6px; color:#38bdf8; font-weight:600; font-size:0.8rem; border:1px solid #334155;">กำลังโหลด...</code>
+          <button type="button" onclick="copyDeviceId()" style="background:#334155; color:#f8fafc; border:none; padding:4px 8px; border-radius:6px; font-size:0.75rem; cursor:pointer;">คัดลอก</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const GITHUB_KEYS_URL = "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/keys.json";
+
+    function getDeviceId() {
+      let id = localStorage.getItem("app_device_id");
+      if (!id) {
+        id = "DEV-" + Math.random().toString(36).substring(2, 8).toUpperCase() + "-" + Date.now().toString(36).slice(-4).toUpperCase();
+        localStorage.setItem("app_device_id", id);
+      }
+      return id;
     }
 
-    .channel-item:focus {
-      background-color: #334155 !important;
-      border-color: #38bdf8 !important;
+    function copyDeviceId() {
+      const id = getDeviceId();
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(id);
+      }
+      const msg = document.getElementById("auth-msg");
+      msg.style.color = "#38bdf8";
+      msg.innerText = "คัดลอกรหัสประจำเครื่องแล้ว: " + id;
     }
 
-    /* Announcement Bar Styling */
+    function logoutLicense() {
+      localStorage.removeItem("saved_license_key");
+      document.getElementById("license-input").value = "";
+      document.getElementById("auth-msg").innerText = "";
+      document.getElementById("auth-lock-screen").style.display = "flex";
+      const v = document.getElementById("tv-video");
+      if (v && !v.paused) v.pause();
+    }
+
+    function unlockScreen() {
+      const lockEl = document.getElementById("auth-lock-screen");
+      if (lockEl) lockEl.style.display = "none";
+    }
+
+    function lockScreenWithError(errorText) {
+      const lockEl = document.getElementById("auth-lock-screen");
+      const msg = document.getElementById("auth-msg");
+      const video = document.getElementById("tv-video");
+      if (video && !video.paused) video.pause();
+      if (lockEl) lockEl.style.display = "flex";
+      if (msg) {
+        msg.style.color = "#ef4444";
+        msg.innerText = errorText;
+      }
+    }
+
+    async function verifyAccess(savedKey = null) {
+      const keyInput = document.getElementById("license-input");
+      const msg = document.getElementById("auth-msg");
+      const btn = document.getElementById("verify-btn");
+      const inputKey = (savedKey || keyInput.value || "").trim();
+      const currentDeviceId = getDeviceId();
+      const checkValue = inputKey || currentDeviceId;
+
+      btn.disabled = true;
+      btn.innerText = "กำลังตรวจสอบสิทธิ์...";
+      msg.style.color = "#fbbf24";
+      msg.innerText = "กำลังดึงข้อมูลสิทธิ์จากเซิร์ฟเวอร์...";
+
+      try {
+        const response = await fetch(`${GITHUB_KEYS_URL}?t=${Date.now()}`, { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error("ไม่พบไฟล์ keys.json บน GitHub");
+        }
+
+        const data = await response.json();
+        const keyList = Array.isArray(data) ? data : (Array.isArray(data.keys) ? data.keys : []);
+
+        let isAllowed = false;
+        let rejectReason = "รหัสไม่ถูกต้อง หรือยังไม่ได้รับอนุญาตจากแอดมิน";
+
+        for (const item of keyList) {
+          if (typeof item === "string") {
+            if (item.trim().toLowerCase() === inputKey.toLowerCase() || item.trim() === currentDeviceId) {
+              isAllowed = true;
+              break;
+            }
+          } else if (item && typeof item === "object") {
+            const itemKey = (item.key || "").toString().trim();
+            const itemDevice = (item.deviceId || item.device_id || "").toString().trim();
+            const itemStatus = (item.status || "active").toString().trim().toLowerCase();
+
+            const keyMatched = itemKey && inputKey && (itemKey.toLowerCase() === inputKey.toLowerCase());
+            const deviceDirectMatched = !itemKey && itemDevice && (itemDevice === currentDeviceId);
+
+            if (keyMatched || deviceDirectMatched) {
+              if (itemStatus !== "active") {
+                rejectReason = "รหัสผู้ใช้งานนี้ถูกระงับสิทธิ์ชั่วคราว";
+                break;
+              }
+              if (item.expires) {
+                const expDate = new Date(item.expires);
+                if (!isNaN(expDate) && new Date() > expDate) {
+                  rejectReason = "รหัสผู้ใช้งานนี้หมดอายุแล้ว";
+                  break;
+                }
+              }
+              if (itemDevice && itemDevice !== currentDeviceId) {
+                rejectReason = "รหัสนี้ถูกล็อกไว้กับอุปกรณ์เครื่องอื่นแล้ว!";
+                break;
+              }
+              isAllowed = true;
+              break;
+            }
+          }
+        }
+
+        if (isAllowed) {
+          localStorage.setItem("saved_license_key", checkValue);
+          unlockScreen();
+        } else {
+          localStorage.removeItem("saved_license_key");
+          lockScreenWithError(rejectReason);
+        }
+      } catch (error) {
+        msg.style.color = "#ef4444";
+        msg.innerText = "ไม่สามารถโหลดไฟล์ keys.json จาก GitHub ได้ กรุณาเช็คอินเทอร์เน็ตหรือตรวจสอบว่าสร้างไฟล์บน GitHub แล้ว";
+      } finally {
+        btn.disabled = false;
+        btn.innerText = "เข้าสู่ระบบ";
+      }
+    }
+
+    document.getElementById("license-input").addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.keyCode === 13) { e.preventDefault(); verifyAccess(); }
+    });
+
+    setTimeout(() => {
+      const ls = document.getElementById("auth-lock-screen");
+      if (ls && ls.style.display !== "none") document.getElementById("license-input").focus();
+    }, 400);
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const devIdEl = document.getElementById("display-device-id");
+      if (devIdEl) devIdEl.innerText = getDeviceId();
+
+      const savedKey = localStorage.getItem("saved_license_key");
+      if (savedKey) {
+        document.getElementById("license-input").value = savedKey;
+        verifyAccess(savedKey);
+      }
+    });
+  </script>
+  <!-- ==================== สิ้นสุดระบบล็อกสิทธิ์การใช้งานผ่าน GitHub ==================== -->
+
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect>
+            <polyline points="17 2 12 7 7 2"></polyline>
+          </svg>
+        </div>
+        <span>ดูด้วยกัน(เงียบๆ)</span>
+      </div>
+      <button type="button" onclick="logoutLicense()" style="background:#334155; color:#cbd5e1; border:1px solid #475569; padding:6px 12px; border-radius:8px; font-size:0.78rem; cursor:pointer;">🔑 สลับรหัส / ล็อกเอาต์</button>
+    </div>
+  </header>
+
+  <!-- ==================== แถบข้อความประกาศตัววิ่ง (Announcement Ticker) ==================== -->
+  <div class="announcement-bar" role="region" aria-label="ประกาศถึงผู้ใช้งาน">
+    <div class="announcement-badge">📢 ประกาศ</div>
+    <div class="announcement-track">
+      <div class="announcement-text" id="announcement-text">
+        💡 แจ้งเพื่อทราบ: บางช่องรายการอาจต้องเปิดใช้งาน DNS (เช่น 1.1.1.1 หรือ 8.8.8.8) จึงจะรับชมได้ และสำหรับช่องถ่ายทอดสดกีฬา บางช่องสัญญาณจะเปิดเมื่อถึงเวลาแข่งขันครับ
+      </div>
+    </div>
+  </div>
+
+  <style>
     .announcement-bar {
       background: linear-gradient(90deg, #1e293b 0%, #0f172a 100%);
       border-bottom: 1px solid #334155;
@@ -473,72 +655,42 @@
       animation: ticker-scroll 24s linear infinite;
     }
 
+    /* ถ้าเอาเมาส์ชี้ให้หยุดวิ่งชั่วคราวเพื่อให้อ่านง่าย */
     .announcement-bar:hover .announcement-text {
       animation-play-state: paused;
     }
 
     @keyframes ticker-scroll {
-      0% { transform: translate3d(0, 0, 0); }
-      100% { transform: translate3d(-100%, 0, 0); }
+      0% {
+        transform: translate3d(0, 0, 0);
+      }
+      100% {
+        transform: translate3d(-100%, 0, 0);
+      }
     }
   </style>
-</head>
-<body>
 
-  <!-- ระบบล็อกสิทธิ์การใช้งานผ่าน GitHub (keys.json) -->
-  <div id="auth-lock-screen" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#0f172a; color:#f8fafc; z-index:999999; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:20px; box-sizing:border-box;">
-    <div style="background:#1e293b; border:1px solid #334155; padding:32px 24px; border-radius:16px; width:100%; max-width:380px; text-align:center; box-shadow:0 10px 30px rgba(0,0,0,0.6);">
-      <div style="width:52px; height:52px; border-radius:12px; background:linear-gradient(135deg, #3b82f6, #06b6d4); display:flex; align-items:center; justify-content:center; margin:0 auto 16px; color:#fff;">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-        </svg>
-      </div>
-      <h2 style="margin:0 0 6px; font-size:1.25rem; font-weight:700;">ดูด้วยกัน(เงียบๆ)</h2>
-      <p style="font-size:0.875rem; color:#94a3b8; margin-bottom:20px;">กรุณากรอกรหัสผู้ใช้งานเพื่อเข้าชมรายการ</p>
+  <script>
+    (async function () {
+      try {
+        const res = await fetch('https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/channels.json?t=' + Date.now(), { cache: 'no-store' });
+        if (!res.ok) return;
+        const data = await res.json();
+        const remoteMsg = data.notice || data.announcement || data.message;
+        const textEl = document.getElementById('announcement-text');
+        const barEl = document.querySelector('.announcement-bar');
+        if (remoteMsg !== undefined && textEl && barEl) {
+          if (remoteMsg.trim() === '') barEl.style.display = 'none';
+          else textEl.textContent = remoteMsg;
+        }
+      } catch (e) {}
+    })();
+  </script>
 
-      <!-- ปรับปรุง autocomplete และ enterkeyhint ตามโค้ดที่คุณต้องการ -->
-      <input type="text" id="license-input" placeholder="กรอกรหัส เช่น VIP001" autocomplete="off" enterkeyhint="go" style="width:100%; padding:12px 14px; margin-bottom:12px; border-radius:10px; border:1px solid #334155; background:#0f172a; color:#f8fafc; font-size:1rem; text-align:center; outline:none;">
+  
+  <!-- ==================== สิ้นสุดแถบข้อความประกาศตัววิ่ง ==================== -->
 
-      <button type="button" onclick="verifyAccess()" id="verify-btn" style="width:100%; padding:12px; background:#3b82f6; color:#ffffff; border:none; border-radius:10px; font-size:1rem; font-weight:600; cursor:pointer; transition:background 0.15s ease;">เข้าสู่ระบบ</button>
-
-      <p id="auth-msg" style="color:#ef4444; font-size:0.85rem; margin-top:14px; min-height:20px;"></p>
-
-      <div style="margin-top:18px; padding-top:14px; border-top:1px solid #334155; font-size:0.75rem; color:#64748b; display:flex; flex-direction:column; gap:6px;">
-        <div>รหัสประจำเครื่องของคุณ (สำหรับแจ้งแอดมิน):</div>
-        <div style="display:flex; align-items:center; justify-content:center; gap:8px;">
-          <code id="display-device-id" style="background:#0f172a; padding:4px 10px; border-radius:6px; color:#38bdf8; font-weight:600; font-size:0.8rem; border:1px solid #334155;">กำลังโหลด...</code>
-          <button type="button" onclick="copyDeviceId()" style="background:#334155; color:#f8fafc; border:none; padding:4px 8px; border-radius:6px; font-size:0.75rem; cursor:pointer;">คัดลอก</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <header>
-    <div class="header-inner">
-      <div class="brand">
-        <div class="brand-icon" aria-hidden="true">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect>
-            <polyline points="17 2 12 7 7 2"></polyline>
-          </svg>
-        </div>
-        <span>ดูด้วยกัน(เงียบๆ)</span>
-      </div>
-      <button type="button" onclick="logoutLicense()" style="background:#334155; color:#cbd5e1; border:1px solid #475569; padding:6px 12px; border-radius:8px; font-size:0.78rem; cursor:pointer;">🔑 สลับรหัส / ล็อกเอาต์</button>
-    </div>
-  </header>
-
-  <!-- แถบข้อความประกาศตัววิ่ง (Announcement Ticker) -->
-  <div class="announcement-bar" role="region" aria-label="ประกาศถึงผู้ใช้งาน">
-    <div class="announcement-badge">📢 ประกาศ</div>
-    <div class="announcement-track">
-      <div class="announcement-text" id="announcement-text">
-        💡 แจ้งเพื่อทราบ: บางช่องรายการอาจต้องเปิดใช้งาน DNS (เช่น 1.1.1.1 หรือ 8.8.8.8) จึงจะรับชมได้ และสำหรับช่องถ่ายทอดสดกีฬา บางช่องสัญญาณจะเปิดเมื่อถึงเวลาแข่งขันครับ
-      </div>
-    </div>
-  </div>
-
+  
   <main class="main-container">
     <div class="left-col">
       <section class="card" aria-label="เครื่องเล่นทีวีออนไลน์">
@@ -593,172 +745,14 @@
   </main>
 
   <script>
-    const GITHUB_KEYS_URL = "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/keys.json";
-    const REMOTE_CHANNELS_URL = "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/channels.json";
-
-    let hlsInstance = null;
-    let currentSubtitleBlobUrl = null;
-
-    function getDeviceId() {
-      let id = localStorage.getItem("app_device_id");
-      if (!id) {
-        id = "DEV-" + Math.random().toString(36).substring(2, 8).toUpperCase() + "-" + Date.now().toString(36).slice(-4).toUpperCase();
-        try { localStorage.setItem("app_device_id", id); } catch (e) {}
-      }
-      return id;
-    }
-
-    function copyDeviceId() {
-      const id = getDeviceId();
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(id);
-      }
-      const msg = document.getElementById("auth-msg");
-      if (msg) {
-        msg.style.color = "#38bdf8";
-        msg.innerText = "คัดลอกรหัสประจำเครื่องแล้ว: " + id;
-      }
-    }
-
-    function logoutLicense() {
-      try { localStorage.removeItem("saved_license_key"); } catch (e) {}
-      const inp = document.getElementById("license-input");
-      if (inp) inp.value = "";
-      const msg = document.getElementById("auth-msg");
-      if (msg) msg.innerText = "";
-      const lockScreen = document.getElementById("auth-lock-screen");
-      if (lockScreen) lockScreen.style.display = "flex";
-
-      const v = document.getElementById("tv-video");
-      if (v) {
-        if (!v.paused) v.pause();
-        v.removeAttribute("src");
-        v.load();
-        v.classList.remove("active");
-      }
-      if (hlsInstance) {
-        hlsInstance.destroy();
-        hlsInstance = null;
-      }
-      const ph = document.getElementById("player-placeholder");
-      if (ph) ph.style.display = "block";
-      const curTitle = document.getElementById("current-title");
-      if (curTitle) curTitle.textContent = "เลือกช่องเพื่อรับชม";
-      const curCat = document.getElementById("current-cat");
-      if (curCat) curCat.textContent = "พร้อมใช้งาน";
-      const epBar = document.getElementById("episode-bar");
-      if (epBar) epBar.classList.remove("visible");
-
-      setTimeout(() => { if (inp) inp.focus(); }, 100);
-    }
-
-    function unlockScreen() {
-      const lockEl = document.getElementById("auth-lock-screen");
-      if (lockEl) lockEl.style.display = "none";
-    }
-
-    function lockScreenWithError(errorText) {
-      const lockEl = document.getElementById("auth-lock-screen");
-      const msg = document.getElementById("auth-msg");
-      const video = document.getElementById("tv-video");
-      if (video && !video.paused) video.pause();
-      if (lockEl) lockEl.style.display = "flex";
-      if (msg) {
-        msg.style.color = "#ef4444";
-        msg.innerText = errorText;
-      }
-    }
-
-    async function verifyAccess(savedKey = null) {
-      const keyInput = document.getElementById("license-input");
-      const msg = document.getElementById("auth-msg");
-      const btn = document.getElementById("verify-btn");
-      const inputKey = (savedKey || (keyInput ? keyInput.value : "") || "").trim();
-      const currentDeviceId = getDeviceId();
-      const checkValue = inputKey || currentDeviceId;
-
-      if (btn) {
-        btn.disabled = true;
-        btn.innerText = "กำลังตรวจสอบสิทธิ์...";
-      }
-      if (msg) {
-        msg.style.color = "#fbbf24";
-        msg.innerText = "กำลังดึงข้อมูลสิทธิ์จากเซิร์ฟเวอร์...";
-      }
-
-      try {
-        const response = await fetch(`${GITHUB_KEYS_URL}?t=${Date.now()}`, { cache: "no-store" });
-        if (!response.ok) throw new Error("ไม่พบไฟล์ keys.json");
-
-        const data = await response.json();
-        const keyList = Array.isArray(data) ? data : (Array.isArray(data.keys) ? data.keys : []);
-
-        let isAllowed = false;
-        let rejectReason = "รหัสไม่ถูกต้อง หรือยังไม่ได้รับอนุญาตจากแอดมิน";
-
-        for (const item of keyList) {
-          if (typeof item === "string") {
-            if (item.trim().toLowerCase() === inputKey.toLowerCase() || item.trim() === currentDeviceId) {
-              isAllowed = true;
-              break;
-            }
-          } else if (item && typeof item === "object") {
-            const itemKey = (item.key || "").toString().trim();
-            const itemDevice = (item.deviceId || item.device_id || "").toString().trim();
-            const itemStatus = (item.status || "active").toString().trim().toLowerCase();
-
-            const keyMatched = itemKey && inputKey && (itemKey.toLowerCase() === inputKey.toLowerCase());
-            const deviceDirectMatched = !itemKey && itemDevice && (itemDevice === currentDeviceId);
-
-            if (keyMatched || deviceDirectMatched) {
-              if (itemStatus !== "active") {
-                rejectReason = "รหัสผู้ใช้งานนี้ถูกระงับสิทธิ์ชั่วคราว";
-                continue;
-              }
-              if (item.expires) {
-                const expDate = new Date(item.expires);
-                if (!isNaN(expDate) && new Date() > expDate) {
-                  rejectReason = "รหัสผู้ใช้งานนี้หมดอายุแล้ว";
-                  continue;
-                }
-              }
-              if (itemDevice && itemDevice !== currentDeviceId) {
-                rejectReason = "รหัสนี้ถูกล็อกไว้กับอุปกรณ์เครื่องอื่นแล้ว!";
-                continue;
-              }
-              isAllowed = true;
-              break;
-            }
-          }
-        }
-
-        if (isAllowed) {
-          try { localStorage.setItem("saved_license_key", checkValue); } catch (e) {}
-          unlockScreen();
-        } else {
-          try { localStorage.removeItem("saved_license_key"); } catch (e) {}
-          lockScreenWithError(rejectReason);
-        }
-      } catch (error) {
-        if (msg) {
-          msg.style.color = "#ef4444";
-          msg.innerText = "ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ตรวจสอบสิทธิ์ได้ กรุณาลองใหม่อีกครั้ง";
-        }
-      } finally {
-        if (btn) {
-          btn.disabled = false;
-          btn.innerText = "เข้าสู่ระบบ";
-        }
-      }
-    }
-
-    // ==================== ส่วนระบบเครื่องเล่นทีวี และ Android TV Focus ====================
     (function () {
       const channels = [];
+
       let activeChannelId = null;
       let activeEpisodeIndex = 0;
       let selectedCategory = 'ทั้งหมด';
       let searchQuery = '';
+      let hlsInstance = null;
 
       const videoEl = document.getElementById('tv-video');
       const placeholderEl = document.getElementById('player-placeholder');
@@ -773,6 +767,155 @@
       const searchInput = document.getElementById('search-input');
       const categoryTabs = document.getElementById('category-tabs');
       const channelListEl = document.getElementById('channel-list');
+
+      // ฟังก์ชันดึงข้อมูลแบบมี Timeout 5 วินาทีต่อจุด (ป้องกันอาการกดแล้วนิ่งค้าง)
+      async function fetchWithTimeout(url, timeoutMs = 5500) {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), timeoutMs);
+        try {
+          const res = await fetch(url, { signal: controller.signal, cache: 'no-store' });
+          clearTimeout(timer);
+          return res;
+        } catch (err) {
+          clearTimeout(timer);
+          throw err;
+        }
+      }
+
+      async function fetchTextWithFallback(targetUrl) {
+        const proxies = [
+          targetUrl,
+          'https://corsproxy.io/?' + encodeURIComponent(targetUrl),
+          'https://api.allorigins.win/raw?url=' + encodeURIComponent(targetUrl),
+          'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(targetUrl)
+        ];
+        for (const u of proxies) {
+          try {
+            const res = await fetchWithTimeout(u, 5500);
+            if (res && res.ok) {
+              const txt = await res.text();
+              if (txt && txt.trim().length > 10) return txt.trim();
+            }
+          } catch (e) {}
+        }
+        throw new Error('เซิร์ฟเวอร์ปลายทางบล็อกการดึงข้อมูลจากหน้าเว็บ');
+      }
+
+      function parseM3U(m3uText) {
+        const lines = m3uText.split(/\r?\n/);
+        const list = [];
+        let currentName = '';
+        let currentLogo = '';
+        let currentGroup = '';
+
+        for (let i = 0; i < lines.length; i++) {
+          const line = lines[i].trim();
+          if (!line) continue;
+          if (line.startsWith('#EXTINF:')) {
+            const nameParts = line.split(',');
+            currentName = (nameParts[nameParts.length - 1] || 'ช่องรายการ').trim();
+            const logoMatch = line.match(/tvg-logo="([^"]+)"/i);
+            currentLogo = logoMatch ? logoMatch[1] : '';
+            const groupMatch = line.match(/group-title="([^"]+)"/i);
+            currentGroup = groupMatch ? groupMatch[1] : '';
+          } else if (!line.startsWith('#') && (line.startsWith('http://') || line.startsWith('https://'))) {
+            list.push({
+              name: currentName || ('ช่องที่ ' + (list.length + 1)),
+              info: currentGroup || '',
+              image: currentLogo || '',
+              url: line
+            });
+            currentName = '';
+            currentLogo = '';
+            currentGroup = '';
+          }
+        }
+        return list;
+      }
+
+      function extractStationsFromJson(obj, parentName = '') {
+        let results = [];
+        if (!obj) return results;
+
+        if (Array.isArray(obj)) {
+          obj.forEach(item => {
+            results = results.concat(extractStationsFromJson(item, parentName));
+          });
+          return results;
+        }
+
+        if (typeof obj === 'object') {
+          const currentGroupName = obj.name || parentName || '';
+          if (Array.isArray(obj.stations)) {
+            obj.stations.forEach(st => {
+              if (st && st.url) {
+                results.push({
+                  name: st.name || currentGroupName || 'ช่องรายการ',
+                  info: currentGroupName !== st.name ? currentGroupName : (st.info || ''),
+                  image: st.image || st.logo || obj.image || '',
+                  url: st.url,
+                  referer: st.referer || '',
+                  subtitle: st.subtitle || ''
+                });
+              }
+            });
+          }
+          if (Array.isArray(obj.groups)) {
+            obj.groups.forEach(g => {
+              results = results.concat(extractStationsFromJson(g, currentGroupName));
+            });
+          }
+          if (!obj.stations && !obj.groups && obj.url) {
+            results.push({
+              name: obj.name || 'ช่องรายการ',
+              info: parentName || obj.info || '',
+              image: obj.image || obj.logo || '',
+              url: obj.url,
+              referer: obj.referer || '',
+              subtitle: obj.subtitle || ''
+            });
+          }
+        }
+        return results;
+      }
+
+      async function fetchExternalPlaylist(playlistUrl) {
+        const text = await fetchTextWithFallback(playlistUrl);
+        if (text.startsWith('#EXTM3U') || text.includes('#EXTINF:')) {
+          return parseM3U(text);
+        }
+        try {
+          const json = JSON.parse(text);
+          return extractStationsFromJson(json);
+        } catch (e) {
+          return parseM3U(text);
+        }
+      }
+
+      function isExternalPlaylistItem(channel) {
+        if (!channel || !channel.url) return false;
+        if (channel.import === false) return true;
+        const lower = channel.url.toLowerCase();
+        if (lower.includes('.m3u8') || lower.includes('.mp4') || lower.includes('.ts')) return false;
+        return lower.includes('playlist') || lower.endsWith('.m3u') || lower.endsWith('.w3u') || lower.endsWith('.json');
+      }
+
+      function normalizeItem(item, index) {
+        const hasStations = Array.isArray(item.stations) && item.stations.length > 0;
+        if (!item._uid) item._uid = item.id || ('item_' + (index + 1));
+        return {
+          id: item._uid,
+          name: item.name || 'ไม่มีชื่อรายการ',
+          category: item.category || (hasStations ? 'ละคร/ซีรีส์' : 'ทั่วไป'),
+          logo: item.logo || item.image || (hasStations && item.stations[0].image) || '',
+          url: item.url || (hasStations ? (item.stations[0].url || '') : ''),
+          referer: item.referer || '',
+          subtitle: item.subtitle || '',
+          import: item.import,
+          stations: hasStations ? item.stations : null,
+          rawIndex: index
+        };
+      }
 
       function showPlayerError(msg, externalUrl = '') {
         if (msg) {
@@ -792,10 +935,6 @@
 
       async function attachSubtitle(subUrl) {
         Array.from(videoEl.querySelectorAll('track')).forEach(t => t.remove());
-        if (currentSubtitleBlobUrl) {
-          URL.revokeObjectURL(currentSubtitleBlobUrl);
-          currentSubtitleBlobUrl = null;
-        }
         if (!subUrl) return;
         try {
           const res = await fetch(subUrl);
@@ -804,12 +943,11 @@
           if (!text.trim().startsWith('WEBVTT')) {
             text = 'WEBVTT\n\n' + text.replace(/(\d{2}:\d{2}:\d{2}),(\d{3})/g, '$1.$2');
           }
-          currentSubtitleBlobUrl = URL.createObjectURL(new Blob([text], { type: 'text/vtt' }));
           const track = document.createElement('track');
           track.kind = 'subtitles';
           track.label = 'ไทย';
           track.srclang = 'th';
-          track.src = currentSubtitleBlobUrl;
+          track.src = URL.createObjectURL(new Blob([text], { type: 'text/vtt' }));
           track.default = true;
           videoEl.appendChild(track);
         } catch (e) {
@@ -886,22 +1024,6 @@
         });
       }
 
-      function normalizeItem(item, index) {
-        const hasStations = Array.isArray(item.stations) && item.stations.length > 0;
-        if (!item._uid) item._uid = item.id || ('item_' + (index + 1));
-        return {
-          id: item._uid,
-          name: item.name || 'ไม่มีชื่อรายการ',
-          category: item.category || (hasStations ? 'ละคร/ซีรีส์' : 'ทั่วไป'),
-          logo: item.logo || item.image || (hasStations && item.stations[0].image) || '',
-          url: item.url || (hasStations ? (item.stations[0].url || '') : ''),
-          referer: item.referer || '',
-          subtitle: item.subtitle || '',
-          stations: hasStations ? item.stations : null,
-          rawIndex: index
-        };
-      }
-
       async function playChannel(channel) {
         if (!channel) return;
         activeChannelId = channel.id;
@@ -913,6 +1035,40 @@
         currentTitleEl.textContent = channel.name;
         currentCatEl.textContent = 'หมวดหมู่: ' + channel.category;
         renderChannels();
+
+        // ถ้าเป็นลิงก์เพลย์ลิสต์ภายนอกที่บล็อกเว็บ (เช่น aisfree...workers.dev) ให้แจ้งเตือนและแสดงปุ่มเปิดแอปทันทีโดยไม่ต้องรอค้าง
+        if (channel.url && channel.url.includes('workers.dev/playlist')) {
+          if (hlsInstance) { hlsInstance.destroy(); hlsInstance = null; }
+          videoEl.pause();
+          videoEl.removeAttribute('src');
+          episodeBarEl.classList.remove('visible');
+          currentCatEl.textContent = 'เพลย์ลิสต์ภายนอก (สำหรับแอป IPTV)';
+          showPlayerError('⚠️ ลิงก์นี้ล็อกให้เปิดเฉพาะในแอป IPTV (Wiseplay / OTT) กดปุ่มสีฟ้าด้านขวาเพื่อเปิด หรือคัดลอกลิงก์ไปใส่ในแอป IPTV', channel.url);
+          if (navigator.clipboard) navigator.clipboard.writeText(channel.url);
+          return;
+        }
+
+        if ((!channel.stations || channel.stations.length === 0) && isExternalPlaylistItem(channel)) {
+          showPlayerError('⏳ กำลังดึงรายชื่อช่องจากเพลย์ลิสต์ ' + channel.name + ' กรุณารอสักครู่...');
+          try {
+            const subStations = await fetchExternalPlaylist(channel.url);
+            if (subStations && subStations.length > 0) {
+              channel.stations = subStations;
+              if (typeof channel.rawIndex === 'number' && channels[channel.rawIndex]) {
+                channels[channel.rawIndex].stations = subStations;
+              }
+              showPlayerError('');
+            } else {
+              showPlayerError('⚠️ เพลย์ลิสต์นี้ต้องเปิดด้วยแอป IPTV ภายนอก', channel.url);
+              return;
+            }
+          } catch (e) {
+            showPlayerError('⚠️ เซิร์ฟเวอร์ของ ' + channel.name + ' บล็อกการดึงผ่านเว็บ กดปุ่มด้านขวาเพื่อเปิดโดยตรง', channel.url);
+            return;
+          }
+        } else {
+          showPlayerError('');
+        }
 
         if (channel.stations && channel.stations.length > 0) {
           const firstEp = channel.stations[0];
@@ -927,6 +1083,13 @@
         }
         renderChannels();
       }
+
+
+      videoEl.addEventListener('error', () => {
+        if (activeChannelId) {
+          showPlayerError('⚠️ ไม่สามารถเล่นไฟล์สตรีมจากลิงก์นี้บนเว็บได้โดยตรง');
+        }
+      });
 
       function renderChannels() {
         const normalizedList = channels.map(normalizeItem);
@@ -993,6 +1156,8 @@
         renderChannels();
       });
 
+      const REMOTE_CHANNELS_URL = 'https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/channels.json';
+
       async function loadLatestChannels() {
         try {
           const res = await fetch(REMOTE_CHANNELS_URL + '?t=' + Date.now(), { cache: 'no-store' });
@@ -1006,30 +1171,101 @@
             }
           }
         } catch (err) {
-          channelListEl.innerHTML = '<div class="empty-state">ไม่สามารถดึงข้อมูลรายการช่องได้</div>';
+          channelListEl.innerHTML = '<div class="empty-state">ไม่สามารถดึงไฟล์ channels.json ได้ กรุณาตรวจสอบรูปแบบไฟล์บน GitHub</div>';
         }
       }
 
-      // ปลั๊กอินควบคุมรีโมท Android TV
+      renderChannels();
+      loadLatestChannels();
+    })();
+  </script>
+  <!-- ==================== ระบบรองรับรีโมทและหน้าจอ Android TV ==================== -->
+  <style>
+    /* 1. กรอบไฟสว่างเวลาใช้รีโมททีวีเลื่อน (Focus Ring) */
+    button:focus,
+    input:focus,
+    a:focus,
+    .channel-item:focus,
+    .tab-btn:focus,
+    .ep-btn:focus {
+      outline: 3px solid #38bdf8 !important;
+      outline-offset: 2px !important;
+      box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.35), 0 8px 20px rgba(0, 0, 0, 0.6) !important;
+      transform: scale(1.04) !important;
+      z-index: 10;
+    }
+
+    .channel-item:focus {
+      background-color: #334155 !important;
+      border-color: #38bdf8 !important;
+    }
+
+    /* 2. ปรับเลย์เอาต์แบ่งซ้าย-ขวาอัตโนมัติสำหรับจอทีวีแนวนอน (ไม่ต้องเลื่อนหน้าเว็บขึ้น-ลง) */
+    @media (min-width: 960px) {
+      .main-container {
+        max-width: 1600px !important;
+        grid-template-columns: 1.15fr 1fr !important;
+        padding: 16px 24px !important;
+        gap: 20px !important;
+        align-items: start !important;
+      }
+
+      .left-col {
+        position: sticky !important;
+        top: 72px !important;
+      }
+
+      .channel-list {
+        max-height: calc(100vh - 220px) !important;
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+        gap: 10px !important;
+      }
+    }
+  </style>
+
+  <script>
+    (function () {
+      const video = document.getElementById('tv-video');
+      const nowPlayingBar = document.querySelector('.now-playing-bar');
+
+      // เพิ่มปุ่ม "ขยายเต็มจอ (Fullscreen)" ขนาดใหญ่สำหรับกดด้วยรีโมททีวี
+      if (nowPlayingBar && video) {
+        const fsBtn = document.createElement('button');
+        fsBtn.type = 'button';
+        fsBtn.innerHTML = '🖥️ ขยายเต็มจอ';
+        fsBtn.style.cssText = 'background:#06b6d4; color:#ffffff; border:none; padding:8px 14px; border-radius:8px; font-size:0.85rem; font-weight:700; cursor:pointer; white-space:nowrap;';
+        fsBtn.onclick = toggleFullScreen;
+        nowPlayingBar.appendChild(fsBtn);
+      }
+
       function toggleFullScreen() {
-        if (!videoEl) return;
+        if (!video) return;
         if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-          if (videoEl.requestFullscreen) videoEl.requestFullscreen().catch(() => {});
-          else if (videoEl.webkitRequestFullscreen) videoEl.webkitRequestFullscreen();
+          if (video.requestFullscreen) {
+            video.requestFullscreen().catch(() => {});
+          } else if (video.webkitRequestFullscreen) {
+            video.webkitRequestFullscreen();
+          } else if (video.webkitEnterFullscreen) {
+            video.webkitEnterFullscreen();
+          }
         } else {
-          if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
-          else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+          if (document.exitFullscreen) {
+            document.exitFullscreen().catch(() => {});
+          } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+          }
         }
       }
 
+      // ระบบควบคุมด้วยปุ่มลูกศรและปุ่ม OK บนรีโมท Android TV
       function isLockVisible() {
         const lockScreen = document.getElementById('auth-lock-screen');
         return !!lockScreen && window.getComputedStyle(lockScreen).display !== 'none';
       }
 
       function getVisibleFocusableElements() {
-        if (isLockVisible()) {
-          const lockScreen = document.getElementById('auth-lock-screen');
+        const lockScreen = document.getElementById('auth-lock-screen');
+        if (lockScreen && window.getComputedStyle(lockScreen).display !== 'none') {
           return Array.from(lockScreen.querySelectorAll('input, button')).filter(el => !el.disabled);
         }
         const selectors = 'header button, .now-playing-bar button, .now-playing-bar a, .ep-btn, #search-input, .tab-btn, .channel-item';
@@ -1043,7 +1279,7 @@
         const key = e.key;
         const activeEl = document.activeElement;
 
-        // ขณะที่หน้าจอล็อกอินเปิดอยู่ ให้ควบคุมเฉพาะบนกล่องล็อกอิน
+        // While the login screen is showing, keep remote focus inside it
         if (isLockVisible() && !(activeEl && activeEl.closest && activeEl.closest('#auth-lock-screen'))) {
           const lockFirst = document.getElementById('license-input');
           if (lockFirst && ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Enter', ' '].includes(key)) {
@@ -1053,21 +1289,26 @@
           return;
         }
 
-        // กดปุ่ม OK (Enter) บนช่องรายการ
+        // 1. เมื่อกดปุ่ม OK (Enter) บนรีโมททีวีตรงช่องรายการ (.channel-item)
         if ((key === 'Enter' || key === ' ' || e.keyCode === 13 || e.keyCode === 23) && activeEl && activeEl.classList && activeEl.classList.contains('channel-item')) {
           e.preventDefault();
+          // ถ้ากดปุ่ม OK ซ้ำที่ช่องเดิมที่กำลังเล่นอยู่ ให้ขยายเต็มจอทันที!
           if (activeEl.classList.contains('active')) {
             toggleFullScreen();
             return;
           }
+          // ถ้ากดช่องใหม่ ให้สั่งคลิกเพื่อเล่นช่องนั้น แล้วดึงกรอบสีฟ้ากลับมาไว้ที่ช่องที่เพิ่งเลือก
           activeEl.click();
           setTimeout(() => {
-            const newActive = document.querySelector('.channel-item.active');
-            if (newActive) newActive.focus();
+            const newActiveChannel = document.querySelector('.channel-item.active');
+            if (newActiveChannel) {
+              newActiveChannel.focus();
+            }
           }, 60);
           return;
         }
 
+        // 2. ถ้ากำลังพิมพ์ในช่องค้นหาหรือช่องรหัสผ่าน ให้กดลูกศรซ้าย-ขวาเลื่อนตัวอักษรได้ตามปกติ
         if (activeEl && activeEl.tagName === 'INPUT' && (key === 'ArrowLeft' || key === 'ArrowRight')) {
           return;
         }
@@ -1077,14 +1318,13 @@
         const focusables = getVisibleFocusableElements();
         if (focusables.length === 0) return;
 
+        // 3. ถ้ายังไม่มีปุ่มไหนมีกรอบสีฟ้า ให้จับโฟกัสไปที่ช่องปัจจุบันหรือช่องแรกทันที
         if (!focusables.includes(activeEl)) {
           e.preventDefault();
           const lockOn = focusables.some(el => el.closest && el.closest('#auth-lock-screen'));
           const firstTarget = lockOn ? focusables[0] : (document.querySelector('.channel-item.active') || document.querySelector('.channel-item') || focusables[0]);
-          if (firstTarget) {
-            firstTarget.focus();
-            firstTarget.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          }
+          firstTarget.focus();
+          firstTarget.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
           return;
         }
 
@@ -1099,8 +1339,11 @@
         focusables.forEach(candidate => {
           if (candidate === activeEl) return;
           const rect = candidate.getBoundingClientRect();
-          const dx = (rect.left + rect.width / 2) - curCenterX;
-          const dy = (rect.top + rect.height / 2) - curCenterY;
+          const candCenterX = rect.left + rect.width / 2;
+          const candCenterY = rect.top + rect.height / 2;
+
+          const dx = candCenterX - curCenterX;
+          const dy = candCenterY - curCenterY;
 
           let isValidDirection = false;
           if (key === 'ArrowRight' && dx > 5 && Math.abs(dy) < currentRect.height * 1.2) isValidDirection = true;
@@ -1132,65 +1375,10 @@
           bestCandidate.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
       });
-
-      // ปุ่มขยายเต็มจอบน Now Playing Bar
-      const npBar = document.querySelector('.now-playing-bar');
-      if (npBar) {
-        const fsBtn = document.createElement('button');
-        fsBtn.type = 'button';
-        fsBtn.innerHTML = '🖥️ ขยายเต็มจอ';
-        fsBtn.style.cssText = 'background:#06b6d4; color:#ffffff; border:none; padding:8px 14px; border-radius:8px; font-size:0.85rem; font-weight:700; cursor:pointer; white-space:nowrap;';
-        fsBtn.onclick = toggleFullScreen;
-        npBar.appendChild(fsBtn);
-      }
-
-      loadLatestChannels();
     })();
-
-    // ดึงข้อความประกาศตัววิ่ง
-    (async function () {
-      try {
-        const res = await fetch(REMOTE_CHANNELS_URL + '?t=' + Date.now(), { cache: 'no-store' });
-        if (!res.ok) return;
-        const data = await res.json();
-        const remoteMsg = data.notice || data.announcement || data.message;
-        const textEl = document.getElementById('announcement-text');
-        const barEl = document.querySelector('.announcement-bar');
-        if (remoteMsg !== undefined && textEl && barEl) {
-          if (remoteMsg.trim() === '') barEl.style.display = 'none';
-          else textEl.textContent = remoteMsg;
-        }
-      } catch (e) {}
-    })();
-
-    // ติดตั้ง Event Listener ตอน DOM พร้อมทำงานอย่างปลอดภัย
-    window.addEventListener("DOMContentLoaded", () => {
-      const devIdEl = document.getElementById("display-device-id");
-      if (devIdEl) devIdEl.innerText = getDeviceId();
-
-      const licInput = document.getElementById("license-input");
-      if (licInput) {
-        licInput.addEventListener("keydown", (e) => {
-          if (e.key === "Enter" || e.keyCode === 13) {
-            e.preventDefault();
-            verifyAccess();
-          }
-        });
-      }
-
-      const savedKey = localStorage.getItem("saved_license_key");
-      if (savedKey) {
-        if (licInput) licInput.value = savedKey;
-        verifyAccess(savedKey);
-      } else {
-        setTimeout(() => {
-          const ls = document.getElementById("auth-lock-screen");
-          if (ls && ls.style.display !== "none" && licInput) {
-            licInput.focus();
-          }
-        }, 300);
-      }
-    });
   </script>
+  <!-- ==================== สิ้นสุดระบบรองรับ Android TV ==================== -->
+
 </body>
 </html>
+```
