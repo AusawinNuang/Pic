@@ -440,13 +440,92 @@
   <script>
     const GITHUB_KEYS_URL = "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/keys.json";
 
-    function getDeviceId() {
-      let id = localStorage.getItem("app_device_id");
-      if (!id) {
-        id = "DEV-" + Math.random().toString(36).substring(2, 8).toUpperCase() + "-" + Date.now().toString(36).slice(-4).toUpperCase();
-        localStorage.setItem("app_device_id", id);
+    // ==================== ระบบสร้างและจำรหัสประจำเครื่องแบบคงที่ (Hardware Fingerprint + Multi-Storage) ====================
+    function generateStableDeviceFingerprint() {
+      try {
+        const nav = window.navigator || {};
+        const scr = window.screen || {};
+
+        // ดึงชื่อรุ่นอุปกรณ์จาก User-Agent โดยตัดเลขเวอร์ชันของ Chrome/WebView ที่อัปเดตบ่อยออก
+        let uaModel = (nav.userAgent || "")
+          .replace(/Chrome\/[\d.]+/g, "")
+          .replace(/Version\/[\d.]+/g, "")
+          .replace(/Safari\/[\d.]+/g, "")
+          .replace(/AppleWebKit\/[\d.]+/g, "");
+
+        // ดึงข้อมูลการ์ดจอ (GPU Renderer) ซึ่งคงที่เสมอในแต่ละอุปกรณ์
+        let gpuInfo = "";
+        try {
+          const canvas = document.createElement("canvas");
+          const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+          if (gl) {
+            const debugInfo = gl.getExtension("WEBGL_debug_renderer_info");
+            gpuInfo = debugInfo
+              ? (gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL) + "|" + gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL))
+              : (gl.getParameter(gl.VENDOR) + "|" + gl.getParameter(gl.RENDERER));
+          }
+        } catch (e) {}
+
+        const rawComponents = [
+          nav.platform || "",
+          uaModel,
+          gpuInfo,
+          nav.hardwareConcurrency || "",
+          nav.deviceMemory || "",
+          Math.max(scr.width || 0, scr.height || 0) + "x" + Math.min(scr.width || 0, scr.height || 0),
+          scr.colorDepth || "",
+          (Intl && Intl.DateTimeFormat) ? Intl.DateTimeFormat().resolvedOptions().timeZone : ""
+        ].join("||");
+
+        // แปลงเป็นรหัส Hash 2 ชุด เพื่อให้ได้รหัสที่ไม่ซ้ำกันแต่คงที่ตลอดไปบนเครื่องเดิม
+        let h1 = 0x811c9dc5;
+        let h2 = 0x1505;
+        for (let i = 0; i < rawComponents.length; i++) {
+          const ch = rawComponents.charCodeAt(i);
+          h1 ^= ch;
+          h1 = Math.imul(h1, 0x01000193);
+          h2 = Math.imul(h2 ^ ch, 33);
+        }
+        const part1 = (h1 >>> 0).toString(36).toUpperCase().padStart(6, "0").slice(0, 6);
+        const part2 = (h2 >>> 0).toString(36).toUpperCase().padStart(4, "0").slice(-4);
+        return "DEV-" + part1 + "-" + part2;
+      } catch (err) {
+        return "DEV-TVBOX0-0001";
       }
-      return id;
+    }
+
+    function readCookieValue(name) {
+      const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+      return match ? decodeURIComponent(match[2]) : null;
+    }
+
+    function savePersistentValue(key, value) {
+      try { localStorage.setItem(key, value); } catch (e) {}
+      try {
+        const expires = new Date(Date.now() + 3650 * 864e5).toUTCString(); // เก็บในคุกกี้ 10 ปี
+        document.cookie = key + "=" + encodeURIComponent(value) + "; expires=" + expires + "; path=/; SameSite=Lax";
+      } catch (e) {}
+    }
+
+    function readPersistentValue(key) {
+      let val = null;
+      try { val = localStorage.getItem(key); } catch (e) {}
+      if (!val) val = readCookieValue(key);
+      return val;
+    }
+
+    function removePersistentValue(key) {
+      try { localStorage.removeItem(key); } catch (e) {}
+      try {
+        document.cookie = key + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+      } catch (e) {}
+    }
+
+    function getDeviceId() {
+      // ใช้รหัสประจำเครื่องที่คำนวณจากสเปคเครื่องเป็นหลัก เพื่อให้ล้างแคชหรือปิดแอปเปิดใหม่ก็ได้รหัสเดิมเสมอ
+      const stableId = generateStableDeviceFingerprint();
+      savePersistentValue("app_device_id", stableId);
+      return stableId;
     }
 
     function copyDeviceId() {
@@ -460,7 +539,7 @@
     }
 
     function logoutLicense() {
-      localStorage.removeItem("saved_license_key");
+      removePersistentValue("saved_license_key");
       document.getElementById("license-input").value = "";
       document.getElementById("auth-msg").innerText = "";
       document.getElementById("auth-lock-screen").style.display = "flex";
@@ -547,10 +626,10 @@
         }
 
         if (isAllowed) {
-          localStorage.setItem("saved_license_key", checkValue);
+          savePersistentValue("saved_license_key", checkValue);
           unlockScreen();
         } else {
-          localStorage.removeItem("saved_license_key");
+          removePersistentValue("saved_license_key");
           lockScreenWithError(rejectReason);
         }
       } catch (error) {
@@ -575,7 +654,7 @@
       const devIdEl = document.getElementById("display-device-id");
       if (devIdEl) devIdEl.innerText = getDeviceId();
 
-      const savedKey = localStorage.getItem("saved_license_key");
+      const savedKey = readPersistentValue("saved_license_key");
       if (savedKey) {
         document.getElementById("license-input").value = savedKey;
         verifyAccess(savedKey);
@@ -686,11 +765,8 @@
       } catch (e) {}
     })();
   </script>
-
-  
   <!-- ==================== สิ้นสุดแถบข้อความประกาศตัววิ่ง ==================== -->
 
-  
   <main class="main-container">
     <div class="left-col">
       <section class="card" aria-label="เครื่องเล่นทีวีออนไลน์">
