@@ -132,17 +132,11 @@
   {
     "key": "satan",
     "status": "active",
-    "deviceId": "DEV-Y2X92N-0D9Z",
+    "deviceId": "DEV-Y2X92N-0D9Z, DEV-HVJLIL-LNG1",
     "expires": "2026-12-31",
     "note": "satan"
      },
-  {
-    "key": "satan11",
-    "status": "active",
-    "deviceId": "DEV-6316HB-EZGJ",
-    "expires": "2026-12-31",
-    "note": "ตัวอย่างรหัสที่มีวันหมดอายุ"
-     },
+ 
   {
     "key": "VIP016",
     "status": "active",
