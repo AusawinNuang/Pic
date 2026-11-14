@@ -3,65 +3,215 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TV Online & Live Stream Player</title>
-  <!-- CSS เดิมทั้งหมดถูกรักษาไว้ 100% เพื่อไม่ให้กระทบต่อโครงสร้างการแสดงผลเดิม -->
+  <title>TV ONLINE & LIVE STREAM PLAYER</title>
   <style>
-    /* สไตล์เดิมทั้งหมดของคุณจะคงอยู่ตรงนี้ */
+    :root {
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --bg-dark: #0f172a;
+      --bg-card: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #334155;
+      --accent: #10b981;
+      --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
+
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #0f172a;
-      color: #e2e8f0;
-      padding: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.5;
+      padding-bottom: 60px;
     }
+
     header {
-      margin-bottom: 20px;
-      text-align: center;
+      background-color: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
     }
-    h1 {
-      font-size: 1.8rem;
-      color: #38bdf8;
-      margin-bottom: 10px;
-    }
-    .container {
-      max-width: 1200px;
+
+    .header-container {
+      max-width: 1400px;
       margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      font-size: 1.8rem;
+    }
+
+    .logo-text h1 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #38bdf8, #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-text p {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: -2px;
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .search-wrapper {
+      position: relative;
+    }
+
+    .search-input {
+      background-color: var(--bg-dark);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 8px 14px;
+      padding-left: 36px;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      width: 200px;
+      transition: all 0.25s ease;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      width: 280px;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      pointer-events: none;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background-color: var(--bg-dark);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 8px 14px;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      background-color: var(--border);
+      border-color: var(--text-muted);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+      border: none;
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-accent {
+      background: linear-gradient(135deg, #10b981, #059669);
+      border: none;
+      color: #fff;
+    }
+
+    .btn-accent:hover {
+      background: #059669;
+      transform: translateY(-1px);
+    }
+
+    .btn-icon {
+      width: 36px;
+      height: 36px;
+      padding: 0;
+      border-radius: 50%;
+    }
+
+    .main-layout {
+      max-width: 1400px;
+      margin: 16px auto;
+      padding: 0 16px;
       display: grid;
       grid-template-columns: 1fr;
-      gap: 20px;
+      gap: 16px;
     }
-    @media (min-width: 768px) {
-      .container {
-        grid-template-columns: 2fr 1fr;
+
+    @media (min-width: 1024px) {
+      .main-layout {
+        grid-template-columns: minmax(0, 1fr) 360px;
+        align-items: start;
       }
     }
+
     .card {
-      background-color: #1e293b;
-      border-radius: 12px;
-      padding: 15px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    }
-    .video-container {
-      position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
       overflow: hidden;
-      background-color: #000;
-      border-radius: 8px;
+      box-shadow: var(--shadow);
+      margin-bottom: 16px;
     }
-    .video-container video {
-      position: absolute;
-      top: 0;
-      left: 0;
+
+    .player-wrapper {
+      position: relative;
+      background-color: #000;
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 16/9;
+    }
+
+    .main-video {
       width: 100%;
       height: 100%;
-      border: none;
+      display: none;
+      object-fit: contain;
     }
-    .placeholder {
+
+    .main-video.active {
+      display: block;
+    }
+
+    .player-placeholder {
       position: absolute;
       top: 0;
       left: 0;
@@ -69,151 +219,801 @@
       height: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      color: #94a3b8;
+      justify-content: center;
+      background: radial-gradient(circle, #1e293b 0%, #0f172a 100%);
+      color: var(--text-muted);
       text-align: center;
-      padding: 20px;
+      padding: 24px;
     }
-    .placeholder h2 {
-      color: #38bdf8;
-      margin-bottom: 8px;
+
+    .placeholder-icon {
+      font-size: 3.5rem;
+      margin-bottom: 12px;
+      animation: pulse 2s infinite alternate;
     }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.7; }
+      100% { transform: scale(1.08); opacity: 1; }
+    }
+
+    .placeholder-text h2 {
+      color: #fff;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .placeholder-text p {
+      font-size: 0.85rem;
+    }
+
     .now-playing-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 15px;
-      padding: 10px;
-      background-color: #0f172a;
-      border-radius: 8px;
-      gap: 10px;
+      padding: 14px 18px;
+      background-color: rgba(15, 23, 42, 0.4);
+      border-top: 1px solid var(--border);
+      gap: 12px;
     }
+
     .now-playing-info {
       flex: 1;
+      min-width: 0;
     }
+
     .now-playing-label {
-      font-size: 0.75rem;
-      color: #94a3b8;
+      font-size: 0.7rem;
+      color: var(--primary);
       text-transform: uppercase;
+      font-weight: 700;
       letter-spacing: 0.05em;
     }
+
     .now-playing-title {
-      font-size: 1.1rem;
-      font-weight: bold;
+      font-size: 1rem;
+      font-weight: 700;
       color: #fff;
-      margin-top: 2px;
+      margin-top: 1px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
+
     .status-msg {
       font-size: 0.8rem;
-      color: #f43f5e;
-      margin-top: 4px;
+      color: #fb7185;
+      font-weight: 500;
+      margin-top: 3px;
       display: none;
     }
+
     .status-msg.visible {
       display: block;
     }
+
     .episode-bar {
-      margin-top: 15px;
-      background-color: #0f172a;
-      border-radius: 8px;
-      padding: 12px;
+      border-top: 1px solid var(--border);
+      padding: 14px 18px;
+      background-color: rgba(15, 23, 42, 0.25);
       display: none;
     }
+
     .episode-bar.visible {
       display: block;
     }
+
     .episode-bar-header {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: #38bdf8;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
       margin-bottom: 10px;
-      border-bottom: 1px solid #1e293b;
-      padding-bottom: 8px;
+      letter-spacing: 0.03em;
     }
+
     .episode-list {
       display: flex;
-      flex-wrap: wrap;
       gap: 8px;
-      max-height: 180px;
-      overflow-y: auto;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
     }
+
+    .episode-list::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .episode-list::-webkit-scrollbar-thumb {
+      background-color: var(--border);
+      border-radius: 9999px;
+    }
+
     .ep-btn {
-      background-color: #1e293b;
-      border: 1px solid #334155;
-      color: #cbd5e1;
-      padding: 8px 12px;
-      border-radius: 6px;
+      background-color: var(--bg-dark);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
       cursor: pointer;
-      font-size: 0.85rem;
-      transition: all 0.2s;
-      display: flex;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      display: inline-flex;
       flex-direction: column;
-      align-items: flex-start;
-      gap: 2px;
+      align-items: center;
+      min-width: 70px;
     }
+
     .ep-btn:hover {
-      background-color: #334155;
+      background-color: var(--border);
+      border-color: var(--text-muted);
+    }
+
+    .ep-btn.active {
+      background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+      border-color: var(--primary);
       color: #fff;
     }
-    .ep-btn.active {
-      background-color: #38bdf8;
-      border-color: #38bdf8;
-      color: #0f172a;
-      font-weight: bold;
-    }
+
     .ep-btn-sub {
-      font-size: 0.7rem;
-      opacity: 0.8;
+      font-size: 0.65rem;
+      opacity: 0.7;
+      margin-top: 1px;
     }
+
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
     .section-header {
-      margin-bottom: 15px;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
+
     .section-title {
-      font-size: 1.2rem;
+      font-size: 0.95rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
       color: #fff;
     }
-    .channel-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 12px;
+
+    .category-tabs {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 10px 18px;
+      background-color: rgba(15, 23, 42, 0.15);
+      border-bottom: 1px solid var(--border);
+      scrollbar-width: none;
     }
-    .channel-item {
-      background-color: #0f172a;
-      border: 1px solid #1e293b;
-      border-radius: 8px;
-      padding: 10px;
-      text-align: center;
+
+    .category-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .cat-tab {
+      background-color: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .cat-tab:hover {
+      color: var(--text-main);
+      background-color: var(--border);
+    }
+
+    .cat-tab.active {
+      background-color: rgba(59, 130, 246, 0.15);
+      border-color: rgba(59, 130, 246, 0.3);
+      color: var(--primary);
+    }
+
+    .channel-list {
+      max-height: 520px;
+      overflow-y: auto;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+
+    @media (min-width: 1024px) {
+      .channel-list {
+        max-height: 680px;
+      }
+    }
+
+    .channel-list::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .channel-list::-webkit-scrollbar-thumb {
+      background-color: var(--border);
+      border-radius: 9999px;
+    }
+
+    .channel-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      border: 1px solid transparent;
+      position: relative;
+    }
+
+    .channel-item:hover {
+      background-color: rgba(51, 65, 85, 0.3);
+    }
+
+    .channel-item.active {
+      background-color: rgba(59, 130, 246, 0.08);
+      border-color: rgba(59, 130, 246, 0.2);
+    }
+
+    .channel-logo-wrapper {
+      position: relative;
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      overflow: hidden;
+      background-color: var(--bg-dark);
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .channel-logo {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .channel-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .channel-name {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .channel-category {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+
+    .live-badge {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+      display: none;
+    }
+
+    .channel-item.active .live-badge {
+      display: block;
+      animation: pulse-badge 1.5s infinite;
+    }
+
+    @keyframes pulse-badge {
+      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+      70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+
+    /* Modal Styles */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+      padding: 16px;
+    }
+
+    .modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 480px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transform: translateY(20px);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .modal.active .modal-card {
+      transform: translateY(0);
+    }
+
+    .modal-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgba(15, 23, 42, 0.2);
+    }
+
+    .modal-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 4px;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+    }
+
+    .modal-close:hover {
+      background-color: var(--border);
+      color: #fff;
+    }
+
+    .modal-body {
+      padding: 24px;
+    }
+
+    /* GitHub Profile Styles */
+    .profile-card {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
+      text-align: center;
+      gap: 16px;
     }
-    .channel-item:hover {
-      transform: translateY(-2px);
-      border-color: #38bdf8;
+
+    .avatar-wrapper {
+      position: relative;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      padding: 4px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
-    .channel-item.active {
-      border-color: #38bdf8;
-      background-color: rgba(56, 189, 248, 0.05);
+
+    .avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background-color: var(--bg-dark);
+      object-fit: cover;
+      border: 2px solid var(--bg-card);
     }
-    .channel-logo {
-      width: 50px;
-      height: 50px;
-      object-fit: contain;
-      border-radius: 6px;
-      background-color: #1e293b;
+
+    .profile-info h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #fff;
     }
-    .channel-name {
+
+    .profile-info p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .profile-bio {
       font-size: 0.85rem;
-      font-weight: 500;
-      color: #cbd5e1;
-      word-break: break-word;
+      color: var(--text-main);
+      background-color: var(--bg-dark);
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      margin-top: 4px;
+      width: 100%;
+      max-height: 100px;
+      overflow-y: auto;
+    }
+
+    .profile-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      width: 100%;
+      background-color: rgba(15, 23, 42, 0.3);
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .stat-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .stat-val {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .stat-lbl {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-top: 1px;
+      font-weight: 600;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .form-input {
+      background-color: var(--bg-dark);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      width: 100%;
+      transition: all 0.2s ease;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+
+    .form-help {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+      line-height: 1.4;
+    }
+
+    .form-help a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .form-help a:hover {
+      text-decoration: underline;
+    }
+
+    /* TV Grid View (for Big Screen mode) */
+    .tv-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 12px;
+      padding: 16px;
+    }
+
+    .tv-grid-item {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      text-align: center;
+      position: relative;
+    }
+
+    .tv-grid-item:hover, .tv-grid-item.focused {
+      transform: translateY(-4px);
+      border-color: var(--primary);
+      box-shadow: 0 10px 20px -5px rgba(59,130,246,0.3);
+      outline: none;
+    }
+
+    .tv-grid-item.focused {
+      background-color: rgba(59,130,246,0.1);
+    }
+
+    .tv-grid-logo-wrapper {
+      width: 60px;
+      height: 60px;
+      border-radius: 10px;
+      overflow: hidden;
+      background-color: var(--bg-dark);
+      border: 1px solid var(--border);
+    }
+
+    .tv-grid-logo {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .tv-grid-name {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #fff;
+      max-width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Fullscreen Remote overlay styles */
+    .fullscreen-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+      z-index: 2000;
+      display: none;
+      flex-direction: column;
+    }
+
+    .fullscreen-overlay.active {
+      display: flex;
+    }
+
+    .fullscreen-video-wrapper {
+      flex: 1;
+      position: relative;
+    }
+
+    .fullscreen-video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .remote-hud {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 60%, rgba(0,0,0,0) 100%);
+      padding: 30px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .remote-hud.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .hud-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .hud-title-col h2 {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #fff;
+    }
+
+    .hud-title-col p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .hud-clock {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--primary);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .hud-control-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 16px;
+    }
+
+    .hud-tips {
+      display: flex;
+      gap: 20px;
+    }
+
+    .hud-tip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .keycap {
+      background-color: #334155;
+      color: #fff;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      border: 1px solid #475569;
+      border-bottom-width: 3px;
+    }
+
+    /* Donate QR styles */
+    .donate-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 14px;
+    }
+
+    .qr-frame {
+      background-color: #fff;
+      padding: 12px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .qr-img {
+      width: 200px;
+      height: 200px;
+      display: block;
+      object-fit: contain;
+    }
+
+    .donate-prompt {
+      font-size: 0.85rem;
+      color: var(--text-main);
+      line-height: 1.4;
+    }
+
+    .donate-prompt strong {
+      color: var(--primary);
+    }
+
+    /* Dropdown user menu */
+    .user-dropdown-wrapper {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      right: 0;
+      top: 100%;
+      margin-top: 8px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      width: 180px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: all 0.2s ease;
+      z-index: 105;
+    }
+
+    .user-dropdown-wrapper.active .dropdown-menu {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      padding: 10px 16px;
+      background: none;
+      border: none;
+      color: var(--text-main);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+    }
+
+    .dropdown-item:hover {
+      background-color: var(--border);
+    }
+
+    .dropdown-item.danger {
+      color: #ef4444;
+    }
+
+    .dropdown-item.danger:hover {
+      background-color: rgba(239, 68, 68, 0.1);
+    }
+
+    /* Loader */
+    .loader {
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      display: none;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
@@ -221,80 +1021,261 @@
 <body>
 
   <header>
-    <h1>ทีวีออนไลน์ & เครื่องเล่นวิดีโอสตรีม</h1>
-  </header>
+    <div class="header-container">
+      <div class="logo-area">
+        <span class="logo-icon">📺</span>
+        <div class="logo-text">
+          <h1>LIVE TV ONLINE</h1>
+          <p>M3U & HLS IPTV Web Player Pro</p>
+        </div>
+      </div>
 
-  <div class="container">
-    <!-- ส่วนแสดงเครื่องเล่น -->
-    <section class="card" aria-label="เครื่องเล่นวิดีโอ">
-      <div class="video-container">
-        <video id="main-player" controls playsinline></video>
-        <div class="placeholder" id="player-placeholder">
-          <div>
-            <h2>ยังไม่ได้เลือกช่องรายการ</h2>
-            <p>เลือกช่องจากรายการเพื่อเริ่มรับชมทีวีออนไลน์</p>
+      <div class="header-controls">
+        <div class="search-wrapper">
+          <input type="text" class="search-input" id="search-input" placeholder="ค้นหาช่องรายการ...">
+          <span class="search-icon">🔍</span>
+        </div>
+
+        <button class="btn" id="remote-mode-btn">
+          <span>📺</span> Android TV
+        </button>
+
+        <button class="btn" id="donate-btn">
+          <span>☕</span> สนับสนุนนักพัฒนา
+        </button>
+
+        <div class="user-dropdown-wrapper" id="user-dropdown">
+          <button class="btn btn-primary" id="login-btn">
+            <span id="login-label">🔑 เข้าสู่ระบบ GitHub</span>
+            <div class="loader" id="login-loader"></div>
+          </button>
+          
+          <div class="dropdown-menu">
+            <button class="dropdown-item" id="view-profile-btn">👤 โปรไฟล์ผู้ใช้</button>
+            <button class="dropdown-item danger" id="logout-btn">🚪 ออกจากระบบ</button>
           </div>
         </div>
       </div>
-      
-      <!-- แถบแสดงข้อมูลช่องที่กำลังเล่นและปุ่มเปิดแอปภายนอก -->
-      <div class="now-playing-bar">
-        <div class="now-playing-info">
-          <div class="now-playing-label" id="current-cat">พร้อมใช้งาน</div>
-          <div class="now-playing-title" id="current-title">เลือกช่องเพื่อรับชม</div>
-          <div class="status-msg" id="error-msg" role="alert"></div>
+    </div>
+  </header>
+
+  <main class="main-layout" id="app-layout">
+    <div class="main-content">
+      <div class="card">
+        <div class="player-wrapper">
+          <video class="main-video" id="main-player" controls playsinline></video>
+          <div class="player-placeholder" id="player-placeholder">
+            <div class="placeholder-icon">📺</div>
+            <div class="placeholder-text">
+              <h2>ยังไม่ได้เลือกช่องรายการ</h2>
+              <p>เลือกช่องรายการที่ต้องการรับชมทางขวาเพื่อเริ่มเล่นสตรีม</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- [จุดอัปเดต 1/3]: เพิ่มปุ่ม Wiseplay เข้าไปเคียงข้างกันใน now-playing-bar -->
+        <div class="now-playing-bar">
+          <div class="now-playing-info">
+            <div class="now-playing-label" id="current-cat">พร้อมใช้งาน</div>
+            <div class="now-playing-title" id="current-title">เลือกช่องเพื่อรับชม</div>
+            <div class="status-msg" id="error-msg" role="alert"></div>
+          </div>
+          <button type="button" id="wiseplay-open-btn" style="display:none; background:linear-gradient(135deg, #10b981, #059669); color:#fff; border:none; padding:8px 14px; border-radius:8px; font-size:0.8rem; font-weight:700; cursor:pointer; white-space:nowrap; box-shadow:0 2px 8px rgba(16,185,129,0.35);">▶ เล่นใน Wiseplay</button>
+          <a id="external-open-btn" href="#" style="display:none; background:#3b82f6; color:#fff; text-decoration:none; padding:8px 14px; border-radius:8px; font-size:0.8rem; font-weight:600; white-space:nowrap;">📲 เปิดในแอปภายนอก</a>
+        </div>
+
+        <div class="episode-bar" id="episode-bar">
+          <div class="episode-bar-header" id="episode-bar-title">เลือกช่องย่อย / ตอนรับชม</div>
+          <div class="episode-list" id="episode-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <div class="card">
+        <div class="section-header">
+          <h2 class="section-title">รายการช่องทีวี</h2>
         </div>
         
-        <!-- [จุดอัปเดต 1/3] เพิ่มปุ่มเปิด Wiseplay แสดงผลเคียงข้างปุ่มเดิมแบบปลอดภัย -->
-        <button type="button" id="wiseplay-open-btn" style="display:none; background:linear-gradient(135deg, #10b981, #059669); color:#fff; border:none; padding:8px 14px; border-radius:8px; font-size:0.8rem; font-weight:700; cursor:pointer; white-space:nowrap; box-shadow:0 2px 8px rgba(16,185,129,0.35);">▶ เล่นใน Wiseplay</button>
-        <a id="external-open-btn" href="#" style="display:none; background:#3b82f6; color:#fff; text-decoration:none; padding:8px 14px; border-radius:8px; font-size:0.8rem; font-weight:600; white-space:nowrap;">📲 เปิดในแอปภายนอก</a>
-      </div>
-      
-      <div class="episode-bar" id="episode-bar">
-        <div class="episode-bar-header">
-          <span id="episode-bar-title">เลือกช่องย่อย / ตอนรับชม</span>
+        <div class="category-tabs" id="category-tabs">
+          <button class="cat-tab active" data-category="ALL">ทั้งหมด</button>
         </div>
-        <div class="episode-list" id="episode-list"></div>
-      </div>
-    </section>
 
-    <!-- ส่วนรายชื่อช่อง -->
-    <section class="card" aria-label="รายการช่องทั้งหมด">
-      <div class="section-header">
-        <h2 class="section-title">รายการช่องทีวี</h2>
+        <div class="channel-list" id="channel-list">
+          <!-- Channels Rendered Here -->
+        </div>
       </div>
-      <div class="channel-list" id="channel-list">
-        <!-- รายการช่องจะถูก Render ที่นี่ผ่าน JavaScript -->
+    </div>
+  </main>
+
+  <!-- Login Modal -->
+  <div class="modal" id="login-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 class="modal-title">🔓 เข้าสู่ระบบด้วย GitHub</h2>
+        <button class="modal-close" id="close-login-modal">&times;</button>
       </div>
-    </section>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">GitHub Personal Access Token (PAT)</label>
+          <input type="password" class="form-input" id="token-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxx">
+          <p class="form-help">
+            การเข้าสู่ระบบจะเก็บประวัติการเลือกช่องรายการและการตั้งค่าอื่นๆ ไว้บนคลาวด์ของคุณเองอย่างปลอดภัย คุณสามารถสร้าง Token ใหม่ได้ที่ <a href="https://github.com/settings/tokens" target="_blank" rel="noopener">GitHub Settings</a> โดยเลือกขอบเขตสิทธิ์ (Scope) `gist`
+          </p>
+        </div>
+        <button class="btn btn-primary" id="submit-login-btn" style="width: 100%; padding: 10px;">🔐 บันทึกและเข้าสู่ระบบ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Profile Modal -->
+  <div class="modal" id="profile-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 class="modal-title">👤 โปรไฟล์ GitHub Gist Cloud</h2>
+        <button class="modal-close" id="close-profile-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="profile-card">
+          <div class="avatar-wrapper">
+            <img class="avatar" id="prof-avatar" src="" alt="Avatar">
+          </div>
+          <div class="profile-info">
+            <h3 id="prof-name">-</h3>
+            <p id="prof-username">@username</p>
+          </div>
+          <div class="profile-bio" id="prof-bio">-</div>
+          <div class="profile-stats">
+            <div class="stat-box">
+              <span class="stat-val" id="stat-gists">0</span>
+              <span class="stat-lbl">Gists</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-val" id="stat-followers">0</span>
+              <span class="stat-lbl">Followers</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-val" id="stat-following">0</span>
+              <span class="stat-lbl">Following</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Donate Modal -->
+  <div class="modal" id="donate-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 class="modal-title">☕ ร่วมสนับสนุนผู้พัฒนา</h2>
+        <button class="modal-close" id="close-donate-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="qr-frame">
+            <img class="qr-img" src="https://promptpay.io/0821234567.png" alt="QR PromptPay">
+          </div>
+          <p class="donate-prompt">
+            หากคุณชื่นชอบเว็บบอร์ดดูสตรีมตัวนี้และต้องการสนับสนุนค่ากาแฟให้กับนักพัฒนา สามารถแสกนเพื่อโดเนท <strong>PromptPay</strong> ได้โดยตรงอย่างสะดวกสบายครับ ขอบคุณทุกการสนับสนุนครับ! ❤️
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fullscreen Android TV HUD overlay -->
+  <div class="fullscreen-overlay" id="remote-overlay">
+    <div class="fullscreen-video-wrapper">
+      <video class="fullscreen-video" id="remote-player" controls playsinline></video>
+      
+      <div class="remote-hud" id="remote-hud">
+        <div class="hud-title-row">
+          <div class="hud-title-col">
+            <h2 id="hud-title">เลือกช่องด้วยรีโมทคอนโทรล</h2>
+            <p id="hud-category">หมวดหมู่</p>
+          </div>
+          <div class="hud-clock" id="hud-clock">00:00:00</div>
+        </div>
+        <div class="hud-control-row">
+          <div class="hud-tips">
+            <div class="hud-tip"><span class="keycap">▲</span> <span class="keycap">▼</span> สลับช่อง</div>
+            <div class="hud-tip"><span class="keycap">◀</span> <span class="keycap">▶</span> เลือกช่องย่อย/ตอน</div>
+            <div class="hud-tip"><span class="keycap">OK</span> ซ่อนแถบสถานะ</div>
+            <div class="hud-tip"><span class="keycap">BACK</span> ออกจากระบบ Android TV</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script>
-    // ส่วนควบคุมการสตรีมและสถานะการทำงาน
-    let channels = [];
-    let activeChannelId = null;
-    let activeEpisodeIndex = 0;
-    let hlsInstance = null;
-    let wakeLockSentinel = null;
-
-    // โหลด Element ต่างๆ
-    const videoEl = document.getElementById('main-player');
-    const placeholderEl = document.getElementById('player-placeholder');
-    const currentTitleEl = document.getElementById('current-title');
-    const currentCatEl = document.getElementById('current-cat');
+    // State Config
+    let githubToken = localStorage.getItem('gh_token') || '';
+    let githubUser = null;
+    let gistId = localStorage.getItem('gh_gist_id') || '';
+    
+    // UI Elements Mapping
+    const searchInput = document.getElementById('search-input');
+    const categoryTabs = document.getElementById('category-tabs');
+    const channelListEl = document.getElementById('channel-list');
+    const loginBtn = document.getElementById('login-btn');
+    const loginLabel = document.getElementById('login-label');
+    const loginLoader = document.getElementById('login-loader');
+    const userDropdown = document.getElementById('user-dropdown');
+    
+    // [จุดอัปเดต 2/3]: แยกลิงก์และชื่อปัจจุบัน พร้อมดึง element ปุ่ม Wiseplay
     const errorMsgEl = document.getElementById('error-msg');
     const externalOpenBtn = document.getElementById('external-open-btn');
-    const episodeBarEl = document.getElementById('episode-bar');
-    const episodeBarTitleEl = document.getElementById('episode-bar-title');
-    const episodeListEl = document.getElementById('episode-list');
-    const channelListEl = document.getElementById('channel-list');
-
-    // [จุดอัปเดต 2/3] ตัวแปรเก็บสถานะช่องปัจจุบัน และการตั้งค่าปุ่ม Wiseplay
     const wiseplayOpenBtn = document.getElementById('wiseplay-open-btn');
     let currentPlayingUrl = '';
     let currentPlayingTitle = '';
 
-    // ฟังก์ชันคัดลอกข้อความลงคลิปบอร์ดแบบปลอดภัย
+    // Modals
+    const loginModal = document.getElementById('login-modal');
+    const profileModal = document.getElementById('profile-modal');
+    const donateModal = document.getElementById('donate-modal');
+    
+    // Android TV Remote State
+    let isTvMode = false;
+    let focusedIndex = 0;
+    let tvLayoutActive = false;
+    const remoteOverlay = document.getElementById('remote-overlay');
+    const remotePlayer = document.getElementById('remote-player');
+    const remoteHud = document.getElementById('remote-hud');
+    const hudTitle = document.getElementById('hud-title');
+    const hudCategory = document.getElementById('hud-category');
+    const hudClock = document.getElementById('hud-clock');
+    let hudTimeout = null;
+
+    // Default channels (M3U format placeholder)
+    let defaultChannels = [
+      {
+        id: "ch_1",
+        name: "True Sport HD 1",
+        category: "กีฬา",
+        logo: "https://img5.pic.in.th/file/secure-sv1/ts1.png",
+        url: "https://d2j06v9shk5a.cloudfront.net/out/v1/a96ba71457cc43fdb89a9f244199c0d1/index.m3u8",
+        subtitle: ""
+      },
+      {
+        id: "ch_2",
+        name: "True Sport HD 2",
+        category: "กีฬา",
+        logo: "https://img5.pic.in.th/file/secure-sv1/ts2.png",
+        url: "https://d138p2p5539w1f.cloudfront.net/out/v1/9a419eb2031a4734b46c6ea990263fca/index.m3u8"
+      },
+      {
+        id: "ch_3",
+        name: "HBO HD (DRM Test)",
+        category: "ภาพยนตร์",
+        logo: "https://via.placeholder.com/50/1e293b/cbd5e1?text=HBO",
+        url: "https://example.com/hbo.mpd",
+        wiseplay: true // <-- ตัวเลือกเปิดเล่นด้วย Wiseplay
+      }
+    ];
+
+    // Clipboard Copy Helper
     function copyTextSafe(text) {
       if (!text) return;
       if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
@@ -314,27 +1295,21 @@
       }
     }
 
-    // [จุดอัปเดตพิเศษ] ฟังก์ชันจัดการเปิดเล่น Wiseplay ผ่าน Deep Link และ Android Intent
+    // [จุดอัปเดตพิเศษ]: ฟังก์ชันเปิด Wiseplay ผ่าน Deep Link และ Android Intent สำรอง
     function openInWiseplay(streamUrl, title) {
       if (!streamUrl) return;
       const targetUrl = streamUrl.trim();
-      copyTextSafe(targetUrl); // คัดลอกไว้เป็นทางเลือกสำรอง
-      
+      copyTextSafe(targetUrl);
       const encodedUrl = encodeURIComponent(targetUrl);
       const encodedTitle = encodeURIComponent(title || 'Live TV');
-      
-      // ลิงก์ URI Scheme ของ Wiseplay
       const wiseplayUri = `wiseplay://link?link=${encodedUrl}&name=${encodedTitle}`;
-      // ลิงก์ระบบ Android Intent เจาะจงแอป Wiseplay
       const androidIntent = `intent:${targetUrl}#Intent;package=com.wiseplay;type=video/*;end`;
 
-      // หากอยู่ใน WebView ของแอป Android ที่เตรียม Bridge ไว้
       if (window.Android && typeof window.Android.openExternal === 'function') {
         window.Android.openExternal(wiseplayUri);
         return;
       }
 
-      // หากรันบนบราวเซอร์ทั่วไปพยายามยิง Deep Link
       try {
         window.location.href = wiseplayUri;
       } catch (err) {
@@ -342,10 +1317,9 @@
       }
     }
 
-    // [จุดอัปเดตพิเศษ] ฟังก์ชันแสดง/ซ่อนปุ่ม Wiseplay ตามเงื่อนไขอย่างเหมาะสม
+    // [จุดอัปเดตพิเศษ]: ควบคุมการแสดงผลของปุ่ม Wiseplay อย่างปลอดภัย
     function updateWiseplayButton(url, title, isWiseplayTarget = false) {
       if (!wiseplayOpenBtn) return;
-      // แสดงเมื่อ: ได้รับการระบุค่า wiseplay ตรงๆ, หรือเป็นไฟล์ประเภทที่เว็บเล่นไม่ได้ (.mpd, playlist, .w3u)
       if (url && (isWiseplayTarget || url.toLowerCase().includes('.mpd') || url.includes('workers.dev/playlist') || url.endsWith('.w3u'))) {
         wiseplayOpenBtn.style.display = 'inline-block';
         wiseplayOpenBtn.onclick = function () {
@@ -371,7 +1345,7 @@
       });
     }
 
-    // รักษาสถานะหน้าจอไม่ให้ดับเมื่อเครื่องเล่นทำงาน
+    // Screen WakeLock support
     async function requestScreenWakeLock() {
       try {
         if ('wakeLock' in navigator && !wakeLockSentinel) {
@@ -384,8 +1358,21 @@
     }
 
     videoEl.addEventListener('play', requestScreenWakeLock);
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
+        requestScreenWakeLock();
+      }
+    });
 
-    // ดึงค่าข้อมูลและแปลงข้อมูลเข้าสู่ระบบ
+    // M3U & JSON Parsing Engine
+    function isExternalPlaylistItem(channel) {
+      if (channel.import === false) return true;
+      const lower = channel.url.toLowerCase();
+      if (lower.includes('.m3u8') || lower.includes('.mp4') || lower.includes('.ts')) return false;
+      return lower.includes('playlist') || lower.endsWith('.m3u') || lower.endsWith('.w3u') || lower.endsWith('.json');
+    }
+
+    // [จุดอัปเดต 3/3]: normalizeItem เพื่อสืบทอดค่า `wiseplay: true/false` เข้าสู่โมเดลช่องรายการ
     function normalizeItem(item, index) {
       const hasStations = Array.isArray(item.stations) && item.stations.length > 0;
       if (!item._uid) item._uid = item.id || ('item_' + (index + 1));
@@ -399,7 +1386,6 @@
         subtitle: item.subtitle || '',
         import: item.import,
         stations: hasStations ? item.stations : null,
-        // [จุดอัปเดต 3/3] บันทึกคุณสมบัติ wiseplay เพื่อส่งต่อไปประมวลผล
         wiseplay: item.wiseplay || (hasStations && item.stations[0] && item.stations[0].wiseplay) || false,
         rawIndex: index
       };
@@ -416,14 +1402,12 @@
       if (externalUrl) {
         externalOpenBtn.href = externalUrl;
         externalOpenBtn.style.display = 'inline-block';
-        // เมื่อเกิดข้อผิดพลาดในการเล่นบนเว็บ และมีลิงก์ภายนอก ให้เสนอทางเลือกเปิด Wiseplay ด้วย
         updateWiseplayButton(externalUrl, currentPlayingTitle || 'Live Stream', true);
       } else {
         externalOpenBtn.style.display = 'none';
       }
     }
 
-    // เชื่อมต่อคำบรรยาย (Subtitle)
     async function attachSubtitle(subUrl) {
       Array.from(videoEl.querySelectorAll('track')).forEach(t => t.remove());
       if (!subUrl) return;
@@ -452,7 +1436,6 @@
       }
     }
 
-    // เล่นสตรีมด้วย Hls.js หรือ Native Player
     function loadStreamUrl(streamUrl, subtitleUrl) {
       if (hlsInstance) {
         hlsInstance.destroy();
@@ -495,7 +1478,6 @@
       }
     }
 
-    // แสดงผลปุ่มเลือกตอนย่อย (Episodes)
     function renderEpisodes(channel) {
       if (!channel.stations || channel.stations.length === 0) {
         episodeBarEl.classList.remove('visible');
@@ -515,14 +1497,14 @@
         btn.addEventListener('click', () => {
           activeEpisodeIndex = idx;
           currentTitleEl.textContent = channel.name + ' - ' + epName;
+          currentCatEl.textContent = 'หมวดหมู่: ' + channel.category + (st.info ? ' (' + st.info + ')' : '');
           
-          // [จุดอัปเดตพิเศษ] ตรวจสอบและสลับปุ่ม Wiseplay สำหรับตอนย่อยที่ถูกคลิกเลือก
+          // [จุดอัปเดตพิเศษ]: ตรวจจับและรองรับการส่งผ่านสถานะ Wiseplay ให้ปุ่มทำงานตรงจุด
           currentPlayingUrl = st.url;
           currentPlayingTitle = channel.name + ' - ' + epName;
           showPlayerError('');
           updateWiseplayButton(st.url, currentPlayingTitle, Boolean(st.wiseplay || channel.wiseplay));
           
-          currentCatEl.textContent = 'หมวดหมู่: ' + channel.category + (st.info ? ' (' + st.info + ')' : '');
           loadStreamUrl(st.url, st.subtitle);
           renderEpisodes(channel);
         });
@@ -530,7 +1512,6 @@
       });
     }
 
-    // เริ่มเล่นช่องรายการ
     async function playChannel(channel) {
       if (!channel) return;
       activeChannelId = channel.id;
@@ -541,6 +1522,7 @@
       videoEl.classList.add('active');
       currentTitleEl.textContent = channel.name;
       currentCatEl.textContent = 'หมวดหมู่: ' + channel.category;
+      renderChannels();
 
       if (channel.url && channel.url.includes('workers.dev/playlist')) {
         if (hlsInstance) { hlsInstance.destroy(); hlsInstance = null; }
@@ -553,7 +1535,27 @@
         return;
       }
 
-      showPlayerError('');
+      if ((!channel.stations || channel.stations.length === 0) && isExternalPlaylistItem(channel)) {
+        showPlayerError('⏳ กำลังดึงรายชื่อช่องจากเพลย์ลิสต์ ' + channel.name + ' กรุณารอสักครู่...');
+        try {
+          const subStations = await fetchExternalPlaylist(channel.url);
+          if (subStations && subStations.length > 0) {
+            channel.stations = subStations;
+            if (typeof channel.rawIndex === 'number' && channels[channel.rawIndex]) {
+              channels[channel.rawIndex].stations = subStations;
+            }
+            showPlayerError('');
+          } else {
+            showPlayerError('⚠️ เพลย์ลิสต์นี้ต้องเปิดด้วยแอป IPTV ภายนอก', channel.url);
+            return;
+          }
+        } catch (e) {
+          showPlayerError('⚠️ เซิร์ฟเวอร์ของ ' + channel.name + ' บล็อกการดึงผ่านเว็บ กดปุ่มด้านขวาเพื่อเปิดโดยตรง', channel.url);
+          return;
+        }
+      } else {
+        showPlayerError('');
+      }
 
       if (channel.stations && channel.stations.length > 0) {
         const firstEp = channel.stations[0];
@@ -561,7 +1563,7 @@
         currentTitleEl.textContent = channel.name + ' - ' + epName;
         currentCatEl.textContent = 'หมวดหมู่: ' + channel.category + (firstEp.info ? ' (' + firstEp.info + ')' : '');
         
-        // [จุดอัปเดตพิเศษ] ตรวจสอบการย้ายข้อมูลและเปิดใช้งานปุ่ม Wiseplay สำหรับช่องแบบชุด
+        // [จุดอัปเดตพิเศษ]: ดึงและตรวจสอบค่า Wiseplay ช่องย่อยแรกที่รัน
         currentPlayingUrl = firstEp.url;
         currentPlayingTitle = channel.name + ' - ' + epName;
         updateWiseplayButton(firstEp.url, currentPlayingTitle, Boolean(firstEp.wiseplay || channel.wiseplay));
@@ -569,7 +1571,7 @@
         renderEpisodes(channel);
         loadStreamUrl(firstEp.url, firstEp.subtitle);
       } else {
-        // [จุดอัปเดตพิเศษ] จัดการอัปเดตปุ่มสำหรับช่องเดี่ยวปกติ
+        // [จุดอัปเดตพิเศษ]: จัดการปุ่ม Wiseplay สำหรับสตรีมปกติช่องเดี่ยว
         currentPlayingUrl = channel.url;
         currentPlayingTitle = channel.name;
         updateWiseplayButton(channel.url, channel.name, Boolean(channel.wiseplay));
@@ -586,58 +1588,469 @@
       }
     });
 
-    // Render รายชื่อช่องทั้งหมดทางขวามือ
-    function renderChannels() {
+    // Playlist parsing helper
+    function parseM3uContent(text) {
+      const items = [];
+      const lines = text.split('\n');
+      let currentItem = null;
+
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].trim();
+        if (line.startsWith('#EXTINF:')) {
+          currentItem = {
+            id: 'import_' + i,
+            name: 'ช่องรายการสตรีม',
+            category: 'นำเข้าภายนอก',
+            logo: '',
+            url: '',
+            import: true
+          };
+
+          const logoMatch = line.match(/tvg-logo="([^"]+)"/);
+          if (logoMatch) currentItem.logo = logoMatch[1];
+
+          const groupMatch = line.match(/group-title="([^"]+)"/);
+          if (groupMatch) currentItem.category = groupMatch[1];
+
+          const titleParts = line.split(',');
+          if (titleParts.length > 1) {
+            currentItem.name = titleParts[titleParts.length - 1].trim();
+          }
+        } else if (line.startsWith('http') && currentItem) {
+          currentItem.url = line;
+          items.push(currentItem);
+          currentItem = null;
+        }
+      }
+      return items;
+    }
+
+    async function fetchExternalPlaylist(url) {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error('Network error');
+      const text = await response.text();
+      return parseM3uContent(text);
+    }
+
+    // [จุดอัปเดตพิเศษ]: ผสานค่า Wiseplay ในส่วนของการแยกวัตถุจาก JSON ในกรณีเพลย์ลิสต์
+    function extractStationsFromJson(obj) {
+      let results = [];
+      let currentGroupName = '';
+
+      function traverse(o) {
+        if (o && typeof o === 'object') {
+          if (o.group) currentGroupName = o.group;
+          if (Array.isArray(o.stations)) {
+            o.stations.forEach(st => {
+              if (st.url) {
+                results.push({
+                  name: st.name || currentGroupName || 'ช่องรายการ',
+                  info: currentGroupName !== st.name ? currentGroupName : (st.info || ''),
+                  image: st.image || st.logo || obj.image || '',
+                  url: st.url,
+                  referer: st.referer || '',
+                  subtitle: st.subtitle || '',
+                  wiseplay: st.wiseplay !== undefined ? st.wiseplay : (obj.wiseplay || false)
+                });
+              }
+            });
+          }
+          for (let key in o) {
+            if (o.hasOwnProperty(key)) traverse(o[key]);
+          }
+        }
+      }
+      traverse(obj);
+      return results;
+    }
+
+    // Render channels UI list
+    function renderChannels(categoryFilter = 'ALL', query = '') {
       channelListEl.innerHTML = '';
-      channels.forEach((item) => {
+      
+      const filtered = channels.filter(item => {
+        const ch = normalizeItem(item, item.rawIndex);
+        const matchCategory = categoryFilter === 'ALL' || ch.category === categoryFilter;
+        const matchQuery = !query || ch.name.toLowerCase().includes(query.toLowerCase()) || ch.category.toLowerCase().includes(query.toLowerCase());
+        return matchCategory && matchQuery;
+      });
+
+      if (filtered.length === 0) {
+        channelListEl.innerHTML = `<div style="text-align:center; padding:30px; color:var(--text-muted); font-size:0.85rem;">ไม่พบรายการช่องสตรีมที่ค้นหา</div>`;
+        return;
+      }
+
+      filtered.forEach((item) => {
         const channel = normalizeItem(item, item.rawIndex);
+        
         const div = document.createElement('div');
         div.className = 'channel-item' + (channel.id === activeChannelId ? ' active' : '');
+        div.setAttribute('data-id', channel.id);
+        
+        const logoWrapper = document.createElement('div');
+        logoWrapper.className = 'channel-logo-wrapper';
         
         const logo = document.createElement('img');
         logo.className = 'channel-logo';
         logo.src = channel.logo || 'https://via.placeholder.com/50/1e293b/cbd5e1?text=TV';
-        logo.alt = channel.name;
         logo.onerror = () => {
           logo.src = 'https://via.placeholder.com/50/1e293b/cbd5e1?text=TV';
         };
+
+        logoWrapper.appendChild(logo);
+
+        const info = document.createElement('div');
+        info.className = 'channel-info';
 
         const name = document.createElement('div');
         name.className = 'channel-name';
         name.textContent = channel.name;
 
-        div.appendChild(logo);
-        div.appendChild(name);
-        div.addEventListener('click', () => playChannel(channel));
+        const cat = document.createElement('div');
+        cat.className = 'channel-category';
+        cat.textContent = channel.category;
+
+        info.appendChild(name);
+        info.appendChild(cat);
+
+        const badge = document.createElement('div');
+        badge.className = 'live-badge';
+
+        div.appendChild(logoWrapper);
+        div.appendChild(info);
+        div.appendChild(badge);
+
+        div.addEventListener('click', () => {
+          playChannel(channel);
+        });
+
         channelListEl.appendChild(div);
       });
     }
 
-    // ตัวอย่าง Mock ข้อมูลช่องเพื่อทดสอบ (สามารถเปลี่ยนไปใช้ fetch โหลดไฟล์ JSON ของคุณได้ปกติ)
-    const mockChannelsData = [
-      {
-        "name": "True Sport HD 1",
-        "category": "กีฬา",
-        "logo": "https://img5.pic.in.th/file/secure-sv1/ts1.png",
-        "url": "https://example.com/live/sport1.m3u8",
-        "wiseplay": true // <-- แสดงปุ่มเปิด Wiseplay ทันทีเมื่อคลิกช่องนี้
-      },
-      {
-        "name": "HBO HD (DRM Test)",
-        "category": "ภาพยนตร์",
-        "url": "https://example.com/stream/hbo.mpd" // <-- จะแสดงปุ่มอัตโนมัติเพราะเป็นประเภท .mpd
-      },
-      {
-        "name": "ช่องทั่วไป 1 (เล่นปกติ)",
-        "category": "ทั่วไป",
-        "url": "https://example.com/live/general.m3u8" // <-- ช่องธรรมดา เล่นบนเว็บปกติ ปุ่ม Wiseplay จะถูกซ่อนไว้
+    function renderCategoryTabs() {
+      const cats = ['ALL'];
+      channels.forEach(item => {
+        const ch = normalizeItem(item, item.rawIndex);
+        if (!cats.includes(ch.category)) cats.push(ch.category);
+      });
+
+      categoryTabs.innerHTML = '';
+      cats.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = 'cat-tab' + (cat === 'ALL' ? ' active' : '');
+        btn.textContent = cat === 'ALL' ? 'ทั้งหมด' : cat;
+        btn.setAttribute('data-category', cat);
+        btn.addEventListener('click', () => {
+          Array.from(categoryTabs.querySelectorAll('.cat-tab')).forEach(tab => tab.classList.remove('active'));
+          btn.classList.add('active');
+          renderChannels(cat, searchInput.value);
+        });
+        categoryTabs.appendChild(btn);
+      });
+    }
+
+    searchInput.addEventListener('input', (e) => {
+      const activeTab = categoryTabs.querySelector('.cat-tab.active');
+      const cat = activeTab ? activeTab.getAttribute('data-category') : 'ALL';
+      renderChannels(cat, e.target.value);
+    });
+
+    // GitHub Account & Gist Core Integration
+    async function makeGithubRequest(endpoint, options = {}) {
+      if (!githubToken) return null;
+      const headers = {
+        'Authorization': `token ${githubToken}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      };
+      const res = await fetch(`https://api.github.com${endpoint}`, { ...options, headers });
+      if (res.status === 401) {
+        logout();
+        throw new Error('Github login unauthorized');
       }
-    ];
+      return res.json();
+    }
 
-    // เริ่มต้นระบบโดยโหลดข้อมูล
-    channels = mockChannelsData;
-    renderChannels();
+    async function loadGitHubUser() {
+      if (!githubToken) return;
+      loginLoader.style.display = 'block';
+      loginLabel.style.display = 'none';
+      
+      try {
+        const user = await makeGithubRequest('/user');
+        if (user && user.login) {
+          githubUser = user;
+          loginLabel.textContent = user.name || user.login;
+          userDropdown.classList.add('dropdown-ready');
+          
+          if (!gistId) {
+            await findOrCreateUserGist();
+          } else {
+            await syncFromGist();
+          }
+        }
+      } catch (err) {
+        console.error(err);
+      } finally {
+        loginLoader.style.display = 'none';
+        loginLabel.style.display = 'inline-block';
+      }
+    }
 
+    async function findOrCreateUserGist() {
+      try {
+        const gists = await makeGithubRequest('/gists');
+        const ourGist = gists.find(g => g.description === 'Cloud IPTV Playlist & History Pro');
+        
+        if (ourGist) {
+          gistId = ourGist.id;
+          localStorage.setItem('gh_gist_id', gistId);
+          await syncFromGist();
+        } else {
+          const defaultCloudData = {
+            customChannels: [],
+            history: [],
+            favorites: []
+          };
+          
+          const newGist = await makeGithubRequest('/gists', {
+            method: 'POST',
+            body: JSON.stringify({
+              description: 'Cloud IPTV Playlist & History Pro',
+              public: false,
+              files: {
+                'iptv_cloud_settings.json': {
+                  content: JSON.stringify(defaultCloudData, null, 2)
+                }
+              }
+            })
+          });
+          
+          if (newGist && newGist.id) {
+            gistId = newGist.id;
+            localStorage.setItem('gh_gist_id', gistId);
+          }
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    async function syncFromGist() {
+      if (!gistId) return;
+      try {
+        const gist = await makeGithubRequest(`/gists/${gistId}`);
+        if (gist && gist.files && gist.files['iptv_cloud_settings.json']) {
+          const cloudData = JSON.parse(gist.files['iptv_cloud_settings.json'].content);
+          if (cloudData && Array.isArray(cloudData.customChannels) && cloudData.customChannels.length > 0) {
+            // merge custom channels
+            channels = [...defaultChannels, ...cloudData.customChannels];
+            renderCategoryTabs();
+            renderChannels();
+          }
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    async function uploadToGist(customChannelsList = []) {
+      if (!gistId) return;
+      try {
+        const cloudData = {
+          customChannels: customChannelsList,
+          history: [],
+          favorites: []
+        };
+        await makeGithubRequest(`/gists/${gistId}`, {
+          method: 'PATCH',
+          body: JSON.stringify({
+            files: {
+              'iptv_cloud_settings.json': {
+                content: JSON.stringify(cloudData, null, 2)
+              }
+            }
+          })
+        });
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem('gh_token');
+      localStorage.removeItem('gh_gist_id');
+      githubToken = '';
+      gistId = '';
+      githubUser = null;
+      loginLabel.textContent = '🔑 เข้าสู่ระบบ GitHub';
+      userDropdown.classList.remove('dropdown-ready');
+      userDropdown.classList.remove('active');
+      channels = defaultChannels;
+      renderCategoryTabs();
+      renderChannels();
+    }
+
+    // Modal Events Triggering
+    document.getElementById('login-btn').addEventListener('click', (e) => {
+      if (githubUser) {
+        userDropdown.classList.toggle('active');
+        e.stopPropagation();
+      } else {
+        loginModal.classList.add('active');
+      }
+    });
+
+    document.addEventListener('click', () => {
+      userDropdown.classList.remove('active');
+    });
+
+    document.getElementById('close-login-modal').addEventListener('click', () => loginModal.classList.remove('active'));
+    document.getElementById('close-profile-modal').addEventListener('click', () => profileModal.classList.remove('active'));
+    document.getElementById('close-donate-modal').addEventListener('click', () => donateModal.classList.remove('active'));
+    document.getElementById('donate-btn').addEventListener('click', () => donateModal.classList.add('active'));
+
+    document.getElementById('submit-login-btn').addEventListener('click', async () => {
+      const token = document.getElementById('token-input').value.trim();
+      if (token) {
+        githubToken = token;
+        localStorage.setItem('gh_token', token);
+        loginModal.classList.remove('active');
+        await loadGitHubUser();
+      }
+    });
+
+    document.getElementById('logout-btn').addEventListener('click', () => {
+      logout();
+    });
+
+    document.getElementById('view-profile-btn').addEventListener('click', () => {
+      if (githubUser) {
+        document.getElementById('prof-avatar').src = githubUser.avatar_url;
+        document.getElementById('prof-name').textContent = githubUser.name || githubUser.login;
+        document.getElementById('prof-username').textContent = '@' + githubUser.login;
+        document.getElementById('prof-bio').textContent = githubUser.bio || 'ไม่มีข้อมูลรายละเอียดคำอธิบายผู้ใช้';
+        document.getElementById('stat-gists').textContent = githubUser.public_gists;
+        document.getElementById('stat-followers').textContent = githubUser.followers;
+        document.getElementById('stat-following').textContent = githubUser.following;
+        profileModal.classList.add('active');
+      }
+    });
+
+    // Android TV Key events listener simulation
+    document.getElementById('remote-mode-btn').addEventListener('click', () => {
+      enterTvMode();
+    });
+
+    function enterTvMode() {
+      isTvMode = true;
+      remoteOverlay.classList.add('active');
+      focusedIndex = 0;
+      
+      // sync player stream state
+      if (activeChannelId) {
+        const activeCh = channels.find(c => normalizeItem(c).id === activeChannelId);
+        if (activeCh) {
+          focusedIndex = channels.findIndex(c => normalizeItem(c).id === activeChannelId);
+        }
+      }
+      
+      triggerHud();
+      syncTvPlayer();
+    }
+
+    function syncTvPlayer() {
+      if (channels.length === 0) return;
+      const ch = normalizeItem(channels[focusedIndex], focusedIndex);
+      hudTitle.textContent = ch.name;
+      hudCategory.textContent = 'หมวดหมู่: ' + ch.category;
+      
+      // Load and play in Tv mode
+      const streamUrl = (ch.stations && ch.stations.length > 0) ? ch.stations[0].url : ch.url;
+      remotePlayer.src = streamUrl;
+      remotePlayer.play().catch(() => {});
+    }
+
+    function triggerHud() {
+      remoteHud.classList.add('active');
+      clearTimeout(hudTimeout);
+      hudTimeout = setTimeout(() => {
+        if (isTvMode) remoteHud.classList.remove('active');
+      }, 5000);
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (!isTvMode) return;
+      triggerHud();
+
+      switch (e.key) {
+        case 'ArrowUp':
+          e.preventDefault();
+          if (focusedIndex > 0) {
+            focusedIndex--;
+            syncTvPlayer();
+          }
+          break;
+        case 'ArrowDown':
+          e.preventDefault();
+          if (focusedIndex < channels.length - 1) {
+            focusedIndex++;
+            syncTvPlayer();
+          }
+          break;
+        case 'ArrowLeft':
+        case 'ArrowRight':
+          e.preventDefault();
+          // Episode change triggers
+          const ch = normalizeItem(channels[focusedIndex]);
+          if (ch.stations && ch.stations.length > 1) {
+            if (e.key === 'ArrowRight' && activeEpisodeIndex < ch.stations.length - 1) {
+              activeEpisodeIndex++;
+            } else if (e.key === 'ArrowLeft' && activeEpisodeIndex > 0) {
+              activeEpisodeIndex--;
+            }
+            const st = ch.stations[activeEpisodeIndex];
+            hudTitle.textContent = ch.name + ' - ' + (st.name || 'ตอนย่อย');
+            remotePlayer.src = st.url;
+            remotePlayer.play().catch(() => {});
+          }
+          break;
+        case 'Enter':
+          e.preventDefault();
+          remoteHud.classList.toggle('active');
+          break;
+        case 'Escape':
+        case 'Backspace':
+          e.preventDefault();
+          isTvMode = false;
+          remotePlayer.pause();
+          remoteOverlay.classList.remove('active');
+          
+          // resume standard layout player
+          if (channels[focusedIndex]) {
+            playChannel(normalizeItem(channels[focusedIndex], focusedIndex));
+          }
+          break;
+      }
+    });
+
+    // Clock for Android TV HUD
+    setInterval(() => {
+      const now = new Date();
+      hudClock.textContent = now.toTimeString().split(' ')[0];
+    }, 1000);
+
+    // Initial sequence
+    window.addEventListener('DOMContentLoaded', async () => {
+      channels = defaultChannels.map((item, idx) => {
+        item.rawIndex = idx;
+        return item;
+      });
+      renderCategoryTabs();
+      renderChannels();
+      await loadGitHubUser();
+    });
   </script>
 </body>
 </html>
