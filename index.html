@@ -6,7 +6,7 @@
   <title>ดูด้วยกัน(เงียบๆ)</title>
   <!-- โหลด hls.js พร้อมระบบสำรองอัตโนมัติ (Fallback CDN) กรณีเน็ตบางค่ายบล็อก jsdelivr -->
   <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.15/dist/hls.min.js" onerror="var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.15/hls.min.js';document.head.appendChild(s);"></script>
-  <!-- โหลด mpegts.js สำหรับเล่นสตรีมสดประเภท HTTP MPEG-TS (เช่น about:invalid#zPythonSafez) -->
+  <!-- โหลด mpegts.js สำหรับเล่นสตรีมสดประเภท HTTP MPEG-TS -->
   <script src="https://cdn.jsdelivr.net/npm/mpegts.js@1.7.3/dist/mpegts.js" onerror="var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/mpegts.js/1.7.3/mpegts.min.js';document.head.appendChild(s);"></script>
   <style>
     :root {
@@ -656,7 +656,7 @@
       background: #475569;
     }
   </style>
-<style data-link-removed-style>a[data-link-removed],a[href*="zPythonSafez"]:not([onclick]){pointer-events:none!important;cursor:default!important;opacity:.6}</style></head>
+</head>
 <body>
 
   <!-- ==================== ระบบล็อกสิทธิ์การใช้งานผ่าน GitHub (keys.json) ==================== -->
@@ -1311,23 +1311,28 @@
   <script>
     (async function () {
       const channelsUrl = 'https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/channels.json';
-      if (!channelsUrl || channelsUrl.startsWith('about:') || channelsUrl.includes('zPythonSafez')) return;
+      if (!channelsUrl || channelsUrl.startsWith('about:')) return;
       try {
-        const res = await fetch(channelsUrl + '?t=' + Date.now(), { cache: 'no-store' });
-        if (!res.ok) return;
-        const data = await res.json();
+        if (!window.__channelsDataPromise) {
+          window.__channelsDataPromise = fetch(channelsUrl + '?t=' + Date.now(), { cache: 'no-store' })
+            .then(res => (res && res.ok) ? res.json() : null)
+            .catch(() => null);
+        }
+        const data = await window.__channelsDataPromise;
+        if (!data) return;
         const remoteMsg = data.notice || data.announcement || data.message;
         const textEl = document.getElementById('announcement-text');
         const barEl = document.querySelector('.announcement-bar');
         if (remoteMsg !== undefined && textEl && barEl) {
-          if (remoteMsg.trim() === '') barEl.style.display = 'none';
-          else textEl.textContent = remoteMsg;
+          if (String(remoteMsg).trim() === '') barEl.style.display = 'none';
+          else textEl.textContent = String(remoteMsg);
         }
 
         const customQrUrl = data.donate_qr || data.donate_image || data.qr;
         if (customQrUrl && typeof customQrUrl === 'string' && customQrUrl.trim()) {
           const qrImg = document.getElementById('donate-qr-img');
           if (qrImg) {
+            qrLoadedSuccessfully = true;
             qrImg.style.display = 'block';
             qrImg.src = customQrUrl.trim();
             const svgBox = document.getElementById('fallback-qr-svg');
@@ -1555,15 +1560,15 @@
     (function () {
       // รายการช่องพื้นฐานเริ่มต้น (กรณี GitHub บล็อก หรือออฟไลน์ จะยังมีช่องให้กดดูได้)
       const DEFAULT_CHANNELS = [
-        { id: "ch3", name: "ช่อง 3 HD (33)", category: "ฟรีทีวี", logo: "https://upload.wikimedia.org/wikipedia/th/thumb/a/a2/Channel_3_HD_logo.svg/300px-Channel_3_HD_logo.svg.png", url: "" },
-        { id: "ch7", name: "ช่อง 7 HD (35)", category: "ฟรีทีวี", logo: "https://upload.wikimedia.org/wikipedia/th/thumb/0/08/Channel_7_HD_Thailand_Logo.svg/300px-Channel_7_HD_Thailand_Logo.svg.png", url: "" },
-        { id: "ch9", name: "ช่อง 9 MCOT (30)", category: "ฟรีทีวี", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/MCOT_HD.svg/300px-MCOT_HD.svg.png", url: "" },
-        { id: "thairath", name: "ไทยรัฐทีวี 32 HD", category: "ข่าวสาร", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Thairath_TV_logo.png/300px-Thairath_TV_logo.png", url: "" },
-        { id: "amarintv", name: "อมรินทร์ทีวี 34 HD", category: "ทั่วไป", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Amarin_TV_HD_Logo.png/300px-Amarin_TV_HD_Logo.png", url: "" },
-        { id: "workpoint", name: "Workpoint 23", category: "บันเทิง", logo: "https://upload.wikimedia.org/wikipedia/th/thumb/7/7b/Workpoint_TV_logo.svg/300px-Workpoint_TV_logo.svg.png", url: "" },
-        { id: "mono29", name: "MONO 29", category: "ภาพยนตร์", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Mono29_logo.png/300px-Mono29_logo.png", url: "" },
-        { id: "one31", name: "ONE 31", category: "ละคร/ซีรีส์", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/One_31_logo.svg/300px-One_31_logo.svg.png", url: "" },
-        { id: "thaipbs", name: "Thai PBS HD", category: "ข่าวสาร", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Thai_PBS_logo.svg/300px-Thai_PBS_logo.svg.png", url: "" }
+        { id: "ch3", name: "ช่อง 3 HD (33)", category: "ฟรีทีวี", logo: "https://upload.wikimedia.org/wikipedia/th/thumb/a/a2/Channel_3_HD_logo.svg/300px-Channel_3_HD_logo.svg.png", url: "https://lb1-live-mv.v2h-cdn.com/hls/ffae/3hd/3hd.m3u8" },
+        { id: "ch7", name: "ช่อง 7 HD (35)", category: "ฟรีทีวี", logo: "https://upload.wikimedia.org/wikipedia/th/thumb/0/08/Channel_7_HD_Thailand_Logo.svg/300px-Channel_7_HD_Thailand_Logo.svg.png", url: "https://lb1-live-mv.v2h-cdn.com/hls/ffae/7hd/7hd.m3u8" },
+        { id: "ch9", name: "ช่อง 9 MCOT (30)", category: "ฟรีทีวี", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/MCOT_HD.svg/300px-MCOT_HD.svg.png", url: "https://lb1-live-mv.v2h-cdn.com/hls/ffae/mcot/mcot.m3u8" },
+        { id: "thairath", name: "ไทยรัฐทีวี 32 HD", category: "ข่าวสาร", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Thairath_TV_logo.png/300px-Thairath_TV_logo.png", url: "https://lb1-live-mv.v2h-cdn.com/hls/ffae/thairath/thairath.m3u8" },
+        { id: "amarintv", name: "อมรินทร์ทีวี 34 HD", category: "ทั่วไป", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Amarin_TV_HD_Logo.png/300px-Amarin_TV_HD_Logo.png", url: "https://lb1-live-mv.v2h-cdn.com/hls/ffae/amarin/amarin.m3u8" },
+        { id: "workpoint", name: "Workpoint 23", category: "บันเทิง", logo: "https://upload.wikimedia.org/wikipedia/th/thumb/7/7b/Workpoint_TV_logo.svg/300px-Workpoint_TV_logo.svg.png", url: "https://lb1-live-mv.v2h-cdn.com/hls/ffae/workpoint/workpoint.m3u8" },
+        { id: "mono29", name: "MONO 29", category: "ภาพยนตร์", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Mono29_logo.png/300px-Mono29_logo.png", url: "https://lb1-live-mv.v2h-cdn.com/hls/ffae/mono/mono.m3u8" },
+        { id: "one31", name: "ONE 31", category: "ละคร/ซีรีส์", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/One_31_logo.svg/300px-One_31_logo.svg.png", url: "https://lb1-live-mv.v2h-cdn.com/hls/ffae/one/one.m3u8" },
+        { id: "thaipbs", name: "Thai PBS HD", category: "ข่าวสาร", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Thai_PBS_logo.svg/300px-Thai_PBS_logo.svg.png", url: "https://thaipbs-live.cdn.byteark.com/live/playlist_1080p/index.m3u8" }
       ];
 
       const channels = [...DEFAULT_CHANNELS];
@@ -1575,6 +1580,7 @@
       let hlsInstance = null;
       let mpegtsPlayer = null;
       let wakeLockSentinel = null;
+      let activeSubtitleBlobUrl = null;
 
       const videoEl = document.getElementById('tv-video');
       const placeholderEl = document.getElementById('player-placeholder');
@@ -1633,7 +1639,7 @@
       }
 
       async function fetchTextWithFallback(targetUrl) {
-        if (!targetUrl || targetUrl.startsWith('about:') || targetUrl.includes('zPythonSafez')) {
+        if (!targetUrl || targetUrl.startsWith('about:')) {
           throw new Error('ลิงก์ไม่ถูกต้อง');
         }
         try {
@@ -1789,6 +1795,10 @@
       }
 
       async function attachSubtitle(subUrl) {
+        if (activeSubtitleBlobUrl) {
+          try { URL.revokeObjectURL(activeSubtitleBlobUrl); } catch (e) {}
+          activeSubtitleBlobUrl = null;
+        }
         Array.from(videoEl.querySelectorAll('track')).forEach(t => t.remove());
         if (!subUrl) return;
         try {
@@ -1802,7 +1812,8 @@
           track.kind = 'subtitles';
           track.label = 'ไทย';
           track.srclang = 'th';
-          track.src = URL.createObjectURL(new Blob([text], { type: 'text/vtt' }));
+          activeSubtitleBlobUrl = URL.createObjectURL(new Blob([text], { type: 'text/vtt' }));
+          track.src = activeSubtitleBlobUrl;
           track.default = true;
           videoEl.appendChild(track);
         } catch (e) {
@@ -1883,6 +1894,28 @@
             mpegtsPlayer.play().catch(() => {});
             mpegtsPlayer.on(window.mpegts.Events.ERROR, () => {
               destroyActivePlayers();
+              // กรณีลิงก์ไม่มีนามสกุลไฟล์แต่เป็น HLS Stream ให้ลองสลับมาเล่นผ่าน Hls.js ก่อนส่งไปแอปภายนอก
+              if (!url.toLowerCase().endsWith('.ts') && window.Hls && window.Hls.isSupported()) {
+                try {
+                  hlsInstance = new window.Hls({ enableWorker: true, lowLatencyMode: true });
+                  hlsInstance.loadSource(url);
+                  hlsInstance.attachMedia(videoEl);
+                  hlsInstance.on(window.Hls.Events.MANIFEST_PARSED, () => {
+                    videoEl.play().catch(() => {});
+                  });
+                  hlsInstance.on(window.Hls.Events.ERROR, (ev, data) => {
+                    if (data && data.fatal) {
+                      destroyActivePlayers();
+                      videoEl.src = url;
+                      videoEl.play().catch(() => {});
+                      showPlayerError('📲 สตรีมสดนี้ต้องใช้แอปภายนอก กำลังเปิดในแอป Wiseplay อัตโนมัติ (หรือกดปุ่มด้านขวาเพื่อเปิดซ้ำ)', url, true);
+                    }
+                  });
+                  return;
+                } catch (e) {
+                  destroyActivePlayers();
+                }
+              }
               // หากเซิร์ฟเวอร์ปลายทางบล็อก CORS บนเว็บ ให้ลองใช้ Native Video และสั่งเปิดแอป Wiseplay อัตโนมัติ
               videoEl.src = url;
               videoEl.play().catch(() => {});
@@ -1936,7 +1969,15 @@
           btn.type = 'button';
           btn.className = 'ep-btn' + (idx === activeEpisodeIndex ? ' active' : '');
           const epName = st.name || ('รายการที่ ' + (idx + 1));
-          btn.innerHTML = '<span>' + epName + '</span>' + (st.info ? '<span class="ep-btn-sub">' + st.info + '</span>' : '');
+          const titleSpan = document.createElement('span');
+          titleSpan.textContent = epName;
+          btn.appendChild(titleSpan);
+          if (st.info) {
+            const subSpan = document.createElement('span');
+            subSpan.className = 'ep-btn-sub';
+            subSpan.textContent = st.info;
+            btn.appendChild(subSpan);
+          }
           btn.addEventListener('click', () => {
             activeEpisodeIndex = idx;
             currentTitleEl.textContent = channel.name + ' - ' + epName;
@@ -1962,7 +2003,7 @@
         renderChannels();
 
         if (isWiseplayRequiredItem(channel) && (!channel.stations || channel.stations.length === 0)) {
-          if (hlsInstance) { hlsInstance.destroy(); hlsInstance = null; }
+          destroyActivePlayers();
           videoEl.pause();
           videoEl.removeAttribute('src');
           episodeBarEl.classList.remove('visible');
@@ -2080,14 +2121,22 @@
       const REMOTE_CHANNELS_URL = 'https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/channels.json';
 
       async function loadLatestChannels() {
-        if (!REMOTE_CHANNELS_URL || REMOTE_CHANNELS_URL.startsWith('about:') || REMOTE_CHANNELS_URL.includes('zPythonSafez')) {
+        if (!REMOTE_CHANNELS_URL || REMOTE_CHANNELS_URL.startsWith('about:')) {
           renderChannels();
           return;
         }
         try {
-          const res = await fetch(REMOTE_CHANNELS_URL + '?t=' + Date.now(), { cache: 'no-store' });
-          if (res.ok) {
-            const remoteData = await res.json();
+          let remoteData = null;
+          if (window.__channelsDataPromise) {
+            remoteData = await window.__channelsDataPromise;
+          }
+          if (!remoteData) {
+            const res = await fetch(REMOTE_CHANNELS_URL + '?t=' + Date.now(), { cache: 'no-store' });
+            if (res.ok) {
+              remoteData = await res.json();
+            }
+          }
+          if (remoteData) {
             const items = Array.isArray(remoteData) ? remoteData : (Array.isArray(remoteData.groups) ? remoteData.groups : []);
             if (items.length > 0) {
               channels.length = 0;
