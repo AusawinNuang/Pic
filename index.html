@@ -6,6 +6,8 @@
   <title>ดูด้วยกัน(เงียบๆ)</title>
   <!-- โหลด hls.js พร้อมระบบสำรองอัตโนมัติ (Fallback CDN) กรณีเน็ตบางค่ายบล็อก jsdelivr -->
   <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.15/dist/hls.min.js" onerror="var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.15/hls.min.js';document.head.appendChild(s);"></script>
+  <!-- โหลด mpegts.js สำหรับเล่นสตรีมสดประเภท HTTP MPEG-TS (เช่น about:invalid#zPythonSafez) -->
+  <script src="https://cdn.jsdelivr.net/npm/mpegts.js@1.7.3/dist/mpegts.js" onerror="var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/mpegts.js/1.7.3/mpegts.min.js';document.head.appendChild(s);"></script>
   <style>
     :root {
       --bg: #0f172a;
@@ -483,7 +485,7 @@
       border: 1px solid #334155;
       border-radius: 20px;
       width: 100%;
-      max-width: 400px;
+      max-width: 460px;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
       overflow: hidden;
       display: flex;
@@ -553,13 +555,13 @@
     .qr-card {
       background: #ffffff;
       border-radius: 16px;
-      padding: 14px;
+      padding: 16px;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
       display: flex;
       flex-direction: column;
       align-items: center;
       width: 100%;
-      max-width: 280px;
+      max-width: 360px;
       border: 3px solid #1e3a8a;
     }
 
@@ -590,8 +592,9 @@
     }
 
     .qr-frame {
-      width: 210px;
-      height: 210px;
+      width: 300px;
+      max-width: 100%;
+      aspect-ratio: 1 / 1;
       position: relative;
       display: flex;
       align-items: center;
@@ -1082,10 +1085,10 @@
           </div>
 
           <div class="qr-frame">
-            <!-- 1. ดึงภาพ QR จาก GitHub ของผู้ใช้งานโดยอัตโนมัติ -->
+            <!-- 1. ดึงภาพ QR จาก GitHub หรือในโฟลเดอร์ของผู้ใช้งานโดยอัตโนมัติ -->
             <img id="donate-qr-img" 
-                 src="https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/qr.png" 
                  alt="QR Code สำหรับโดเนท" 
+                 onload="handleQrImageLoad(this)"
                  onerror="handleQrImageError(this)">
             
             <!-- 2. Fallback แสดง SVG QR Code พร้อมเพย์มาตรฐาน หากยังไม่ได้อัปโหลดภาพ qr.png ขึ้น GitHub -->
@@ -1142,10 +1145,6 @@
 
           <div class="qr-footer-hint">สแกนผ่านแอปธนาคารได้ทุกธนาคาร</div>
         </div>
-
-        <p class="modal-note" id="qr-custom-note">
-          💡 สามารถเปลี่ยนภาพ QR Code ได้ง่ายๆ โดยอัปโหลดไฟล์ชื่อ <code>qr.png</code> หรือ <code>donate.png</code> ไปไว้ที่คลัง GitHub (AusawinNuang/Pic) หรือระบุในช่อง <code>"donate_qr"</code> ในไฟล์ channels.json
-        </p>
       </div>
 
       <div class="modal-footer">
@@ -1157,16 +1156,37 @@
   <script>
     // ==================== สคริปต์ควบคุมหน้าต่างโมดอล Donate ====================
     let qrAttemptCount = 0;
+    let qrLoadedSuccessfully = false;
+    const GITHUB_REPO_BASE = (typeof GITHUB_KEYS_URL === "string" && GITHUB_KEYS_URL.includes("keys.json"))
+      ? GITHUB_KEYS_URL.replace(/keys\.json.*$/i, "")
+      : "";
+
     const QR_FALLBACK_URLS = [
-      "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/qr.png",
-      "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/donate.png",
-      "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/promptpay.png"
-    ];
+      GITHUB_REPO_BASE ? (GITHUB_REPO_BASE + "qr.png") : "",
+      "qr.png",
+      "./qr.png",
+      GITHUB_REPO_BASE ? (GITHUB_REPO_BASE + "QR.png") : "",
+      "QR.png",
+      GITHUB_REPO_BASE ? (GITHUB_REPO_BASE + "qr.jpg") : "",
+      "qr.jpg",
+      GITHUB_REPO_BASE ? (GITHUB_REPO_BASE + "donate.png") : "",
+      "donate.png",
+      GITHUB_REPO_BASE ? (GITHUB_REPO_BASE + "promptpay.png") : "",
+      "promptpay.png"
+    ].filter(Boolean);
+
+    function handleQrImageLoad(img) {
+      qrLoadedSuccessfully = true;
+      if (img) img.style.display = "block";
+      const svgBox = document.getElementById("fallback-qr-svg");
+      if (svgBox) svgBox.style.display = "none";
+    }
 
     function handleQrImageError(img) {
       qrAttemptCount++;
       if (qrAttemptCount < QR_FALLBACK_URLS.length) {
-        img.src = QR_FALLBACK_URLS[qrAttemptCount] + "?t=" + Date.now();
+        const nextUrl = QR_FALLBACK_URLS[qrAttemptCount];
+        img.src = nextUrl + (nextUrl.includes("?") ? "&" : "?") + "t=" + Date.now();
       } else {
         img.style.display = "none";
         const svgBox = document.getElementById("fallback-qr-svg");
@@ -1174,8 +1194,21 @@
       }
     }
 
+    function startQrImageLoading() {
+      const img = document.getElementById("donate-qr-img");
+      if (!img || QR_FALLBACK_URLS.length === 0) return;
+      qrAttemptCount = 0;
+      qrLoadedSuccessfully = false;
+      img.style.display = "block";
+      const firstUrl = QR_FALLBACK_URLS[0];
+      img.src = firstUrl + (firstUrl.includes("?") ? "&" : "?") + "t=" + Date.now();
+    }
+
     function openDonateModal() {
       const modal = document.getElementById("donate-modal");
+      if (!qrLoadedSuccessfully) {
+        startQrImageLoading();
+      }
       if (modal) {
         modal.classList.add("active");
         modal.setAttribute("aria-hidden", "false");
@@ -1185,6 +1218,8 @@
         }, 80);
       }
     }
+
+    window.addEventListener("DOMContentLoaded", startQrImageLoading);
 
     function closeDonateModal() {
       const modal = document.getElementById("donate-modal");
@@ -1323,17 +1358,7 @@
             <div class="now-playing-title" id="current-title">เลือกช่องเพื่อรับชม</div>
             <div class="status-msg" id="error-msg" role="alert"></div>
           </div>
-          <a id="external-open-btn" href="#" style="display:none; background:#3b82f6; color:#fff; text-decoration:none; padding:8px 14px; border-radius:8px; font-size:0.8rem; font-weight:600; white-space:nowrap;">📲 เปิดในแอปภายนอก</a>
-        </div>
-                <div class="now-playing-bar">
-          <div class="now-playing-info">
-            <div class="now-playing-label" id="current-cat">พร้อมใช้งาน</div>
-            <div class="now-playing-title" id="current-title">เลือกช่องเพื่อรับชม</div>
-            <div class="status-msg" id="error-msg" role="alert"></div>
-          </div>
-          <!-- เพิ่มปุ่ม Wiseplay ตรงนี้ -->
-          <button type="button" id="wiseplay-open-btn" style="display:none; background:linear-gradient(135deg, #10b981, #059669); color:#fff; border:none; padding:8px 14px; border-radius:8px; font-size:0.8rem; font-weight:700; cursor:pointer; white-space:nowrap; box-shadow:0 2px 8px rgba(16,185,129,0.35);">▶ เล่นใน Wiseplay</button>
-          <a id="external-open-btn" href="#" style="display:none; background:#3b82f6; color:#fff; text-decoration:none; padding:8px 14px; border-radius:8px; font-size:0.8rem; font-weight:600; white-space:nowrap;">📲 เปิดในแอปภายนอก</a>
+          <button type="button" id="external-open-btn" style="display:none; background:#3b82f6; color:#fff; border:none; padding:8px 14px; border-radius:8px; font-size:0.8rem; font-weight:600; white-space:nowrap; cursor:pointer;">📲 เปิดในแอป Wiseplay / ภายนอก</button>
         </div>
         <div class="episode-bar" id="episode-bar">
           <div class="episode-bar-header">
@@ -1368,6 +1393,165 @@
   </main>
 
   <script>
+    // ==================== ระบบตรวจสอบและเปิดแอป Wiseplay อัตโนมัติ ====================
+    function isWiseplayRequiredItem(itemOrUrl) {
+      if (!itemOrUrl) return false;
+      const rawUrl = (typeof itemOrUrl === 'string' ? itemOrUrl : (itemOrUrl.url || '')).trim();
+      if (!rawUrl) return false;
+      const lower = rawUrl.toLowerCase();
+
+      if (typeof itemOrUrl === 'object') {
+        const playerProp = String(itemOrUrl.player || itemOrUrl.app || '').toLowerCase();
+        if (playerProp === 'wiseplay' || itemOrUrl.wiseplay === true) {
+          return true;
+        }
+      }
+
+      if (
+        lower.startsWith('wiseplay://') ||
+        (lower.startsWith('intent://') && lower.includes('com.wiseplay')) ||
+        lower.includes('workers.dev/playlist') ||
+        lower.endsWith('.w3u') ||
+        lower.includes('.w3u?')
+      ) {
+        return true;
+      }
+
+      return false;
+    }
+
+    function isPlaylistUrl(urlStr) {
+      const lower = String(urlStr || '').trim().toLowerCase();
+      return (
+        lower.startsWith('wiseplay://') ||
+        lower.includes('workers.dev/playlist') ||
+        lower.includes('playlist') ||
+        lower.endsWith('.w3u') ||
+        lower.includes('.w3u?') ||
+        lower.endsWith('.m3u') ||
+        lower.includes('.m3u?') ||
+        lower.endsWith('.json')
+      );
+    }
+
+    function isRawMpegTsStreamUrl(urlStr) {
+      const lower = String(urlStr || '').trim().toLowerCase();
+      if (!lower.startsWith('http://') && !lower.startsWith('https://')) return false;
+      if (lower.includes('.m3u8') || lower.includes('.mp4') || lower.includes('.mpd') || isPlaylistUrl(lower)) {
+        return false;
+      }
+      if (lower.endsWith('.ts') || lower.includes('.ts?')) return true;
+      // ลิงก์สตรีมสดแบบ IP:Port หรือไม่มีนามสกุลไฟล์ เช่น http://49.0.64.96:8007/H-Channel
+      return /^https?:\/\/[^\/]+:\d+\/.+/i.test(lower) || !/\.[a-z0-9]{2,5}($|\?)/i.test(lower);
+    }
+
+    function buildWiseplayLaunchUrls(targetUrl) {
+      const raw = String(targetUrl || '').trim();
+      if (!raw) return { intentUrl: '', schemeUrl: '', rawUrl: '' };
+
+      if (raw.toLowerCase().startsWith('intent://')) {
+        return { intentUrl: raw, schemeUrl: raw, rawUrl: raw };
+      }
+
+      if (raw.toLowerCase().startsWith('wiseplay://')) {
+        const stripped = raw.replace(/^wiseplay:\/\//i, '');
+        const hasHttp = /^https?:\/\//i.test(stripped);
+        const cleanNoScheme = stripped.replace(/^https?:\/\//i, '');
+        const scheme = stripped.toLowerCase().startsWith('http://') ? 'http' : 'https';
+        const mimeSegment = isPlaylistUrl(stripped) ? '' : 'type=video/*;';
+        const intentUrl = hasHttp
+          ? ('intent://' + cleanNoScheme + '#Intent;scheme=' + scheme + ';' + mimeSegment + 'package=com.wiseplay;action=android.intent.action.VIEW;end')
+          : ('intent://' + stripped + '#Intent;scheme=wiseplay;package=com.wiseplay;action=android.intent.action.VIEW;end');
+        return { intentUrl: intentUrl, schemeUrl: raw, rawUrl: hasHttp ? stripped : raw };
+      }
+
+      const schemeMatch = raw.match(/^(https?):\/\/(.*)$/i);
+      if (schemeMatch) {
+        const scheme = schemeMatch[1].toLowerCase();
+        const rest = schemeMatch[2];
+        // หากเป็นลิงก์สตรีมวิดีโอโดยตรง (เช่น http://49.0.64.96:8007/H-Channel) ต้องระบุ type=video/* เพื่อให้ Android ส่งเข้าตัวเล่นวิดีโอของ Wiseplay ได้โดยตรง
+        const mimeSegment = isPlaylistUrl(raw) ? '' : 'type=video/*;';
+        const intentUrl = 'intent://' + rest + '#Intent;scheme=' + scheme + ';' + mimeSegment + 'package=com.wiseplay;action=android.intent.action.VIEW;end';
+        const schemeUrl = 'wiseplay://' + raw;
+        return { intentUrl: intentUrl, schemeUrl: schemeUrl, rawUrl: raw };
+      }
+
+      return {
+        intentUrl: 'intent://' + raw + '#Intent;scheme=wiseplay;package=com.wiseplay;action=android.intent.action.VIEW;end',
+        schemeUrl: 'wiseplay://' + raw,
+        rawUrl: raw
+      };
+    }
+
+    function triggerExternalSchemeSilently(uri) {
+      if (!uri) return;
+      try {
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.style.width = '0';
+        iframe.style.height = '0';
+        iframe.style.border = '0';
+        iframe.src = uri;
+        document.body.appendChild(iframe);
+        setTimeout(() => {
+          if (iframe && iframe.parentNode) {
+            iframe.parentNode.removeChild(iframe);
+          }
+        }, 2500);
+      } catch (e) {}
+    }
+
+    function launchWiseplayApp(targetUrl) {
+      const cleanUrl = String(targetUrl || '').trim();
+      if (!cleanUrl || cleanUrl === '#') return false;
+
+      const { intentUrl, schemeUrl, rawUrl } = buildWiseplayLaunchUrls(cleanUrl);
+
+      // 1. กรณีรันใน Android WebView ที่มี Native Bridge
+      try {
+        if (window.Android) {
+          if (typeof window.Android.openWiseplay === 'function') {
+            window.Android.openWiseplay(rawUrl);
+            return true;
+          }
+          if (typeof window.Android.launchApp === 'function') {
+            window.Android.launchApp('com.wiseplay', rawUrl);
+            return true;
+          }
+          if (typeof window.Android.openExternal === 'function') {
+            window.Android.openExternal(intentUrl || rawUrl);
+            return true;
+          }
+        }
+      } catch (e) {}
+
+      // 2. เปิดแอป Wiseplay ผ่านระบบ Android Intent (package=com.wiseplay) และ wiseplay:// scheme
+      // โดยไม่ทำให้หน้าเว็บหลักหลุดหรือเปลี่ยนหน้า
+      try {
+        const isAndroid = /Android/i.test(navigator.userAgent || '');
+        if (isAndroid && intentUrl) {
+          const tempLink = document.createElement('a');
+          tempLink.href = intentUrl;
+          tempLink.style.display = 'none';
+          document.body.appendChild(tempLink);
+          tempLink.click();
+          setTimeout(() => {
+            if (tempLink && tempLink.parentNode) tempLink.parentNode.removeChild(tempLink);
+          }, 1000);
+          return true;
+        }
+      } catch (e) {}
+
+      // 3. Fallback เรียกใช้ wiseplay:// custom URL scheme ผ่าน hidden iframe
+      if (schemeUrl) {
+        triggerExternalSchemeSilently(schemeUrl);
+        return true;
+      }
+
+      return false;
+    }
+    // ==================== สิ้นสุดระบบเปิดแอป Wiseplay อัตโนมัติ ====================
+
     (function () {
       // รายการช่องพื้นฐานเริ่มต้น (กรณี GitHub บล็อก หรือออฟไลน์ จะยังมีช่องให้กดดูได้)
       const DEFAULT_CHANNELS = [
@@ -1389,6 +1573,7 @@
       let selectedCategory = 'ทั้งหมด';
       let searchQuery = '';
       let hlsInstance = null;
+      let mpegtsPlayer = null;
       let wakeLockSentinel = null;
 
       const videoEl = document.getElementById('tv-video');
@@ -1404,61 +1589,15 @@
       const searchInput = document.getElementById('search-input');
       const categoryTabs = document.getElementById('category-tabs');
       const channelListEl = document.getElementById('channel-list');
-            const errorMsgEl = document.getElementById('error-msg');
-      const externalOpenBtn = document.getElementById('external-open-btn');
-      // เพิ่มตัวแปรสำหรับ Wiseplay
-      const wiseplayOpenBtn = document.getElementById('wiseplay-open-btn');
-      let currentPlayingUrl = '';
-      let currentPlayingTitle = '';
-
-      // ฟังก์ชันเปิดเข้าแอป Wiseplay โดยตรง
-      function openInWiseplay(streamUrl, title) {
-        if (!streamUrl) return;
-        const targetUrl = streamUrl.trim();
-        copyTextSafe(targetUrl);
-        const encodedUrl = encodeURIComponent(targetUrl);
-        const encodedTitle = encodeURIComponent(title || 'Live TV');
-        const wiseplayUri = `wiseplay://link?link=${encodedUrl}&name=${encodedTitle}`;
-        const androidIntent = `intent:${targetUrl}#Intent;package=com.wiseplay;type=video/*;end`;
-
-        if (window.Android && typeof window.Android.openExternal === 'function') {
-          window.Android.openExternal(wiseplayUri);
-          return;
-        }
-
-        try {
-          window.location.href = wiseplayUri;
-        } catch (err) {
-          window.location.href = androidIntent;
-        }
-      }
-
-      // ฟังก์ชันควบคุมการแสดง/ซ่อนปุ่ม Wiseplay
-      function updateWiseplayButton(url, title, isWiseplayTarget = false) {
-        if (!wiseplayOpenBtn) return;
-        if (url && (isWiseplayTarget || url.toLowerCase().includes('.mpd') || url.includes('workers.dev/playlist') || url.endsWith('.w3u'))) {
-          wiseplayOpenBtn.style.display = 'inline-block';
-          wiseplayOpenBtn.onclick = function () {
-            openInWiseplay(url, title);
-          };
-        } else {
-          wiseplayOpenBtn.style.display = 'none';
-        }
-      }
-
+      let currentExternalUrl = '';
 
       if (externalOpenBtn) {
         externalOpenBtn.addEventListener('click', function (e) {
-          const targetHref = externalOpenBtn.getAttribute('href');
-          if (!targetHref || targetHref === '#') {
-            e.preventDefault();
+          e.preventDefault();
+          if (!currentExternalUrl || currentExternalUrl === '#') {
             return;
           }
-          copyTextSafe(targetHref);
-          if (window.Android && typeof window.Android.openExternal === 'function') {
-            e.preventDefault();
-            window.Android.openExternal(targetHref);
-          }
+          launchWiseplayApp(currentExternalUrl);
         });
       }
 
@@ -1524,7 +1663,7 @@
             currentLogo = logoMatch ? logoMatch[1] : '';
             const groupMatch = line.match(/group-title="([^"]+)"/i);
             currentGroup = groupMatch ? groupMatch[1] : '';
-          } else if (!line.startsWith('#') && (line.startsWith('http://') || line.startsWith('https://'))) {
+          } else if (!line.startsWith('#') && (line.startsWith('http://') || line.startsWith('https://') || line.startsWith('wiseplay://') || line.startsWith('intent://'))) {
             list.push({
               name: currentName || ('ช่องที่ ' + (list.length + 1)),
               info: currentGroup || '',
@@ -1561,7 +1700,9 @@
                   image: st.image || st.logo || obj.image || '',
                   url: st.url,
                   referer: st.referer || '',
-                  subtitle: st.subtitle || ''
+                  subtitle: st.subtitle || '',
+                  player: st.player || obj.player || '',
+                  wiseplay: st.wiseplay || obj.wiseplay || false
                 });
               }
             });
@@ -1578,7 +1719,9 @@
               image: obj.image || obj.logo || '',
               url: obj.url,
               referer: obj.referer || '',
-              subtitle: obj.subtitle || ''
+              subtitle: obj.subtitle || '',
+              player: obj.player || '',
+              wiseplay: obj.wiseplay || false
             });
           }
         }
@@ -1618,30 +1761,14 @@
           referer: item.referer || '',
           subtitle: item.subtitle || '',
           import: item.import,
+          player: item.player || item.app || '',
+          wiseplay: item.wiseplay || false,
           stations: hasStations ? item.stations : null,
-          rawIndex: index
-        };
-      }
-      
-      function normalizeItem(item, index) {
-        const hasStations = Array.isArray(item.stations) && item.stations.length > 0;
-        if (!item._uid) item._uid = item.id || ('item_' + (index + 1));
-        return {
-          id: item._uid,
-          name: item.name || 'ไม่มีชื่อรายการ',
-          category: item.category || (hasStations ? 'ละคร/ซีรีส์' : 'ทั่วไป'),
-          logo: item.logo || item.image || (hasStations && item.stations[0].image) || '',
-          url: item.url || (hasStations ? (item.stations[0].url || '') : ''),
-          referer: item.referer || '',
-          subtitle: item.subtitle || '',
-          import: item.import,
-          stations: hasStations ? item.stations : null,
-          wiseplay: item.wiseplay || (hasStations && item.stations[0] && item.stations[0].wiseplay) || false,
           rawIndex: index
         };
       }
 
-      function showPlayerError(msg, externalUrl = '') {
+      function showPlayerError(msg, externalUrl = '', autoOpenWiseplay = true) {
         if (msg) {
           errorMsgEl.textContent = msg;
           errorMsgEl.classList.add('visible');
@@ -1650,9 +1777,13 @@
           errorMsgEl.classList.remove('visible');
         }
         if (externalUrl) {
-          externalOpenBtn.href = externalUrl;
+          currentExternalUrl = externalUrl;
           externalOpenBtn.style.display = 'inline-block';
+          if (autoOpenWiseplay) {
+            launchWiseplayApp(externalUrl);
+          }
         } else {
+          currentExternalUrl = '';
           externalOpenBtn.style.display = 'none';
         }
       }
@@ -1685,24 +1816,85 @@
         }
       }
 
-      function loadStreamUrl(streamUrl, subtitleUrl) {
+      function destroyActivePlayers() {
         if (hlsInstance) {
-          hlsInstance.destroy();
+          try { hlsInstance.destroy(); } catch (e) {}
           hlsInstance = null;
         }
+        if (mpegtsPlayer) {
+          try {
+            mpegtsPlayer.pause();
+            mpegtsPlayer.unload();
+            mpegtsPlayer.detachMediaElement();
+            mpegtsPlayer.destroy();
+          } catch (e) {}
+          mpegtsPlayer = null;
+        }
+      }
+
+      function loadStreamUrl(streamUrl, subtitleUrl, stationOrChannelObj = null) {
+        destroyActivePlayers();
         const url = (streamUrl || '').trim();
         if (!url) {
           showPlayerError('ไม่พบลิงก์สตรีมสำหรับรายการนี้');
           return;
         }
-        if (url.toLowerCase().includes('.mpd')) {
-          showPlayerError('⚠️ ช่องนี้เข้ารหัส DRM (.mpd) กดปุ่มด้านขวาเพื่อเปิดในแอปภายนอก', url);
+        if (isWiseplayRequiredItem(stationOrChannelObj || url)) {
+          videoEl.pause();
+          videoEl.removeAttribute('src');
+          showPlayerError('📲 กำลังเปิดลิงก์ในแอป Wiseplay อัตโนมัติ (หรือกดปุ่มด้านขวาเพื่อเปิดอีกครั้ง)', url, true);
           return;
         }
-        const isHls = url.toLowerCase().includes('.m3u8') || !url.toLowerCase().includes('.mp4');
+        if (url.toLowerCase().includes('.mpd')) {
+          showPlayerError('⚠️ ช่องนี้เข้ารหัส DRM (.mpd) กำลังเปิดในแอป Wiseplay / ภายนอกอัตโนมัติ', url, true);
+          return;
+        }
+
         attachSubtitle(subtitleUrl);
 
-        if (isHls && window.Hls && window.Hls.isSupported()) {
+        const isHttpStreamOnHttpsPage = (window.location.protocol === 'https:' && /^http:\/\//i.test(url));
+        const isRawTs = isRawMpegTsStreamUrl(url);
+        const isHls = url.toLowerCase().includes('.m3u8');
+
+        // กรณีหน้าเว็บเปิดบน HTTPS แต่ลิงก์สตรีมเป็น HTTP ธรรมดา (เช่น http://49.0.64.96:8007/H-Channel)
+        // เบราว์เซอร์จะบล็อก XHR/fetch (Mixed Content) จึงส่งเข้าแอป Wiseplay ให้อัตโนมัติทันที พร้อมลองเล่นผ่านแท็ก video ควบคู่กัน
+        if (isHttpStreamOnHttpsPage) {
+          videoEl.src = url;
+          videoEl.play().catch(() => {});
+          showPlayerError('📲 ลิงก์สตรีม HTTP (' + (isRawTs ? 'MPEG-TS' : 'Direct Stream') + ') กำลังเปิดผ่านแอป Wiseplay อัตโนมัติ (หรือกดปุ่มด้านขวาเพื่อเปิดซ้ำ)', url, true);
+          return;
+        }
+
+        // กรณีเป็นสตรีมสดแบบ HTTP MPEG-TS หรือ IP:Port (เช่น http://49.0.64.96:8007/H-Channel)
+        if (isRawTs && window.mpegts && window.mpegts.isSupported()) {
+          try {
+            mpegtsPlayer = window.mpegts.createPlayer({
+              type: 'mpegts',
+              isLive: true,
+              url: url,
+              cors: true
+            }, {
+              enableWorker: true,
+              enableStashBuffer: false,
+              stashInitialSize: 128
+            });
+            mpegtsPlayer.attachMediaElement(videoEl);
+            mpegtsPlayer.load();
+            mpegtsPlayer.play().catch(() => {});
+            mpegtsPlayer.on(window.mpegts.Events.ERROR, () => {
+              destroyActivePlayers();
+              // หากเซิร์ฟเวอร์ปลายทางบล็อก CORS บนเว็บ ให้ลองใช้ Native Video และสั่งเปิดแอป Wiseplay อัตโนมัติ
+              videoEl.src = url;
+              videoEl.play().catch(() => {});
+              showPlayerError('📲 สตรีมสดนี้ต้องใช้แอปภายนอก กำลังเปิดในแอป Wiseplay อัตโนมัติ (หรือกดปุ่มด้านขวาเพื่อเปิดซ้ำ)', url, true);
+            });
+            return;
+          } catch (err) {
+            destroyActivePlayers();
+          }
+        }
+
+        if ((isHls || (!url.toLowerCase().includes('.mp4') && !isRawTs)) && window.Hls && window.Hls.isSupported()) {
           hlsInstance = new window.Hls({
             enableWorker: true,
             lowLatencyMode: true
@@ -1717,13 +1909,15 @@
               if (data.type === window.Hls.ErrorTypes.MEDIA_ERROR) {
                 hlsInstance.recoverMediaError();
               } else {
-                showPlayerError('⚠️ สตรีมนี้บล็อกการเล่นบนเว็บ กดปุ่มด้านขวาเพื่อเปิดผ่านแอปภายนอก', url);
+                showPlayerError('⚠️ สตรีมนี้ต้องใช้แอปภายนอก กำลังเปิดในแอป Wiseplay อัตโนมัติ', url, true);
               }
             }
           });
         } else {
           videoEl.src = url;
-          videoEl.play().catch(() => {});
+          videoEl.play().catch(() => {
+            showPlayerError('📲 สตรีมสดนี้ต้องใช้แอปภายนอก กำลังเปิดในแอป Wiseplay อัตโนมัติ', url, true);
+          });
         }
       }
 
@@ -1748,7 +1942,7 @@
             currentTitleEl.textContent = channel.name + ' - ' + epName;
             currentCatEl.textContent = 'หมวดหมู่: ' + channel.category + (st.info ? ' (' + st.info + ')' : '');
             showPlayerError('');
-            loadStreamUrl(st.url, st.subtitle);
+            loadStreamUrl(st.url, st.subtitle, st);
             renderEpisodes(channel);
           });
           episodeListEl.appendChild(btn);
@@ -1767,19 +1961,18 @@
         currentCatEl.textContent = 'หมวดหมู่: ' + channel.category;
         renderChannels();
 
-        if (channel.url && channel.url.includes('workers.dev/playlist')) {
+        if (isWiseplayRequiredItem(channel) && (!channel.stations || channel.stations.length === 0)) {
           if (hlsInstance) { hlsInstance.destroy(); hlsInstance = null; }
           videoEl.pause();
           videoEl.removeAttribute('src');
           episodeBarEl.classList.remove('visible');
-          currentCatEl.textContent = 'เพลย์ลิสต์ภายนอก (สำหรับแอป IPTV)';
-          showPlayerError('⚠️ ลิงก์นี้ล็อกให้เปิดเฉพาะในแอป IPTV (Wiseplay / OTT) กดปุ่มสีฟ้าด้านขวาเพื่อเปิด หรือคัดลอกลิงก์ไปใส่ในแอป IPTV', channel.url);
-          copyTextSafe(channel.url);
+          currentCatEl.textContent = 'เพลย์ลิสต์ภายนอก (สำหรับแอป Wiseplay / IPTV)';
+          showPlayerError('📲 ลิงก์นี้ต้องใช้แอป Wiseplay ระบบกำลังเปิดแอป Wiseplay ให้โดยอัตโนมัติ (หรือกดปุ่มด้านขวาเพื่อเปิดซ้ำ)', channel.url, true);
           return;
         }
 
         if ((!channel.stations || channel.stations.length === 0) && isExternalPlaylistItem(channel)) {
-          showPlayerError('⏳ กำลังดึงรายชื่อช่องจากเพลย์ลิสต์ ' + channel.name + ' กรุณารอสักครู่...');
+          showPlayerError('⏳ กำลังดึงรายชื่อช่องจากเพลย์ลิสต์ ' + channel.name + ' กรุณารอสักครู่...', '', false);
           try {
             const subStations = await fetchExternalPlaylist(channel.url);
             if (subStations && subStations.length > 0) {
@@ -1789,11 +1982,11 @@
               }
               showPlayerError('');
             } else {
-              showPlayerError('⚠️ เพลย์ลิสต์นี้ต้องเปิดด้วยแอป IPTV ภายนอก', channel.url);
+              showPlayerError('📲 เพลย์ลิสต์นี้ต้องเปิดด้วยแอป Wiseplay ระบบกำลังเปิดแอปให้อัตโนมัติ', channel.url, true);
               return;
             }
           } catch (e) {
-            showPlayerError('⚠️ เซิร์ฟเวอร์ของ ' + channel.name + ' บล็อกการดึงผ่านเว็บ กดปุ่มด้านขวาเพื่อเปิดโดยตรง', channel.url);
+            showPlayerError('📲 เซิร์ฟเวอร์ของ ' + channel.name + ' ต้องเปิดผ่านแอป Wiseplay ระบบกำลังเปิดแอปให้อัตโนมัติ', channel.url, true);
             return;
           }
         } else {
@@ -1806,17 +1999,18 @@
           currentTitleEl.textContent = channel.name + ' - ' + epName;
           currentCatEl.textContent = 'หมวดหมู่: ' + channel.category + (firstEp.info ? ' (' + firstEp.info + ')' : '');
           renderEpisodes(channel);
-          loadStreamUrl(firstEp.url, firstEp.subtitle);
+          loadStreamUrl(firstEp.url, firstEp.subtitle, firstEp);
         } else {
           renderEpisodes(channel);
-          loadStreamUrl(channel.url, channel.subtitle);
+          loadStreamUrl(channel.url, channel.subtitle, channel);
         }
         renderChannels();
       }
 
       videoEl.addEventListener('error', () => {
         if (activeChannelId) {
-          showPlayerError('⚠️ ไม่สามารถเล่นไฟล์สตรีมจากลิงก์นี้บนเว็บได้โดยตรง');
+          const currentUrl = videoEl.getAttribute('src') || '';
+          showPlayerError('⚠️ ไม่สามารถเล่นไฟล์สตรีมจากลิงก์นี้บนเว็บได้โดยตรง', currentUrl, !!currentUrl);
         }
       });
 
