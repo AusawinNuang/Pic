@@ -2471,13 +2471,6 @@
   },
 
 
-	  {
-  "name": "ห้องทดลอง",
-  "category": "ทั่วไป",
-  "image": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/ded.png",
-  "url": "https://aisfree.copytv-iptv.workers.dev/playlist",
-  "import": false
-},
 
 	  {
 		"name": "Movies Online",
