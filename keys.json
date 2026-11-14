@@ -6,6 +6,11 @@
     "expires": "2026-12-31",
     "note": "ใช้เอง"
   },
+  {
+    "key": "TEST",
+    "status": "active",
+    "note": "ใช้เอง"
+  },
 {
     "key": "TOP",
     "status": "active",
