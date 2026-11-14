@@ -2472,12 +2472,18 @@
 {
     "id": "ch_353",
     "name": "MCOT30(mpd)",
-    "category": "กีฬา",
+    "category": "ฟรีทีวี",
     "logo": "https://cdn.imgchest.com/files/4e89b8a4aab4.png",
     "url": "https://udn-streamer1.cdn.3bbtv.com:8443/3bb/live/30/30.mpd"
   },
+	  {
+    "id": "ch_354",
+    "name": "CH8(mpd)",
+    "category": "ฟรีทีวี",
+    "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/ch8.png",
+    "url": "https://udn-streamer1.cdn.3bbtv.com:8443/3bb/live/27/27.mpd"
+  },
 	
-
 
 	  {
 		"name": "Movies Online",
