@@ -2471,19 +2471,61 @@
   },
 {
     "id": "ch_353",
-    "name": "MCOT30(mpd)",
+    "name": "H-Channel",
     "category": "ฟรีทีวี",
-    "logo": "https://cdn.imgchest.com/files/4e89b8a4aab4.png",
-    "url": "https://udn-streamer1.cdn.3bbtv.com:8443/3bb/live/30/30.mpd"
+    "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/movie.jpg",
+    "url": "http://49.0.64.96:8007/H-Channel"
   },
 	  {
     "id": "ch_354",
-    "name": "CH8(mpd)",
+    "name": "Cartoonumi",
     "category": "ฟรีทีวี",
-    "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/ch8.png",
-    "url": "https://udn-streamer1.cdn.3bbtv.com:8443/3bb/live/27/27.mpd"
+    "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/movie.jpg",
+    "url": "http://49.0.64.96:8007/Cartoonumi"
   },
-	
+{
+    "id": "ch_355",
+    "name": "PING",
+    "category": "ฟรีทีวี",
+    "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/pingxmovie.png",
+    "url": "http://49.0.64.96:8007/PING"
+  },
+{
+    "id": "ch_356",
+    "name": "IZAA",
+    "category": "ฟรีทีวี",
+    "logo": "https://raw.githubusercontent.com/AusawinNuang/Pic/refs/heads/main/izaa.png",
+    "url": "http://49.0.64.96:8007/IZAA"
+  },
+	  {
+    "id": "ch_357",
+    "name": "SeriesTv",
+    "category": "ฟรีทีวี",
+    "logo": "https://raw.githubusercontent.com/zaxacaasada/logotv/refs/heads/main/SeriesTV.png",
+    "url": "http://49.0.64.96:8007/SERIES"
+  },
+	  {
+    "id": "ch_358",
+    "name": "Amazing Show",
+    "category": "ฟรีทีวี",
+    "logo": "https://i.postimg.cc/brt0yS2H/IMG-2953.png",
+    "url": "http://49.0.64.96:8007/AMAZING"
+  },
+	  {
+    "id": "ch_359",
+    "name": "World Animal",
+    "category": "ฟรีทีวี",
+    "logo": "https://i.postimg.cc/rFscPFcF/IMG-2948.png",
+    "url": "http://49.0.64.96:8007/Animal"
+  },
+	  {
+    "id": "ch_360",
+    "name": "World Science",
+    "category": "ฟรีทีวี",
+    "logo": "https://i.postimg.cc/5yFyB8yK/IMG-3100.png",
+    "url": "http://49.0.64.96:8007/WSCI"
+  },
+	  
 
 	  {
 		"name": "Movies Online",
